@@ -1,57 +1,7 @@
-This is BibTeX, Version 0.99d (TeX Live 2012)
-Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
-The top-level auxiliary file: Progress Report SandTable Version.aux
+This is BibTeX, Version 0.99dThe top-level auxiliary file: Progress Report SandTable Version.aux
 The style file: plain.bst
 Database file #1: progRepBib.bib
-I was expecting a `,' or a `}'---line 2 of file progRepBib.bib
- :  
- :  author="Charles Kadushin",
-(Error may have been on previous line)
-I'm skipping whatever remains of this entry
-Warning--to sort, need author, editor, or key in USN
-Warning--empty author and editor in USN
-Warning--empty title in USN
 Warning--empty publisher in USN
 Warning--empty year in USN
-You've used 1 entry,
-            2118 wiz_defined-function locations,
-            499 strings with 4055 characters,
-and the built_in function-call counts, 190 in all, are:
-= -- 10
-> -- 1
-< -- 0
-+ -- 1
-- -- 0
-* -- 19
-:= -- 24
-add.period$ -- 1
-call.type$ -- 1
-change.case$ -- 2
-chr.to.int$ -- 0
-cite$ -- 6
-duplicate$ -- 13
-empty$ -- 25
-format.name$ -- 0
-if$ -- 37
-int.to.chr$ -- 0
-int.to.str$ -- 1
-missing$ -- 1
-newline$ -- 6
-num.names$ -- 0
-pop$ -- 13
-preamble$ -- 1
-purify$ -- 2
-quote$ -- 0
-skip$ -- 6
-stack$ -- 0
-substring$ -- 5
-swap$ -- 0
-text.length$ -- 0
-text.prefix$ -- 0
-top$ -- 0
-type$ -- 2
-warning$ -- 5
-while$ -- 0
-width$ -- 2
-write$ -- 6
-(There was 1 error message)
+Warning--empty journal in WSTech
+(There were 3 warnings)

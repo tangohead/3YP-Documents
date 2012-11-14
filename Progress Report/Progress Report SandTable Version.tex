@@ -1,5 +1,6 @@
 \documentclass[]{article}
 \usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
 
 \begin{document}
 
@@ -20,47 +21,76 @@ On the whole, the project continued to be consistent with the project specificat
 
 \subsection{Human Representation}
 
-As modelling a human (also referred to as a \emph{node}) in general is a difficult task, the scope of the project can be reduced significantly by ensuring that only aspects of human behaviour related to the analysis of smoking are used. Furthermore, some assumptions about the way in which nodes behave have to be made to prevent the project encompassing a large part of sociological and psychological theory. 
-
-Due to this, it has been decided that the human behaviour will be represented in a probabilistic manner - the reasons for this are twofold. First, is that it provides a simple method of recreating some facets of actions, for example a person could rate, on a scale of one to ten, how likely they are to start smoking in the next few days. Although this is not necessarily an accurate measure, it is enough for a simplistic representation. Example attributes include:
+As modelling a human (also referred to as a \emph{node}) in general is a difficult task, the scope of the project can be reduced significantly by ensuring that only aspects of human behaviour related to the analysis of smoking are used. Furthermore, some assumptions about the way in which nodes behave have to be made to prevent the project encompassing a large part of sociological and psychological theory. Due to this, it has been decided that the human behaviour will be represented in a probabilistic manner - the reasons for this are twofold. First, is that it provides a simple method of recreating some facets of actions, for example a person could rate, on a scale of one to ten, how likely they are to start smoking in the next few days. Although this is not necessarily an accurate measure, it is enough for a simplistic representation. Example attributes include:
 
 \begin{itemize}
-\item Susceptibility to peer-pressure
-\item Likeliness to smoke
-\item Willpower - how likely they are to continue their giving-up effort.
+\item \emph{Susceptibility to peer-pressure} - peer-pressure may over-ride other considerations
+\item \emph{Likeliness to smoke} - humans may have an internal opinion on smoking that guides them.
+\item \emph{Willpower} - how likely they are to continue their giving-up effort.
+\item \emph{Number of Cigarettes Per Day} - a higher number may make giving up harder.
+\item \emph{Ability to Influence} - hub nodes may be influential, and as such be powerful.
 \end{itemize}
 
 Some attributes, however, cannot be representing by probabilities. These include items such as how many cigarettes someone smokes, whether someone smokes at all and how likely they are to reach out beyond their local network.
 
-Representing this series of decisions will be done through the use of a decision tree - a series of choices that the person can make, leading them to some state consisting of a collection of attribute values. The key advantages of this are that it allows a fixed number of choices per tick, with the ability to structure the choices (for example, important ones at the top). The structure and content of this tree is largely a developmental matter and needs to be tuned over time, but a concept tree can be seen below.
+Representing this series of decisions will be done through the use of a decision tree - a series of choices that the person can make, leading them to some state consisting of a collection of attribute values. The key advantages of this are that it allows a fixed number of choices per tick, with the ability to structure the choices (for example, important ones at the top). The structure and content of this tree is largely a developmental matter and needs to be tuned over time, but a concept tree can be seen in figure \ref{fig:Sample decision tree}.
 
-\emph{Sample Agent Decision Tree to go here}
 
-In terms of the model-at-large, it is important for the network to be able to reconfigure itself over time, since people move towards to others with similar interests \cite{USN} - it should also be noted, however, that friends develop similar interests, thus giving a potential conflict. At this stage, proof-of-concept work has been done in regards to basic reconfiguration, but the actual feature will be created in the development section of the project. 
+\begin{figure}
+	\centering
+		\includegraphics[width=0.80\textwidth]{sdt.jpg}
+	\caption{Example Decision Tree}
+	\label{fig:Sample decision tree}
+\end{figure}
 
-To further balance out this conflict, the system will have \'Acts of God\', where random behaviours will be introduced with a very small probability. This will be tuned to have the impression of subtly unsettle the network and prevent it falling into equilibrium for long periods of time, whilst also attempting to simulate the human behaviour of occasionally acting out of character. {\bf RESEARCH NEEDED HERE}
 
-Influence propagation will tie the human to the outside world - in the current plans, no formal method of influence propagation will be implemented, however a decision tree can either incorporate or have a standalone tree for the impact of influence from surrounding nodes. Once more, this will be done probabilistically, where the edge weights either dampen or emphasise the influence passing through them (see below). By doing this, influence will still flow through the network without making the project scope too large.
+In terms of the model-at-large, it is important for the network to be able to reconfigure itself over time, due to the notion of homophily \cite{USN} - this is the concept of people with similar interests since people move towards to others with similar interests whilst at the same time, friends will develop similar interests within the relationship. This leads to a split between influence and reconfiguration. The former is a major focus of this project, since understanding how the influence flows around a social network is key to concluding how the network impacts behaviour. 
 
-In terms of the items that propagate, attributes are a particular focus - the idea of others affecting your choices is key to this process. As such, the probabilities used in the decision trees will be manipulated by the nodes connected to a given person. The overall aim is that these manipulations will represent the overt and subconscious actions of others that encourage someone to choose a particular action.
+Up to this point, only the human as a single entity has been considered - to model effects of interacting with others, influence must be modelled. In the current plans, the \emph{Linear Threshold} model will be used to implement influence - it is based upon the concept of the number of neighbours for a given node holding an attribute or performing an action will increase the chance of the node also taking on that attribute/performing the action. In addition, the previously mentioned decision tree can either incorporate or have a standalone tree for the impact of incoming influence from surrounding nodes. Once more, this will be done probabilistically, where the edge weights either dampen or emphasise the influence passing through them (see below). 
+
+Reconfiguration is also important, but is much harder to accurately model - to maintain a reasonable project scope, this will not be as formal as an implementation. It is likely that a decision tree will be created that will choose and negotiate relationships with other nodes, with the aim of building a model that will emulate the previously mentioned concept of homophily.
+
+To further the attempt of emulating human actions, the system will have `Acts of God', where random behaviours will be introduced with a very small probability. This will be tuned to have the impression of subtly unsettle the network and prevent it falling into equilibrium for long periods of time, whilst also attempting to simulate the human behaviour of occasionally acting out of character. \emph{More research to come here.}
+
+In terms of the items that propagate, attributes are a particular focus - the idea of others affecting your choices is key to this process. Example attributes that would propagate are whether someone smokes, and the number of cigarettes someone smokers, per day - if person's friend smokes heavily, then the person may increase to allow them to spend more time with their friend. As such, the probabilities used in the decision trees will be manipulated by the nodes connected to a given person. The overall aim is that these manipulations will represent the overt and subconscious actions of others that encourage someone to choose a particular action.
 
 \subsection{Network Representation}
-One of the key factors in the success of this project was to be able to generate a realistic social network, as without this, the model would be unable to produce meaningful results. To date, two methods have come out as useful in the research - \emph{small-world} and {scale-free}.
+One of the key factors in the success of this project was to be able to generate a realistic social network, as without this, the model would be unable to produce meaningful results. To date, two methods have come out as useful in the research - \emph{small-world} and \emph{scale-free}, the latter being a type of \emph{preferential attachment} network.
 
-Small-world networks are created using the Watts & Strogatz model\cite{WSTech}, and produce graphs similar to the one shown below {\bf INSERT GRAPH}. In general, the method uses a degree averaging technique to give all members in the graph roughly the same number of edges. As implied by the name, this method is strongly related to the idea that most people know each other, or if not directly, through a small number of connections - as such, this is not entirely useful to this project as it is difficult to realistically model the environment of larger groups of people. 
+Small-world networks are created using the Watts \& Strogatz model \cite{WSTech}, and produce graphs similar to the one shown below in figure \ref{fig:small-world}. In general, the method uses a degree averaging technique to give all members in the graph roughly the same number of edges. As implied by the name, this method is strongly related to the idea that most people know each other, or if not directly, through a small number of connections - as such, this is not entirely useful to this project as it is difficult to realistically model the environment of larger groups of people. 
 
-In a larger graph, it is highly unlikely that most people know each other within a few connections, so the creation of a scale-free network (using the {\bf INSERT NAME} method) succeeds here. This uses a *preferential attachment* method - \"the rich get richer\" - to generate networks which instead have a number of \'hub\' nodes, similar to popular figures in friendship circles. Additionally, the graph is significantly less connected, resulting in a seemingly more realistic network.
+\begin{figure}
+	\centering
+		\includegraphics[width=0.80\textwidth]{small-world.png}
+	\caption{Small-World Network - 50 nodes, $\beta$ = 0.5, K = 10 - Layout: Fruchterman-Reingold Algorithm}
+	\label{fig:small-world}
+\end{figure}
 
-\emph{NEED TO INSERT METRICS OF CLOSENESS, DIAMETER AND AVERAGE DISTANCE HERE}
-\emph{INSERT VALUES ABOUT HOW REALISTIC NETWORKS ARE}
 
-Whilst using pre-made/sampled networks has been considered for the final data output, at this stage the project will work on a basis of a computer generated network - assuming that the generated network is considered \'realistic\', then this will provide a much wider range of data and thus analysis at the end of the project. 
+In a larger graph, it is highly unlikely that most people know each other within a few connections, so the creation of a scale-free network (using the \emph{Barab\'{a}si}-\emph{Albert} model \cite{BAMod}) succeeds here. This uses a \emph{preferential attachment} method - ``the rich get richer'' - to generate networks which instead have a number of `hub' nodes, similar to popular figures in friendship circles. Additionally, the graph is significantly less connected, resulting in a seemingly more realistic network. As can be seen in figure \ref{fig:scale-free1}, a basic scale-free graph of the same number of nodes exhibits features such as `hubs' and groups of nodes. Furthermore, when increased to 250 nodes(fig. \ref{fig:scale-free2}), these features are emphasised. With some modification of this algorithm, networks produced should approach realistic social networks. Note that there are a lot of outliers - this would have to be accounted for in modifications, for example by removing a certain percentage of them.
 
-Sampled networks are, however, very useful in the development phase - this is largely because they provide a consistent, realistic network to test new constructs and methods on. As such, when it comes to the development, sampling of some data sets will take place for this purpose. 
+\begin{figure}
+	\centering
+		\includegraphics[width=0.80\textwidth]{scale-free1.png}
+	\caption{Scale-Free Network - 50 nodes, starting with 4 vertices, 3 edges - Layout: Fruchterman-Reingold Algorithm}
+	\label{fig:scale-free1}
+\end{figure}
 
-Moving from the whole network to individual edges, friendships in a social network map well to a directed graph. This is because friendships are not necessarily symmetric - assuming they are removes the concept of role-models, an important feature of social networks, and also blocks another key concept,  that of different people being influenced by others to a different degree. 
+\begin{figure}
+	\centering
+		\includegraphics[width=0.80\textwidth]{scale-free2.png}
+	\caption{Scale-Free Network - 250 nodes, starting with 4 vertices, 3 edges - Layout: Fruchterman-Reingold Algorithm}
+	\label{fig:scale-free2}
+\end{figure}
 
-Using this idea, it has been decided that edge-weight should represent the \'influence factor\' of that relationship - if node A has an edge of weight 0.5 to node B, then any behaviours that traverse this edge will only do so with an impact of half the original. Firstly, this reinforces the idea of role-models (a person is highly influenced by another, but the other is not necessarily influenced, or even knows, the first). It also provides a more realistic approximation of how a friendship works, since although friends, one person may think more of the other and as such tend to be influenced more easily by them. Values between 0 and 1 will be used here to maintain the probabilistic approach.
+\emph{Metrics relating to small-world vs scale free will go here, e.g. network diameter, average distance and more.}
+\emph{Further details about how realistic these networks are will be included here.}
+
+Alongside the generated networks, sampled networks will also be gathered - by combining these with a set of generated networks, developmental models of components such as the decision tree can be tuned with the ability to reproduce model behaviour. Working from this, larger data sets can be both gathered from real datasets and computer-generated to provide a wide range of networks usable in the final analysis. 
+
+Moving from the whole network to individual edges, relationships in a social network map well to a directed graph. This is because relationships are not necessarily symmetric - assuming they are removes the concept of role-models, an important feature of social networks, and also blocks another key concept,  that of different people being influenced by others to a different degree. 
+
+Using this idea, it has been decided that edge-weight should represent the `influence factor' of that relationship - if node A has an edge of weight 0.5 to node B, then any behaviours that traverse this edge will only do so with an impact of half the original. Firstly, this reinforces the idea of role-models (a person is highly influenced by another, but the other is not necessarily influenced, or even knows, the first). It also provides a more realistic approximation of how a friendship works, since although friends, one person may think more of the other and as such tend to be influenced more easily by them. Values between 0 and 1 will be used here to maintain the probabilistic approach.
 
 \subsection{User Features}
 
@@ -74,17 +104,14 @@ At this stage, it would not be suitable to consider whether the model will fit i
 
 \subsection{Visualisation}
 
-Along with simulating the human and network behaviour, it is important to be able to view snapshots of the model to understand what is happening. So far, this has come via two avenues - \emph{Gephi} and the \emph{Repast GUI}. 
-
-Gephi is particularly useful when it comes to generating standalone networks for analysis - examples of this include inspecting algorithm-generated networks for realism and checking if a sampling method is working correctly, producing a reasonable graph.
-
-The Repast GUI provides a similar service but is refreshed on each simulation tick. Due to this, the GUI effectively gives a live view of the network and how it is behaving - of course, this is has some more simplistic tools than Gephi, so works in a complementary way.
+Along with simulating the human and network behaviour, it is important to be able to view snapshots of the model to understand what is happening. So far, this has come via two avenues - \emph{Gephi} and the \emph{Repast GUI}. Gephi is particularly useful when it comes to generating standalone networks for analysis - examples of this include inspecting algorithm-generated networks for realism and checking if a sampling method is working correctly, producing a reasonable graph. The \emph{Repast GUI} provides a similar service but is refreshed on each simulation tick. Due to this, the GUI effectively gives a live view of the network and how it is behaving - of course, this is has some more simplistic tools than \emph{Gephi}, so works in a complementary way.
 
 \subsection{Analysis of Model}
 
-Although final analysis methods are yet to be decided, great care has been taken to ensure that there is as larger range as tools as possible available for analysis, and as such stopping any implementation based restrictions on these tools. An example of this include building a \emph{GraphML} serialiser for \emph{JUNG} networks, to allow for \emph{Gephi}/\emph{Cytoscape} analysis of these graphs.
+Although final analysis methods are yet to be decided, great care has been taken to ensure that there is as larger range as tools as possible available for analysis, and as such stopping any implementation based restrictions on these tools. An example of this include building a \emph{GraphML} serialiser for \emph{JUNG} networks, to allow for \emph{Gephi}/\emph{Cytoscape} analysis of these graphs. Considering final analysis methods, statistical methods are likely to form the basis of comparing realistic models to the model produced as part of this project - this will provide a numerical approach to evaluating the `realism' of the networks and nodes involved.
 
-Considering final analysis methods, statistical methods are likely to form the basis of comparing realistic models to the model produced as part of this project - this will provide a numerical approach to evaluating the \'realism\' of the networks and nodes involved.
+\section{Timetable}
+To be added.
 
 \bibliographystyle{plain}
 \bibliography{progRepBib}
