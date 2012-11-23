@@ -32,7 +32,7 @@ As modelling a human (also referred to as a \emph{node}) in general is a difficu
 \item \emph{Ability to Influence} - hub nodes may be influential, and as such be powerful.
 \end{itemize}
 
-Some attributes, however, cannot be representing by probabilities. These include items such as how many cigarettes someone smokes, whether someone smokes at all and how likely they are to reach out beyond their local network.
+Some other attributes, however, cannot be representing by probabilities. These include items such as how many cigarettes someone smokes, whether someone smokes at all and how likely they are to reach out beyond their local network.
 
 Representing this series of decisions will be done through the use of a decision tree - a series of choices that the person can make, leading them to some state consisting of a collection of attribute values. The key advantages of this are that it allows a fixed number of choices per cycles, with the ability to structure the choices (for example, important ones at the top). The structure and content of this tree is largely a developmental matter and needs to be tuned over time, but a concept tree can be seen in figure \ref{fig:Sample decision tree}.
 
@@ -44,7 +44,7 @@ Representing this series of decisions will be done through the use of a decision
 	\label{fig:Sample decision tree}
 \end{figure}
 
-
+As such, the tree and its contents will be researched whilst the overall model development is in progress. Currently, the planned approach is to divide separate concerns (i.e. decisions on smoking would be a separate tree to decisions about whether to try and make new connections) and produce a tree for each of these. Certain series of decisions in one tree may trigger another, as seen in fig. \ref{fig:Sample decision tree}, but this may be changed if it does not perform as expected.
 
 In terms of the model-at-large, it is important for the network to be able to reconfigure itself over time, due to the notion of homophily \cite{USN} - this is the concept of people with similar interests since people move towards to others with similar interests whilst at the same time, friends will develop similar interests within the relationship. This leads to a split between influence and reconfiguration. The former is a major focus of this project, since understanding how the influence flows around a social network is key to concluding how the network impacts behaviour. 
 
