@@ -1,6 +1,7 @@
 \documentclass[]{article}
 \usepackage[margin=1in]{geometry}
 \usepackage{graphicx}
+\usepackage{lscape}
 
 \begin{document}
 
@@ -114,7 +115,55 @@ Along with simulating the human and network behaviour, it is important to be abl
 Although final analysis methods are yet to be decided, great care has been taken to ensure that there is as larger range as tools as possible available for analysis, and as such stopping any implementation based restrictions on these tools. An example of this include building a \emph{GraphML} serialiser for \emph{JUNG} networks, to allow for \emph{Gephi}/\emph{Cytoscape} analysis of these graphs. Considering final analysis methods, statistical methods are likely to form the basis of comparing realistic models to the model produced as part of this project - this will provide a numerical approach to evaluating the `realism' of the networks and nodes involved.
 
 \section{Timetable}
-To be added.
+The timetable from the current point onwards can be seen in fig. \ref{timetable}. Note that certain aspects of the work will
+be developed continuously. These are:
+\begin{itemize}
+\item Network reconfiguration and generation, as this depends on the influence model and decision tree.
+\item Model validation against real statistics, such as NHS smoking figures.
+\item Documentation, by way of a development log and working towards the final report.
+\item Research into the causes of smoking, social network influence and self-determination.
+\end{itemize}
+These aspects of the project drive or are affacted by other sections so must continuously be developed and checked throughout.
+\begin{landscape}
+\begin{table}
+	\centering
+		\begin{tabular}{|c|c|p{12cm}|}
+		\hline
+			Week No. & Week Beginning & Tasks \\
+			\hline
+			9 & 26th Nov & Research \& experiment with decision trees, read into self-determination. \\
+			\hline
+			10 & 3rd Dec & Experiment with network reconfiguration and work on tools. \\
+			\hline
+			11 & 10th Dec & Set up development environment and design model structure. \\
+			\hline
+			12 & 17th Dec & Build model structure, with focus on extendability using modular design. \\
+			\hline
+			13 & 24th Dec & Expand upon existing network generators, parsers, exporters and build automated setup tools. \\
+			\hline
+			14-15 & 7th Jan & Implement decision tree basics and the core of an influence model. \\
+			\hline
+			16 & 14th Jan & Analyse previous work (with focus on decision tree) and tune, as well as working more attributes into the human model. \\
+			\hline
+			17 & 21 Jan & Further tune decision tree, incorporating self-determination and user-specified trigger humans (i.e. certain user-given characteristics that cause them to give up). \\
+			\hline
+			18 & 28th Jan & Tune and asses network reconfiguration on model so far.\\
+			\hline
+			19 & 4th Feb & Build analysis tools (i.e. graph dumps, node tracking, automated running, forcing specific structures)\\
+			\hline 
+			20 & 11th Feb & Run simulation and analyse data.\\
+			\hline
+			21 & 18th Feb & Further data analysis and presentation preparation.\\
+			\hline
+			22 & 25th Feb & Presentation of project so far.\\
+			\hline
+			23-30 & 4th Mar & Write the final version of the report, with further data analysis if necessary.\\
+			\hline
+		\end{tabular}
+		\label{timetable}
+\end{table}
+\end{landscape}
+
 
 \bibliographystyle{plain}
 \bibliography{progRepBib}
