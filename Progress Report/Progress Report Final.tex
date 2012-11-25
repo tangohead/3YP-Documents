@@ -22,7 +22,7 @@ On the whole, the project continued to be consistent with the project specificat
 
 \subsection{Human Representation}
 
-As modelling a human (also referred to as a \emph{node}) in general is a difficult task, the scope of the project can be reduced significantly by ensuring that only aspects of human behaviour related to the analysis of smoking are used. Furthermore, some assumptions about the way in which nodes behave have to be made to prevent the project encompassing a large part of sociological and psychological theory. Due to this, it has been decided that the some human behaviours will be represented in a probabilistic manner - the reasons for this are twofold. First, is that it provides a simple method of recreating some facets of actions, for example a person could rate, on a scale of one to ten, how likely they are to start smoking in the next few days. Although this is not necessarily an accurate measure, it is enough for a simplistic representation. Example attributes include:
+As modelling a human (also referred to as a \emph{node}) in general is a difficult task, the scope of the project can be reduced significantly by ensuring that only aspects of human behaviour related to the analysis of smoking are used. Furthermore, some assumptions about the way in which nodes behave have to be made to prevent the project encompassing a large part of sociological and psychological theory. Due to this, it has been decided that the some human behaviours will be represented in a probabilistic manner - the reasons for this are twofold. Firstly, it provides a simple method of recreating some facets of actions. For example, a person could rate, on a scale of one to ten, how likely they are to start smoking in the next few days. Although this is not necessarily an accurate measure, it is enough for a simplistic representation. Example attributes include:
 
 \begin{itemize}
 \item \emph{Susceptibility to peer-pressure} - peer-pressure may over-ride other considerations
@@ -32,9 +32,9 @@ As modelling a human (also referred to as a \emph{node}) in general is a difficu
 \item \emph{Ability to Influence} - hub nodes may be influential, and as such be powerful.
 \end{itemize}
 
-Some other attributes, however, cannot be representing by probabilities. These include items such as how many cigarettes someone smokes, whether someone smokes at all and how likely they are to reach out beyond their local network.
+Some other attributes, however, cannot be representing by probabilities. These include items such as how many cigarettes someone smokes, whether someone smokes at all and how likely they are to reach out beyond their local network. This kind of attribute will not be normalised, but instead will be grouped as necessary, or handled in a raw form. 
 
-Representing this series of decisions will be done through the use of a decision tree - a series of choices that the person can make, leading them to some state consisting of a collection of attribute values. The key advantages of this are that it allows a fixed number of choices per cycles, with the ability to structure the choices (for example, important ones at the top). The structure and content of this tree is largely a developmental matter and needs to be tuned over time, but a concept tree can be seen in figure \ref{fig:Sample decision tree}.
+Over time, decisions will be made that relate to these attributes, and to represent this series of decisions, a decision tree will be used. This is a structure that maps series of choices that the person can make to a tree, leading them to some state consisting of a collection of attribute values. The key advantages of this are that it allows a fixed number of choices per cycles, with the ability to force the structure of the choices (for example, important ones at the top). The specific structure and content of this tree is largely a developmental matter and needs to be tuned over time, but a concept tree can be seen in figure \ref{fig:Sample decision tree}.
 
 
 \begin{figure}
@@ -46,13 +46,13 @@ Representing this series of decisions will be done through the use of a decision
 
 As such, the tree and its contents will be researched whilst the overall model development is in progress. Currently, the planned approach is to divide separate concerns (i.e. decisions on smoking would be a separate tree to decisions about whether to try and make new connections) and produce a tree for each of these. Certain series of decisions in one tree may trigger another, as seen in fig. \ref{fig:Sample decision tree}, but this may be changed if it does not perform as expected.
 
-In terms of the model-at-large, it is important for the network to be able to reconfigure itself over time, due to the notion of homophily \cite{USN} - this is the concept of people with similar interests since people move towards to others with similar interests whilst at the same time, friends will develop similar interests within the relationship. This leads to a split between influence and reconfiguration. The former is a major focus of this project, since understanding how the influence flows around a social network is key to concluding how the network impacts behaviour. 
+In terms of the model-at-large, it is important for the network to be able to reconfigure itself over time, due to the notion of homophily \cite{USN} This is the concept of people with similar interests since people move towards to others with similar interests whilst at the same time, friends will develop similar interests within the relationship, leading to a split between influence and reconfiguration. The former is a major focus of this project, since understanding how the influence flows around a social network is key to concluding how the network impacts behaviour. 
 
-Up to this point, only the human as a single entity has been considered - to model effects of interacting with others, influence must be modelled. In the current plans, the \emph{Linear Threshold} model will be used to implement influence - it is based upon the concept of the number of neighbours for a given node holding an attribute or performing an action will increase the chance of the node also taking on that attribute/performing the action. In addition, the previously mentioned decision tree can either incorporate or have a standalone tree for the impact of incoming influence from surrounding nodes. Once more, this will be done probabilistically, where the edge weights either dampen or emphasise the influence passing through them (see below). 
+Up to this point, only the human as a single entity has been considered - to model effects of interacting with others, influence must be modelled. In the current plans, the \emph{Linear Threshold} model will be used to implement influence - it is based upon the idea of the number of neighbours for a given node holding an attribute or performing an action will increase the chance of the node also taking on that attribute/performing the action. In addition, the previously mentioned decision tree can either incorporate or have a standalone tree for the impact of incoming influence from surrounding nodes. Once more, this will be done probabilistically, where the edge weights either dampen or emphasise the influence passing through them (see below). 
 
 Reconfiguration is also important, but is much harder to accurately model - to maintain a reasonable project scope, this will not be as formal as an implementation. It is likely that a decision tree will be created that will choose and negotiate relationships with other nodes, with the aim of building a model that will emulate the previously mentioned concept of homophily.
 
-To add into the strictly rational aspect of the human model, some representation of irrationality will be researched and included. Elster \cite{ESB} mentions how irrationality can often be a deviation from the rational course of action, which fits in well with the decision tree. One possible programmatic approach is to work some random factors into the decision trees, triggering choices that would not usually be the rational decision. Obviously, this would be done in moderated way and tuned to avoid it becoming a regular part of decision making.
+To add into the strictly rational aspect of the human model, some representation of irrationality will be researched and included. Elster \cite{ESB} mentions how irrationality can often be a deviation from the rational course of action, which fits in well with the decision tree model. One possible programmatic approach is to work some random factors into the decision trees, triggering choices that would not usually be the rational decision. Obviously, this would be done in moderated way and tuned to avoid it becoming a regularity and hence causing it to no longer be irrational.
 
 In terms of the items that propagate, attributes are a particular focus - the idea of others affecting your choices is key to this process. Example attributes that would propagate are whether someone smokes, and the number of cigarettes someone smokers, per day - if person's friend smokes heavily, then the person may increase to allow them to spend more time with their friend. As such, the probabilities used in the decision trees will be manipulated by the nodes connected to a given person. The overall aim is that these manipulations will represent the overt and subconscious actions of others that encourage someone to choose a particular action.
 
@@ -97,7 +97,7 @@ Using this idea, it has been decided that edge-weight should represent the `infl
 
 There are two main user features that are to be included in the project, to date. The first is the generation of networks based on loose statistics - this, when combined with both the previously mentioned network generators and the human model, will be a relatively trivial interface between the initialisation of the simulation environment and the user, so should cause no problems in the development phase. 
 
-The other feature is the ability to parse and export existing graphs - again, as mentioned above, work has gone into parsing datasets and outputting them as \emph{GraphML} - to work this into the simulation setup should be relatively simple as it is based on code already written. A particularly useful feature would be to export the network to \emph{GraphML} at given simulation cycle, to allow for static analysis of the network at a given time. 
+The other feature is the ability to parse and export existing graphs - again, as mentioned above, work has gone into parsing datasets and outputting them as \emph{GraphML} - to work this into the simulation setup should be relatively simple as it is based on code already written. A particularly useful feature would be to export the network to \emph{GraphML} at given simulation cycle, to allow for static analysis of the network at a given time. Within this, there should be some way to indicate humans which are user triggered, in that the user can force certain attributes at certain points.
 
 \subsection{Commercial Model Integration}
 
@@ -122,7 +122,7 @@ be developed continuously. These are:
 \item Documentation, by way of a development log and working towards the final report.
 \item Research into the causes of smoking, social network influence and rationality.
 \end{itemize}
-These aspects of the project drive or are affacted by other sections so must continuously be developed and checked throughout.
+These aspects of the project drive or are affected by other sections so must continuously be developed and checked throughout.
 \begin{landscape}
 \begin{table}
 	\centering
@@ -142,15 +142,13 @@ These aspects of the project drive or are affacted by other sections so must con
 			\hline
 			14-15 & 7th Jan & Implement decision tree basics and the core of an influence model. \\
 			\hline
-			16 & 14th Jan & Analyse previous work (with focus on decision tree) and tune, as well as working more attributes into the human model. \\
+			16 & 14th Jan & Analyse previous work (with focus on decision tree) and tune, as well as working more attributes into the human model. Begin to build analysis tools (i.e. graph dumps, node tracking, automated running, forcing specific structures).\\
 			\hline
-			17 & 21 Jan & Further tune decision tree, incorporating rationality/irrationality and user-specified trigger humans (i.e. certain user-given characteristics that cause them to give up). \\
+			17 & 21 Jan & Further tune decision tree, incorporating rationality/irrationality and user-specified trigger humans (i.e. certain user-given characteristics that cause them to give up). Continue analysis tool development, running some basic simulations and analysing these. \\
 			\hline
-			18 & 28th Jan & Tune and asses network reconfiguration on model so far.\\
+			18 & 28th Jan & Tune and assess network reconfiguration on model so far. Begin to run simulations.\\
 			\hline
-			19 & 4th Feb & Build analysis tools (i.e. graph dumps, node tracking, automated running, forcing specific structures)\\
-			\hline 
-			20 & 11th Feb & Run simulation and analyse data.\\
+			19-20 & 4th Feb & Run more simulations and analyse data.\\
 			\hline
 			21 & 18th Feb & Further data analysis and presentation preparation.\\
 			\hline
