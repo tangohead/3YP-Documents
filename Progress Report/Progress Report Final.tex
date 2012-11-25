@@ -52,9 +52,7 @@ Up to this point, only the human as a single entity has been considered - to mod
 
 Reconfiguration is also important, but is much harder to accurately model - to maintain a reasonable project scope, this will not be as formal as an implementation. It is likely that a decision tree will be created that will choose and negotiate relationships with other nodes, with the aim of building a model that will emulate the previously mentioned concept of homophily.
 
-To further the attempt of emulating human actions, the system will have `Acts of God', where random behaviours will be introduced with a very small probability. This will be tuned to have the impression of subtly unsettle the network and prevent it falling into equilibrium for long periods of time, whilst also attempting to simulate the human behaviour of occasionally acting out of character.
-
-\emph{More research to come here.}
+To add into the strictly rational aspect of the human model, some representation of irrationality will be researched and included. Elster \cite{ESB} mentions how irrationality can often be a deviation from the rational course of action, which fits in well with the decision tree. One possible programmatic approach is to work some random factors into the decision trees, triggering choices that would not usually be the rational decision. Obviously, this would be done in moderated way and tuned to avoid it becoming a regular part of decision making.
 
 In terms of the items that propagate, attributes are a particular focus - the idea of others affecting your choices is key to this process. Example attributes that would propagate are whether someone smokes, and the number of cigarettes someone smokers, per day - if person's friend smokes heavily, then the person may increase to allow them to spend more time with their friend. As such, the probabilities used in the decision trees will be manipulated by the nodes connected to a given person. The overall aim is that these manipulations will represent the overt and subconscious actions of others that encourage someone to choose a particular action.
 
@@ -87,8 +85,7 @@ In a larger graph, it is highly unlikely that most people know each other within
 	\label{fig:scale-free2}
 \end{figure}
 
-\emph{Metrics relating to small-world vs scale free will go here, e.g. network diameter, average distance and more.}
-\emph{Further details about how realistic these networks are will be included here.}
+Both methods have advantages in a certain set of situations, so it is worth including the ability to generate and simulate upon either. Examples of a \emph{small-world} network being useful is when examining tightly knit but larger networks, whereas \emph{scale-free} networks are ideal for a more general network. The methods in general will be constantly adapted and tweaked to behave in similar ways to real networks, which will be measured through metrics such as betweenness, network diameter and average path length. 
 
 Alongside the generated networks, sampled networks will also be gathered - by combining these with a set of generated networks, developmental models of components such as the decision tree can be tuned with the ability to reproduce model behaviour. Working from this, larger data sets can be both gathered from real datasets and computer-generated to provide a wide range of networks usable in the final analysis. 
 
@@ -112,7 +109,7 @@ Along with simulating the human and network behaviour, it is important to be abl
 
 \subsection{Validation \& Analysis of Model}
 
-Before analysis, the model must be analysed. This will be done in a number of ways, involving 
+During development, the model must be validated against realistic figures. This will be done in a number of ways, involving comparing it to governmental statistics \cite{SmokStats}, other models (for example by SandTable), and methods that will arise during development. The general aim of validating the model is to ensure that, for known graphs/simulation starting points, it behaves in an expected manner, i.e. providing the same results as other runs within a degree of certainty. 
 
 Although final analysis methods are yet to be decided, great care has been taken to ensure that there is as larger range as tools as possible available for analysis, and as such stopping any implementation based restrictions on these tools. An example of this include building a \emph{GraphML} serialiser for \emph{JUNG} networks, to allow for \emph{Gephi}/\emph{Cytoscape} analysis of these graphs. More tools for analysis will be developed, whilst research into the ideal methods will be undertaken throughout the implementation. Considering final analysis methods, statistical methods are likely to form the basis of comparing realistic models to the model produced as part of this project - this will provide a numerical approach to evaluating the `realism' of the networks and nodes involved.
 
@@ -123,7 +120,7 @@ be developed continuously. These are:
 \item Network reconfiguration and generation, as this depends on the influence model and decision tree.
 \item Model validation against real statistics, such as NHS smoking figures.
 \item Documentation, by way of a development log and working towards the final report.
-\item Research into the causes of smoking, social network influence and self-determination.
+\item Research into the causes of smoking, social network influence and rationality.
 \end{itemize}
 These aspects of the project drive or are affacted by other sections so must continuously be developed and checked throughout.
 \begin{landscape}
@@ -133,7 +130,7 @@ These aspects of the project drive or are affacted by other sections so must con
 		\hline
 			Week No. & Week Beginning & Tasks \\
 			\hline
-			9 & 26th Nov & Research \& experiment with decision trees, read into self-determination. \\
+			9 & 26th Nov & Research \& experiment with decision trees, read into rationality. \\
 			\hline
 			10 & 3rd Dec & Experiment with network reconfiguration and work on tools. \\
 			\hline
@@ -147,7 +144,7 @@ These aspects of the project drive or are affacted by other sections so must con
 			\hline
 			16 & 14th Jan & Analyse previous work (with focus on decision tree) and tune, as well as working more attributes into the human model. \\
 			\hline
-			17 & 21 Jan & Further tune decision tree, incorporating self-determination and user-specified trigger humans (i.e. certain user-given characteristics that cause them to give up). \\
+			17 & 21 Jan & Further tune decision tree, incorporating rationality/irrationality and user-specified trigger humans (i.e. certain user-given characteristics that cause them to give up). \\
 			\hline
 			18 & 28th Jan & Tune and asses network reconfiguration on model so far.\\
 			\hline
