@@ -29,7 +29,8 @@ As it stands, nodes have the following attributes:
 Edges are directed and their weight is a probability, representing their influence.
 Nodes can also be constrained to a maximum number of in-edges, i.e. nodes which influence them. Within each simulation step, the following happens:
 \begin{enumerate}
-\item The local neighbourhood within three incoming hops is acquired for the given node. Influence between the nodes is calculated as the maximum influence across all possible connections of the two nodes, where influence over multiple hops is the product of the influence of each hop. For example, in Fig. \ref{networkdiag}, the 
+\item The local neighbourhood within three incoming hops is acquired for the given node. Influence between the nodes is calculated as the maximum influence across all possible connections of the two nodes, where influence over multiple hops is the product of the influence of each hop. For example, in Fig. \ref{networkdiag}, the influence of \emph{Node C} on the \emph{Current Node} is the maxiumum of $0.8 * 0.8$ and $0.1$, the maxiumum value here is $0.64$ for \emph{Node C} to \emph{D} to \emph{Current}. All nodes within the neighbourhood set are unique.
+\item Metrics for this set are calculated for the current node relative to the neighborhood. 
 \begin{figure}[h]
 \begin{center}
 \includegraphics{networkdiag.png}
