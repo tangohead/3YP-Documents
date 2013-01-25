@@ -2,7 +2,11 @@
 \usepackage[margin=1in]{geometry}
 \usepackage{graphicx}
 \usepackage{lscape}
-
+\usepackage{mathtools}
+\usepackage{listings}
+\lstset{ %
+language=Java,                % choose the language of the code
+}
 \begin{document}
 
 \title{SmokeSNET Model}
@@ -27,10 +31,10 @@ As it stands, nodes have the following attributes:
     \end{tabular}
 \end{table}
 Edges are directed and their weight is a probability, representing their influence.
+Currently, all attributes are normally distrobuted. This can be adjusted to more realistic values later in development.
 Nodes can also be constrained to a maximum number of in-edges, i.e. nodes which influence them. Within each simulation step, the following happens:
 \begin{enumerate}
 \item The local neighbourhood within three incoming hops is acquired for the given node. Influence between the nodes is calculated as the maximum influence across all possible connections of the two nodes, where influence over multiple hops is the product of the influence of each hop. For example, in Fig. \ref{networkdiag}, the influence of \emph{Node C} on the \emph{Current Node} is the maxiumum of $0.8 * 0.8$ and $0.1$, the maxiumum value here is $0.64$ for \emph{Node C} to \emph{D} to \emph{Current}. All nodes within the neighbourhood set are unique.
-\item Metrics for this set are calculated for the current node relative to the neighborhood. 
 \begin{figure}[h]
 \begin{center}
 \includegraphics{networkdiag.png}
@@ -38,11 +42,85 @@ Nodes can also be constrained to a maximum number of in-edges, i.e. nodes which 
 \caption{Network Diagram}
 \end{center}
 \end{figure}
+
+\item Metrics for this set are calculated for the current node relative to the neighborhood. Some general ones, such as the percentage of the neighbourhood which is giving up smoking, along with the percentage that currently smoke is calculated. For each attribute other than this, the influence weighted average seen in figure \ref{inf} is used.
+\begin{figure}[h]
+	\begin{center}
+		\begin{math}
+		\frac{\sum_{\forall n \in N} attribute_{n} \times influence_{n}}{\sum_{\forall n \in N} influence_{n}} \text{ where } N \text{ is the set of nodes}
+		\end{math}
+	\end{center}
+	\label{inf}
+	\caption{Influence Calculation}
+\end{figure}
+
+
+\item The decision tree is run on the nodes. At present, this tree can be drawn as seen in figure \ref{dectree}. The relevant probability calculations are in figure \ref{decTreeProbs}. The aim of the decision tree is to adjust the attribute values of the individual.
+\begin{figure}[h]
+\begin{center}
+\includegraphics{DecTreeBasic.png}
+\label{dectree}
+\caption{Decision Tree}
+\end{center}
+\end{figure}
+
+
+\begin{figure}[h]
+	$\forall n \in Nodes$
+	\begin{enumerate}
+		\item $(1-health_{n}) \times \frac{|\text{Nodes giving up smoking}|}{|\text{Nodes}|}$
+		\item If $n$ smokes $\pm10\%$ of the influence sum for cigarettes smoked, then: \\
+		$change = (\text{influence sum of smoked per day} - {smokedPerDay}_{n}) \times influenceability_{n}$, else there is no change.
+		\item $health_{n} \times \frac{|\text{Nodes giving up smoking}|}{|\text{Nodes}|} \times \frac{|\text{Nodes who smoke}|}{|\text{Nodes}|}$
+		\item If the influenced sum of the number of cigarettes per day is $< 0$, then $smokedPerDay = 5$, otherwise \\
+		
+		$smokedPerDay = \operatorname{round}(\frac{\sum_{\forall n \in Neighbours} smokedPerDay_{n} \times influence_{n}}{\sum_{\forall n \in N} influence_{n}})$
+	\end{enumerate}
+	\label{decTreeProbs}
+	\caption{Decision Tree Calculations}
+\end{figure}
+
+\item Finally, a nodes connections are adjusted based on its attributes. Currently, the nodes have an upper limit of nodes that can influence them (simulations run with 10 at the moment) to avoid hugely saturating the graph. If a node reaches this maximum but still wishes to add an edge, it can remove a low influence edge $e$ with a probability $p(removal) = (1 - \operatorname{min}_{\forall e \in \text{In Edges}}(influence_{e}))$.
+\\
+Edges are selected for addition based on a scoring system of each node in the current nodes neighbourhood. The system uses two approaches to determine a score (i.e. a 'worthiness') for each of these nodes:
+\begin{enumerate}
+\item Boolean scoring, where the node either gets all the points, or none of the points
+\item Linear scoring, in which the percentage difference of the node being considered from the source node is deducted from a points total, i.e. $score = maxPoints - \text{\% diff} \times maxPoints$ - if the target node is $100\%$ or over different, then they will score zero on that comparison.
 \end{enumerate}
-This is a work in progress - I'm planning to add the following attributes over the next few days:
+The current scoring algorithm can be seen in figure \ref{pseudo}. It is very basic and as such, gives little spread in the scores of nodes. The effect of this is that it becomes difficult to differentiate good connection candidates from average or poor ones - a way to circumvent this is to add in extra attributes and tune the scores per attribute until a reasonable spread is given.
+
+\begin{figure}[h]
+\begin{center}
+	\begin{lstlisting}
+for(Node n : Neighbours)
+{
+	if(current.isSmoker == n.isSmoker)
+	{
+		score + 1
+		if(current.isGivingUp && n.isGivingUp)
+			score + 2
+		if(current.isSmoker)
+		{
+			score + linearScore(smokedPerDay) 	//Max 5 pts
+		}
+	}
+	score + linearScore(health)		//Max 5 pts
+	
+	return score/13
+}
+	\end{lstlisting}
+\end{center}
+\label{pseudo}
+\caption{Scoring Algorithm}
+\end{figure}
+The total score is divided by the maximum available score to give a value between $0$ and $1$. A threshold is then set to determine whether to add or remove the edge (i.e. if the score is less than $0.1$, remove the edge, if it is between $0.1$ and $0.2$ do nothing, otherwise add it.
+
+\end{enumerate}
+\section{Upcoming Features}
 \begin{itemize}
-\item A representation of addiction - probably a value between 0 and 1, that can be decremented as 
-\item
+\item A more complex decision tree, incorporating all attributes and causing gradual change over time.
+\item Much more work on incorporating attributes into the connection adjuster to enforce a more slowly-moving network.
+\item More attributes that affect smoking cessation being added.
 \end{itemize}
 
 \end{document}
