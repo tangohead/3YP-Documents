@@ -1,15 +1,18 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2012.11.13)  25 JAN 2013 01:04
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2012.11.13)  1 FEB 2013 01:57
 entering extended mode
-**Model.tex
-("G:\My Documents\3rd Year Project\3YP-Documents\Model.tex"
+**G:/My*Documents/3rd*Year*Project/3YP-Documents/Model.tex
+("G:/My Documents/3rd Year Project/3YP-Documents/Model.tex"
 LaTeX2e <2011/06/27>
-Babel <v3.8m> and hyphenation patterns for english, afrikaans, ancientgreek, arabic, armenian, assamese, basque, bengali
-, bokmal, bulgarian, catalan, coptic, croatian, czech, danish, dutch, esperanto, estonian, farsi, finnish, french, galic
-ian, german, german-x-2009-06-19, greek, gujarati, hindi, hungarian, icelandic, indonesian, interlingua, irish, italian,
- kannada, kurmanji, lao, latin, latvian, lithuanian, malayalam, marathi, mongolian, mongolianlmc, monogreek, ngerman, ng
-erman-x-2009-06-19, nynorsk, oriya, panjabi, pinyin, polish, portuguese, romanian, russian, sanskrit, serbian, slovak, s
-lovenian, spanish, swedish, swissgerman, tamil, telugu, turkish, turkmen, ukenglish, ukrainian, uppersorbian, usenglishm
-ax, welsh, loaded.
+Babel <v3.8m> and hyphenation patterns for english, afrikaans, ancientgreek, ar
+abic, armenian, assamese, basque, bengali, bokmal, bulgarian, catalan, coptic, 
+croatian, czech, danish, dutch, esperanto, estonian, farsi, finnish, french, ga
+lician, german, german-x-2009-06-19, greek, gujarati, hindi, hungarian, iceland
+ic, indonesian, interlingua, irish, italian, kannada, kurmanji, lao, latin, lat
+vian, lithuanian, malayalam, marathi, mongolian, mongolianlmc, monogreek, ngerm
+an, ngerman-x-2009-06-19, nynorsk, oriya, panjabi, pinyin, polish, portuguese, 
+romanian, russian, sanskrit, serbian, slovak, slovenian, spanish, swedish, swis
+sgerman, tamil, telugu, turkish, turkmen, ukenglish, ukrainian, uppersorbian, u
+senglishmax, welsh, loaded.
 ("D:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\article.cls"
 Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
 ("D:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\size10.clo"
@@ -269,14 +272,14 @@ LaTeX Font Info:    ... okay on input line 10.
 )
 \c@lstlisting=\count121
 
-Overfull \hbox (23.06529pt too wide) in paragraph at lines 20--32
-[][] 
+Overfull \hbox (20.49774pt too wide) in paragraph at lines 21--35
+[][]
  []
 
 <networkdiag.png, id=1, 393.72093pt x 231.11343pt>
 File: networkdiag.png Graphic file (type png)
  <use networkdiag.png>
-Package pdftex.def Info: networkdiag.png used on input line 40.
+Package pdftex.def Info: networkdiag.png used on input line 45.
 (pdftex.def)             Requested size: 393.71997pt x 231.11287pt.
 
 
@@ -285,17 +288,17 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<DecTreeBasic.png, id=2, 356.0803pt x 267.24844pt>
-File: DecTreeBasic.png Graphic file (type png)
- <use DecTreeBasic.png>
-Package pdftex.def Info: DecTreeBasic.png used on input line 61.
+<DecTreeBasic2.png, id=2, 356.0803pt x 267.24844pt>
+File: DecTreeBasic2.png Graphic file (type png)
+ <use DecTreeBasic2.png>
+Package pdftex.def Info: DecTreeBasic2.png used on input line 66.
 (pdftex.def)             Requested size: 356.07944pt x 267.24779pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 75--76
+Underfull \hbox (badness 10000) in paragraph at lines 81--82
 
  []
 
@@ -305,37 +308,49 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 [1
 
 {C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 96.
- ("D:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\omscmr.fd"
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 104.
+
+
+("D:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\omscmr.fd"
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 96.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 104.
+
+Overfull \hbox (58.25035pt too wide) in paragraph at lines 111--112
+[][][][][][][][][][][][][][][][][][][][][] 
+ []
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[2 <G:/My Documents/3rd Year Project/3YP-Documents/networkdiag.png>] [3 <G:/My Documents/3rd Year Project/3YP-Documents/
-DecTreeBasic.png>] [4] ("G:\My Documents\3rd Year Project\3YP-Documents\Model.aux") ) 
+[2 <G:/My Documents/3rd Year Project/3YP-Documents/networkdiag.png>] [3 <G:/My 
+Documents/3rd Year Project/3YP-Documents/DecTreeBasic2.png>] [4]
+("G:\My Documents\3rd Year Project\3YP-Documents\Model.aux") ) 
 Here is how much of TeX's memory you used:
- 4092 strings out of 494045
- 57933 string characters out of 3145971
- 158254 words of memory out of 3000000
- 7356 multiletter control sequences out of 15000+200000
+ 4104 strings out of 494045
+ 58088 string characters out of 3145971
+ 166254 words of memory out of 3000000
+ 7368 multiletter control sequences out of 15000+200000
  9062 words of font info for 33 fonts, out of 3000000 for 9000
  715 hyphenation exceptions out of 8191
- 33i,8n,40p,587b,1387s stack positions out of 5000i,500n,10000p,200000b,50000s
-<D:/Program Files (x86)/MiKTeX 2.9/
-fonts/type1/public/amsfonts/cm/cmbx10.pfb><D:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><
-D:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cmextra/cmex7.pfb><D:/Program Files (x86)/MiKTeX 2.9/fonts
-/type1/public/amsfonts/cm/cmmi10.pfb><D:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi5.pfb><D:/Pro
-gram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi7.pfb><D:/Program Files (x86)/MiKTeX 2.9/fonts/type1/publ
-ic/amsfonts/cm/cmr10.pfb><D:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><D:/Program Files (
-x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb><D:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/
-cm/cmr7.pfb><D:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><D:/Program Files (x86)/MiKTeX 
-2.9/fonts/type1/public/amsfonts/cm/cmsy5.pfb><D:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy7.pfb
-><D:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on Model.pdf (4 pages, 186121 bytes).
+ 33i,10n,40p,636b,1385s stack positions out of 5000i,500n,10000p,200000b,50000s
+<D:/Program Files
+ (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx10.pfb><D:/Program Files (
+x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><D:/Program Files (x8
+6)/MiKTeX 2.9/fonts/type1/public/amsfonts/cmextra/cmex7.pfb><D:/Program Files (
+x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><D:/Program Files (x8
+6)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi5.pfb><D:/Program Files (x86)/
+MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi7.pfb><D:/Program Files (x86)/MiK
+TeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><D:/Program Files (x86)/MiKTeX
+ 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><D:/Program Files (x86)/MiKTeX 2.
+9/fonts/type1/public/amsfonts/cm/cmr17.pfb><D:/Program Files (x86)/MiKTeX 2.9/f
+onts/type1/public/amsfonts/cm/cmr7.pfb><D:/Program Files (x86)/MiKTeX 2.9/fonts
+/type1/public/amsfonts/cm/cmsy10.pfb><D:/Program Files (x86)/MiKTeX 2.9/fonts/t
+ype1/public/amsfonts/cm/cmsy5.pfb><D:/Program Files (x86)/MiKTeX 2.9/fonts/type
+1/public/amsfonts/cm/cmsy7.pfb><D:/Program Files (x86)/MiKTeX 2.9/fonts/type1/p
+ublic/amsfonts/cm/cmti10.pfb>
+Output written on Model.pdf (4 pages, 187642 bytes).
 PDF statistics:
  73 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

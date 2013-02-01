@@ -15,26 +15,31 @@ language=Java,                % choose the language of the code
 \maketitle
 
 \section{Current Attributes}
-As it stands, nodes have the following attributes:
-\begin{table}[h]
-    \begin{tabular}{|l|l|l|}
+As it stands, nodes have the attributes seen in figure \ref{attr}.
+
+\begin{table}
+    \begin{tabular}{|l|l|p{12cm}|}
         \hline
         Name & Type & Represents \\ \hline
         	isSmoker &  Boolean & True if they're a smoker, false otherwise \\ 
- 	willpower &  Double & A probability representing willpower, 0 being of strong willpower \\ 
-	health &  Double & A value between 0 and 1 for health, where 1 is perfect health \\ 
+ 	willpower &  Double & A probability representing willpower, 0 being of strong willpower. \\ 
+	health &  Double & A value between 0 and 1 for health, where 1 is perfect health and 0 is a smoking-related disease.\\ 
 	smokedPerDay &  Integer & The number of cigarettes smoked per day\\ 
- 	givingUp &  Boolean & True if they're giving up, false otherwise \\ 
- 	stepsSinceGiveUp &  Integer & The number of simulation steps since giving up \\ 
+	givingUp & Boolean & A side-status for non-smokers, where true means they are giving up. Every turn this can influence whether a person starts again, whether they become a \'normal\' non-smoker and can affect others who are also giving up. \\ 
+ 	giveUpAttempts & Integer & The number of attempts at giving up. \\ 
+ 	stepsSinceGiveUp &  Integer & The number of simulation steps since the last decision to give up. \\ 
 	sociable &  Double & A probability representing how sociable someone is, with 1 being very sociable \\ 
         \hline
     \end{tabular}
+\label{attr}
+\caption{Model Attributes}
 \end{table}
+
 Edges are directed and their weight is a probability, representing their influence.
-Currently, all attributes are normally distrobuted. This can be adjusted to more realistic values later in development.
+Currently, all attributes are normally distributed. This can be adjusted to more realistic values later in development.
 Nodes can also be constrained to a maximum number of in-edges, i.e. nodes which influence them. Within each simulation step, the following happens:
 \begin{enumerate}
-\item The local neighbourhood within three incoming hops is acquired for the given node. Influence between the nodes is calculated as the maximum influence across all possible connections of the two nodes, where influence over multiple hops is the product of the influence of each hop. For example, in Fig. \ref{networkdiag}, the influence of \emph{Node C} on the \emph{Current Node} is the maxiumum of $0.8 * 0.8$ and $0.1$, the maxiumum value here is $0.64$ for \emph{Node C} to \emph{D} to \emph{Current}. All nodes within the neighbourhood set are unique.
+\item The local neighbourhood within three incoming hops is acquired for the given node. Influence between the nodes is calculated as the maximum influence across all possible connections of the two nodes, where influence over multiple hops is the product of the influence of each hop. For example, in Fig. \ref{networkdiag}, the influence of \emph{Node C} on the \emph{Current Node} is the maxiumum of $0.8 * 0.8$ and $0.1$, where the best value here is $0.64$ for \emph{Node C} to \emph{D} to \emph{Current}. All nodes within the neighbourhood set are unique.
 \begin{figure}[h]
 \begin{center}
 \includegraphics{networkdiag.png}
@@ -43,7 +48,7 @@ Nodes can also be constrained to a maximum number of in-edges, i.e. nodes which 
 \end{center}
 \end{figure}
 
-\item Metrics for this set are calculated for the current node relative to the neighborhood. Some general ones, such as the percentage of the neighbourhood which is giving up smoking, along with the percentage that currently smoke is calculated. For each attribute other than this, the influence weighted average seen in figure \ref{inf} is used.
+\item Metrics for this set are calculated for the current node relative to the neighborhood. Some general ones, such as the percentage of the neighbourhood which is giving up smoking, along with the percentage that currently smoke is calculated. For each node attribute, the influence weighted average seen in figure \ref{inf} is calculated.
 \begin{figure}[h]
 	\begin{center}
 		\begin{math}
@@ -55,10 +60,10 @@ Nodes can also be constrained to a maximum number of in-edges, i.e. nodes which 
 \end{figure}
 
 
-\item The decision tree is run on the nodes. At present, this tree can be drawn as seen in figure \ref{dectree}. The relevant probability calculations are in figure \ref{decTreeProbs}. The aim of the decision tree is to adjust the attribute values of the individual.
+\item The decision tree is run on the nodes. At present, this tree can be drawn as seen in figure \ref{dectree}. The relevant probability calculations are in figure \ref{decTreeProbs}.  For each, a random number between $0$ and $1$ is generated - if it is lower than the calculated probability, then the decision is considered to have happened. The aim of the decision tree is to adjust the attribute values of the individual.
 \begin{figure}[h]
 \begin{center}
-\includegraphics{DecTreeBasic.png}
+\includegraphics{DecTreeBasic2.png}
 \label{dectree}
 \caption{Decision Tree}
 \end{center}
@@ -67,6 +72,7 @@ Nodes can also be constrained to a maximum number of in-edges, i.e. nodes which 
 
 \begin{figure}[h]
 	$\forall n \in Nodes$
+
 	\begin{enumerate}
 		\item $(1-health_{n}) \times \frac{|\text{Nodes giving up smoking}|}{|\text{Nodes}|}$
 		\item If $n$ smokes $\pm10\%$ of the influence sum for cigarettes smoked, then: \\
@@ -80,12 +86,14 @@ Nodes can also be constrained to a maximum number of in-edges, i.e. nodes which 
 	\caption{Decision Tree Calculations}
 \end{figure}
 
-\item Finally, a nodes connections are adjusted based on its attributes. Currently, the nodes have an upper limit of nodes that can influence them (simulations run with 10 at the moment) to avoid hugely saturating the graph. If a node reaches this maximum but still wishes to add an edge, it can remove a low influence edge $e$ with a probability $p(removal) = (1 - \operatorname{min}_{\forall e \in \text{In Edges}}(influence_{e}))$.
+\item Finally, a nodes connections are adjusted based on its attributes. Currently, the nodes have an upper limit of in-edges, representing influence on the node - (simulations run with 10 at the moment) to avoid hugely saturating the graph. If a node reaches this maximum but still wishes to add an edge, it can remove a low influence edge $e$ with a probability $p(removal) = (1 - \operatorname{min}_{\forall e \in \text{In Edges}}(influence_{e}))$.
 \\
-Edges are selected for addition based on a scoring system of each node in the current nodes neighbourhood. The system uses two approaches to determine a score (i.e. a 'worthiness') for each of these nodes:
+Edges are selected for addition based on a scoring system of each node in the \emph{n}-hop neighbourhood. The system uses multiple approaches to determine a score (i.e. a 'worthiness') for each of these nodes:
 \begin{enumerate}
 \item Boolean scoring, where the node either gets all the points, or none of the points
 \item Linear scoring, in which the percentage difference of the node being considered from the source node is deducted from a points total, i.e. $score = maxPoints - \text{\% diff} \times maxPoints$ - if the target node is $100\%$ or over different, then they will score zero on that comparison.
+\item Range scoring, where if one node is within a given range of another, a set score is given.
+\item Percent scoring, where the attribute is multiplied against a maximum score to get the net score. 
 \end{enumerate}
 The current scoring algorithm can be seen in figure \ref{pseudo}. It is very basic and as such, gives little spread in the scores of nodes. The effect of this is that it becomes difficult to differentiate good connection candidates from average or poor ones - a way to circumvent this is to add in extra attributes and tune the scores per attribute until a reasonable spread is given.
 
@@ -98,15 +106,26 @@ for(Node n : Neighbours)
 	{
 		score + 1
 		if(current.isGivingUp && n.isGivingUp)
+		{
 			score + 2
+			if(n.stepsSinceGiveUp is within 50% of current.stepsSinceGiveUp)
+				score + 5
+			else
+				score + 2
+		}
 		if(current.isSmoker)
 		{
 			score + linearScore(smokedPerDay) 	//Max 5 pts
 		}
 	}
 	score + linearScore(health)		//Max 5 pts
-	
-	return score/13
+	score + linearScore(willpower)		//Max 5 pts
+	score + linearScore(sociable)		//Max 5 pts
+
+	score + percentScore(influenceability)	//Max 5 pts
+	score + percentScore(persuasiveness)	//Max 5 pts
+
+	return score/33
 }
 	\end{lstlisting}
 \end{center}
@@ -119,7 +138,7 @@ The total score is divided by the maximum available score to give a value betwee
 \section{Upcoming Features}
 \begin{itemize}
 \item A more complex decision tree, incorporating all attributes and causing gradual change over time.
-\item Much more work on incorporating attributes into the connection adjuster to enforce a more slowly-moving network.
+\item Network metric analysis during the simulation to check if the graph is converging to a `small world' style graph. This is through looking at the average clustering coefficient of the graph, and depending on the results of this, further graph statistics.
 \item More attributes that affect smoking cessation being added.
 \end{itemize}
 
