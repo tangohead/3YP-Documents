@@ -15,7 +15,6 @@ language=Java,                % choose the language of the code
 \maketitle
 
 \section{Current Attributes}
-As it stands, nodes have the attributes seen in figure \ref{attr}.
 
 \begin{table}
     \begin{tabular}{|l|l|p{12cm}|}
@@ -34,13 +33,13 @@ As it stands, nodes have the attributes seen in figure \ref{attr}.
 \label{attr}
 \caption{Model Attributes}
 \end{table}
-
+As it stands, nodes have the attributes seen in figure \ref{attr}.
 Edges are directed and their weight is a probability, representing their influence.
-Currently, all attributes are normally distributed. This can be adjusted to more realistic values later in development.
+Currently, all attributes are normally distributed and can be adjusted to more realistic values later in development.
 Nodes can also be constrained to a maximum number of in-edges, i.e. nodes which influence them. Within each simulation step, the following happens:
 \begin{enumerate}
-\item The local neighbourhood within three incoming hops is acquired for the given node. Influence between the nodes is calculated as the maximum influence across all possible connections of the two nodes, where influence over multiple hops is the product of the influence of each hop. For example, in Fig. \ref{networkdiag}, the influence of \emph{Node C} on the \emph{Current Node} is the maxiumum of $0.8 * 0.8$ and $0.1$, where the best value here is $0.64$ for \emph{Node C} to \emph{D} to \emph{Current}. All nodes within the neighbourhood set are unique.
-\begin{figure}[h]
+\item The local neighbourhood within three incoming hops is acquired for the given node. Influence between the nodes is calculated as the maximum influence across all possible connections of the two nodes, where influence over multiple hops is the product of the influence of each hop. For example, in Fig. \ref{networkdiag}, the influence of \emph{Node C} on the \emph{Current Node} is the maxiumum of $0.8 * 0.8$ and $0.1$, where the best value here is $0.64$ for \emph{Node C} to \emph{D} to \emph{Current}. Note that even if a one-hop route exists, the maximum influence will be chosen for consistency across the neighbourhood. All nodes within the neighbourhood set are unique.
+\begin{figure}
 \begin{center}
 \includegraphics{networkdiag.png}
 \label{networkdiag}
@@ -49,7 +48,7 @@ Nodes can also be constrained to a maximum number of in-edges, i.e. nodes which 
 \end{figure}
 
 \item Metrics for this set are calculated for the current node relative to the neighborhood. Some general ones, such as the percentage of the neighbourhood which is giving up smoking, along with the percentage that currently smoke is calculated. For each node attribute, the influence weighted average seen in figure \ref{inf} is calculated.
-\begin{figure}[h]
+\begin{figure}
 	\begin{center}
 		\begin{math}
 		\frac{\sum_{\forall n \in N} attribute_{n} \times influence_{n}}{\sum_{\forall n \in N} influence_{n}} \text{ where } N \text{ is the set of nodes}
@@ -60,8 +59,8 @@ Nodes can also be constrained to a maximum number of in-edges, i.e. nodes which 
 \end{figure}
 
 
-\item The decision tree is run on the nodes. At present, this tree can be drawn as seen in figure \ref{dectree}. The relevant probability calculations are in figure \ref{decTreeProbs}.  For each, a random number between $0$ and $1$ is generated - if it is lower than the calculated probability, then the decision is considered to have happened. The aim of the decision tree is to adjust the attribute values of the individual.
-\begin{figure}[h]
+\item The decision tree is run on the nodes. At present, this tree can be drawn as seen in figure \ref{dectree}. The relevant probability calculations are in figure \ref{decTreeProbs}. For decisions such as `Is a Smoker?', the decision is based on the attribute value so no probability needs to be calculated. For each, a random number between $0$ and $1$ is generated - if it is lower than the calculated probability, then the decision is considered to have happened. The aim of the decision tree is to adjust the attribute values of the individual node. 
+\begin{figure}
 \begin{center}
 \includegraphics{DecTreeBasic2.png}
 \label{dectree}
@@ -70,16 +69,15 @@ Nodes can also be constrained to a maximum number of in-edges, i.e. nodes which 
 \end{figure}
 
 
-\begin{figure}[h]
+\begin{figure}
 	$\forall n \in Nodes$
 
 	\begin{enumerate}
-		\item $(1-health_{n}) \times \frac{|\text{Nodes giving up smoking}|}{|\text{Nodes}|}$
-		\item If $n$ smokes $\pm10\%$ of the influence sum for cigarettes smoked, then: \\
-		$change = (\text{influence sum of smoked per day} - {smokedPerDay}_{n}) \times influenceability_{n}$, else there is no change.
-		\item $health_{n} \times \frac{|\text{Nodes giving up smoking}|}{|\text{Nodes}|} \times \frac{|\text{Nodes who smoke}|}{|\text{Nodes}|}$
+		\item p(give up smoking)=$(1-health_{n}) \times \frac{|\text{Nodes giving up smoking}|}{|\text{Nodes}|}$ \\
+		\item If $n$ smokes $\pm10\%$ of the influence sum for cigarettes smoked, and $n$\'s health is within $\pm10\%$ of the influence sum of health. \\
+		\item $change = (\text{influence sum of smoked per day} - {smokedPerDay}_{n}) \times influenceability_{n}$, else there is no change. \\
+		\item p(take up smoking) = $health_{n} \times \frac{|\text{Nodes giving up smoking}|}{|\text{Nodes}|} \times \frac{|\text{Nodes who smoke}|}{|\text{Nodes}|}$ \\
 		\item If the influenced sum of the number of cigarettes per day is $< 0$, then $smokedPerDay = 5$, otherwise \\
-		
 		$smokedPerDay = \operatorname{round}(\frac{\sum_{\forall n \in Neighbours} smokedPerDay_{n} \times influence_{n}}{\sum_{\forall n \in N} influence_{n}})$
 	\end{enumerate}
 	\label{decTreeProbs}
@@ -97,7 +95,7 @@ Edges are selected for addition based on a scoring system of each node in the \e
 \end{enumerate}
 The current scoring algorithm can be seen in figure \ref{pseudo}. It is very basic and as such, gives little spread in the scores of nodes. The effect of this is that it becomes difficult to differentiate good connection candidates from average or poor ones - a way to circumvent this is to add in extra attributes and tune the scores per attribute until a reasonable spread is given.
 
-\begin{figure}[h]
+\begin{figure}
 \begin{center}
 	\begin{lstlisting}
 for(Node n : Neighbours)
