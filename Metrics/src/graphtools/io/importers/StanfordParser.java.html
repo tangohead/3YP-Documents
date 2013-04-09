@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
+<META NAME="GENERATOR" CONTENT="Java2HTML Version 1.5">
+<TITLE>graphtools.io.importers.StanfordParser (Java2HTML)</TITLE>
+</HEAD>
+<BODY><TABLE id="Header" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+<td colspan="2" width="33%">&nbsp;</td>
+<td align="center" colspan="2" width="33%">
+<font size="4">StanfordParser.java</font>
+</td>
+<td align="right" colspan="2" width="33%">&nbsp;</td>
+</tr>
+</TABLE>
+<pre ID="Classes">
+<FONT ID="LN">1   </FONT><A NAME="1"></A><FONT ID="Package">package</FONT> graphtools.io.importers;
+<FONT ID="LN">2   </FONT><A NAME="2"></A><FONT ID="Import">import</FONT> java.io.BufferedReader;
+<FONT ID="LN">3   </FONT><A NAME="3"></A><FONT ID="Import">import</FONT> java.io.DataInputStream;
+<FONT ID="LN">4   </FONT><A NAME="4"></A><FONT ID="Import">import</FONT> java.io.FileInputStream;
+<FONT ID="LN">5   </FONT><A NAME="5"></A><FONT ID="Import">import</FONT> java.io.FileNotFoundException;
+<FONT ID="LN">6   </FONT><A NAME="6"></A><FONT ID="Import">import</FONT> java.io.IOException;
+<FONT ID="LN">7   </FONT><A NAME="7"></A><FONT ID="Import">import</FONT> java.io.InputStreamReader;
+<FONT ID="LN">8   </FONT><A NAME="8"></A><FONT ID="Import">import</FONT> java.util.ArrayList;
+<FONT ID="LN">9   </FONT><A NAME="9"></A><FONT ID="Import">import</FONT> java.util.Collection;
+<FONT ID="LN">10  </FONT><A NAME="10"></A><FONT ID="Import">import</FONT> java.util.Collections;
+<FONT ID="LN">11  </FONT><A NAME="11"></A><FONT ID="Import">import</FONT> java.util.HashSet;
+<FONT ID="LN">12  </FONT><A NAME="12"></A><FONT ID="Import">import</FONT> java.util.Iterator;
+<FONT ID="LN">13  </FONT><A NAME="13"></A><FONT ID="Import">import</FONT> java.util.List;
+<FONT ID="LN">14  </FONT><A NAME="14"></A>
+<FONT ID="LN">15  </FONT><A NAME="15"></A><FONT ID="Import">import</FONT> edu.uci.ics.jung.graph.Graph;
+<FONT ID="LN">16  </FONT><A NAME="16"></A><FONT ID="Import">import</FONT> edu.uci.ics.jung.graph.SparseMultigraph;
+<FONT ID="LN">17  </FONT><A NAME="17"></A><FONT ID="Import">import</FONT> edu.uci.ics.jung.graph.util.EdgeType;
+<FONT ID="LN">18  </FONT><A NAME="18"></A><FONT ID="Import">import</FONT> edu.uci.ics.jung.graph.util.Pair;
+<FONT ID="LN">19  </FONT><A NAME="19"></A>
+<FONT ID="LN">20  </FONT><A NAME="20"></A>
+<FONT ID="LN">21  </FONT><A NAME="21"></A><FONT ID="Public">public</FONT> <FONT ID="Class">class</FONT> StanfordParser {
+<FONT ID="LN">22  </FONT><A NAME="22"></A>
+<FONT ID="LN">23  </FONT><A NAME="23"></A>    <FONT ID="Private">private</FONT> String filePath;
+<FONT ID="LN">24  </FONT><A NAME="24"></A>    <FONT ID="Private">private</FONT> String fileComments = <FONT ID="StringLiteral">""</FONT> ;
+<FONT ID="LN">25  </FONT><A NAME="25"></A>    <FONT ID="Private">private</FONT> ArrayList&lt;String[]&gt; edges = <FONT ID="New">new</FONT> ArrayList&lt;String[]&gt;();
+<FONT ID="LN">26  </FONT><A NAME="26"></A>    <FONT ID="Private">private</FONT> Graph&lt;String, Long&gt; graphRep = <FONT ID="New">new</FONT> SparseMultigraph&lt;String, Long&gt;();
+<FONT ID="LN">27  </FONT><A NAME="27"></A>    
+<FONT ID="LN">28  </FONT><A NAME="28"></A>    
+<FONT ID="LN">29  </FONT><A NAME="29"></A>    <FONT ID="Public">public</FONT> StanfordParser(String filePath)
+<FONT ID="LN">30  </FONT><A NAME="30"></A>    {
+<FONT ID="LN">31  </FONT><A NAME="31"></A>        <FONT ID="This">this</FONT>.filePath = filePath;
+<FONT ID="LN">32  </FONT><A NAME="32"></A>    }
+<FONT ID="LN">33  </FONT><A NAME="33"></A>    
+<FONT ID="LN">34  </FONT><A NAME="34"></A>    <FONT ID="Public">public</FONT> <FONT ID="Boolean">boolean</FONT> Parse() 
+<FONT ID="LN">35  </FONT><A NAME="35"></A>    {
+<FONT ID="LN">36  </FONT><A NAME="36"></A>        <FONT ID="Boolean">boolean</FONT> error = <FONT ID="False">false</FONT>;
+<FONT ID="LN">37  </FONT><A NAME="37"></A>        <FONT ID="Try">try</FONT>
+<FONT ID="LN">38  </FONT><A NAME="38"></A>        {
+<FONT ID="LN">39  </FONT><A NAME="39"></A>            FileInputStream fstream = <FONT ID="New">new</FONT> FileInputStream(filePath);
+<FONT ID="LN">40  </FONT><A NAME="40"></A>            DataInputStream in = <FONT ID="New">new</FONT> DataInputStream(fstream);
+<FONT ID="LN">41  </FONT><A NAME="41"></A>            BufferedReader br = <FONT ID="New">new</FONT> BufferedReader(<FONT ID="New">new</FONT> InputStreamReader(in));
+<FONT ID="LN">42  </FONT><A NAME="42"></A>            String strLine;
+<FONT ID="LN">43  </FONT><A NAME="43"></A>            String tempArr[];
+<FONT ID="LN">44  </FONT><A NAME="44"></A>            
+<FONT ID="LN">45  </FONT><A NAME="45"></A>            
+<FONT ID="LN">46  </FONT><A NAME="46"></A>            <FONT ID="SingleLineComment">//Code from http://www.roseindia.net/java/beginners/java-write-to-file.shtml
+<FONT ID="LN">47  </FONT><A NAME="47"></A></FONT>            <FONT ID="While">while</FONT> ((strLine = br.readLine()) != <FONT ID="Null">null</FONT>)   {
+<FONT ID="LN">48  </FONT><A NAME="48"></A>                <FONT ID="SingleLineComment">//System.out.println(strLine);
+<FONT ID="LN">49  </FONT><A NAME="49"></A></FONT>                <FONT ID="If">if</FONT>(strLine.startsWith(<FONT ID="StringLiteral">"#"</FONT>) == <FONT ID="True">true</FONT> )
+<FONT ID="LN">50  </FONT><A NAME="50"></A>                {
+<FONT ID="LN">51  </FONT><A NAME="51"></A>                    fileComments += strLine + <FONT ID="StringLiteral">"\n"</FONT>;
+<FONT ID="LN">52  </FONT><A NAME="52"></A>                }
+<FONT ID="LN">53  </FONT><A NAME="53"></A>                <FONT ID="Else">else</FONT>
+<FONT ID="LN">54  </FONT><A NAME="54"></A>                {
+<FONT ID="LN">55  </FONT><A NAME="55"></A>                    tempArr = strLine.split(<FONT ID="StringLiteral">"\t"</FONT>);
+<FONT ID="LN">56  </FONT><A NAME="56"></A>                    String insertArr[] = <FONT ID="New">new</FONT> String[<FONT ID="IntegerLiteral">2</FONT>];
+<FONT ID="LN">57  </FONT><A NAME="57"></A>                    <FONT ID="For">for</FONT>(<FONT ID="Int">int</FONT> i = <FONT ID="IntegerLiteral">0</FONT>; i &lt; insertArr.length; i++)
+<FONT ID="LN">58  </FONT><A NAME="58"></A>                    {
+<FONT ID="LN">59  </FONT><A NAME="59"></A>                        insertArr[i] = tempArr[i];
+<FONT ID="LN">60  </FONT><A NAME="60"></A>                    }
+<FONT ID="LN">61  </FONT><A NAME="61"></A>                    <FONT ID="SingleLineComment">//System.out.println("Adding " + insertArr[0] + " to " + insertArr[1]);
+<FONT ID="LN">62  </FONT><A NAME="62"></A></FONT>                    edges.add(insertArr);
+<FONT ID="LN">63  </FONT><A NAME="63"></A>                }
+<FONT ID="LN">64  </FONT><A NAME="64"></A>            }
+<FONT ID="LN">65  </FONT><A NAME="65"></A>            in.close();
+<FONT ID="LN">66  </FONT><A NAME="66"></A>        }
+<FONT ID="LN">67  </FONT><A NAME="67"></A>        <FONT ID="Catch">catch</FONT> (FileNotFoundException e){
+<FONT ID="LN">68  </FONT><A NAME="68"></A>            System.err.println(<FONT ID="StringLiteral">"File not found!"</FONT>);
+<FONT ID="LN">69  </FONT><A NAME="69"></A>            error = <FONT ID="True">true</FONT>;
+<FONT ID="LN">70  </FONT><A NAME="70"></A>        } <FONT ID="Catch">catch</FONT> (IOException e) {
+<FONT ID="LN">71  </FONT><A NAME="71"></A>            <FONT ID="SingleLineComment">// TODO Auto-generated catch block
+<FONT ID="LN">72  </FONT><A NAME="72"></A></FONT>            System.err.println(<FONT ID="StringLiteral">"I/O Error!"</FONT>);
+<FONT ID="LN">73  </FONT><A NAME="73"></A>            error = <FONT ID="True">true</FONT>;
+<FONT ID="LN">74  </FONT><A NAME="74"></A>        }
+<FONT ID="LN">75  </FONT><A NAME="75"></A>        <FONT ID="Return">return</FONT> error;
+<FONT ID="LN">76  </FONT><A NAME="76"></A>    }
+<FONT ID="LN">77  </FONT><A NAME="77"></A>    
+<FONT ID="LN">78  </FONT><A NAME="78"></A>    <FONT ID="Public">public</FONT> ArrayList&lt;String[]&gt; getDataSet()
+<FONT ID="LN">79  </FONT><A NAME="79"></A>    {
+<FONT ID="LN">80  </FONT><A NAME="80"></A>        <FONT ID="Return">return</FONT> edges;
+<FONT ID="LN">81  </FONT><A NAME="81"></A>    }
+<FONT ID="LN">82  </FONT><A NAME="82"></A>    
+<FONT ID="LN">83  </FONT><A NAME="83"></A>    <FONT ID="Public">public</FONT> String getComments() 
+<FONT ID="LN">84  </FONT><A NAME="84"></A>    {
+<FONT ID="LN">85  </FONT><A NAME="85"></A>        <FONT ID="Return">return</FONT> fileComments;
+<FONT ID="LN">86  </FONT><A NAME="86"></A>    }
+<FONT ID="LN">87  </FONT><A NAME="87"></A>    
+<FONT ID="LN">88  </FONT><A NAME="88"></A>    <FONT ID="Public">public</FONT> Graph&lt;String, Long&gt; toGraph()
+<FONT ID="LN">89  </FONT><A NAME="89"></A>    {
+<FONT ID="LN">90  </FONT><A NAME="90"></A>        <FONT ID="SingleLineComment">//Add vertices to graph first
+<FONT ID="LN">91  </FONT><A NAME="91"></A></FONT>        <FONT ID="SingleLineComment">//STORE ADDED IDS IN COLLECTION
+<FONT ID="LN">92  </FONT><A NAME="92"></A></FONT>        <FONT ID="SingleLineComment">//CHECK FOR ID BEFORE ADDING NEW NODE
+<FONT ID="LN">93  </FONT><A NAME="93"></A></FONT>        HashSet&lt;String&gt; nodes = <FONT ID="New">new</FONT> HashSet&lt;String&gt;();
+<FONT ID="LN">94  </FONT><A NAME="94"></A>        Long edgeName = (<FONT ID="Long">long</FONT>) <FONT ID="IntegerLiteral">0</FONT>;
+<FONT ID="LN">95  </FONT><A NAME="95"></A>        EdgeType edgeType = EdgeType.DIRECTED;
+<FONT ID="LN">96  </FONT><A NAME="96"></A>        Pair&lt;String&gt; vPair;
+<FONT ID="LN">97  </FONT><A NAME="97"></A>        <FONT ID="For">for</FONT>(<FONT ID="Int">int</FONT> i = <FONT ID="IntegerLiteral">0</FONT>; i &lt; edges.size(); i++)
+<FONT ID="LN">98  </FONT><A NAME="98"></A>        {
+<FONT ID="LN">99  </FONT><A NAME="99"></A>            <FONT ID="SingleLineComment">//System.out.println("Adding " + edges.get(i)[0] + " to " + edges.get(i)[1]);
+<FONT ID="LN">100 </FONT><A NAME="100"></A></FONT>            
+<FONT ID="LN">101 </FONT><A NAME="101"></A>            <FONT ID="If">if</FONT>(!nodes.contains(edges.get(i)[<FONT ID="IntegerLiteral">0</FONT>]))
+<FONT ID="LN">102 </FONT><A NAME="102"></A>            {
+<FONT ID="LN">103 </FONT><A NAME="103"></A>                graphRep.addVertex(edges.get(i)[<FONT ID="IntegerLiteral">0</FONT>]);
+<FONT ID="LN">104 </FONT><A NAME="104"></A>                nodes.add(edges.get(i)[<FONT ID="IntegerLiteral">0</FONT>]);
+<FONT ID="LN">105 </FONT><A NAME="105"></A>                <FONT ID="SingleLineComment">//System.out.println(graphRep.getVertexCount());
+<FONT ID="LN">106 </FONT><A NAME="106"></A></FONT>            }
+<FONT ID="LN">107 </FONT><A NAME="107"></A>            <FONT ID="If">if</FONT>(!nodes.contains(edges.get(i)[<FONT ID="IntegerLiteral">1</FONT>]))
+<FONT ID="LN">108 </FONT><A NAME="108"></A>            {
+<FONT ID="LN">109 </FONT><A NAME="109"></A>                graphRep.addVertex(edges.get(i)[<FONT ID="IntegerLiteral">1</FONT>]);
+<FONT ID="LN">110 </FONT><A NAME="110"></A>                nodes.add(edges.get(i)[<FONT ID="IntegerLiteral">1</FONT>]);
+<FONT ID="LN">111 </FONT><A NAME="111"></A>                <FONT ID="SingleLineComment">//System.out.println(graphRep.getVertexCount());
+<FONT ID="LN">112 </FONT><A NAME="112"></A></FONT>            }
+<FONT ID="LN">113 </FONT><A NAME="113"></A>            vPair = <FONT ID="New">new</FONT> Pair&lt;String&gt;(edges.get(i)[<FONT ID="IntegerLiteral">0</FONT>], edges.get(i)[<FONT ID="IntegerLiteral">1</FONT>]);
+<FONT ID="LN">114 </FONT><A NAME="114"></A>            edgeName++;
+<FONT ID="LN">115 </FONT><A NAME="115"></A>            graphRep.addEdge(edgeName, vPair, edgeType);
+<FONT ID="LN">116 </FONT><A NAME="116"></A>            <FONT ID="SingleLineComment">//System.out.println(graphRep.getVertexCount());
+<FONT ID="LN">117 </FONT><A NAME="117"></A></FONT>        }
+<FONT ID="LN">118 </FONT><A NAME="118"></A>        
+<FONT ID="LN">119 </FONT><A NAME="119"></A>        <FONT ID="Return">return</FONT> graphRep;
+<FONT ID="LN">120 </FONT><A NAME="120"></A>    }
+<FONT ID="LN">121 </FONT><A NAME="121"></A>}
+<FONT ID="LN">122 </FONT><A NAME="122"></A></pre>
+</BODY>
+</HTML>

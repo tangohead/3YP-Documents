@@ -1,0 +1,210 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
+<META NAME="GENERATOR" CONTENT="Java2HTML Version 1.5">
+<TITLE>graphtools.generators.ScaleFree (Java2HTML)</TITLE>
+</HEAD>
+<BODY><TABLE id="Header" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+<td colspan="2" width="33%">&nbsp;</td>
+<td align="center" colspan="2" width="33%">
+<font size="4">ScaleFree.java</font>
+</td>
+<td align="right" colspan="2" width="33%">&nbsp;</td>
+</tr>
+</TABLE>
+<pre ID="Classes">
+<FONT ID="LN">1   </FONT><A NAME="1"></A><FONT ID="Package">package</FONT> graphtools.generators;
+<FONT ID="LN">2   </FONT><A NAME="2"></A>
+<FONT ID="LN">3   </FONT><A NAME="3"></A><FONT ID="Import">import</FONT> java.util.ArrayList;
+<FONT ID="LN">4   </FONT><A NAME="4"></A><FONT ID="Import">import</FONT> java.util.Iterator;
+<FONT ID="LN">5   </FONT><A NAME="5"></A><FONT ID="Import">import</FONT> java.util.Random;
+<FONT ID="LN">6   </FONT><A NAME="6"></A>
+<FONT ID="LN">7   </FONT><A NAME="7"></A><FONT ID="Import">import</FONT> repast.simphony.context.Context;
+<FONT ID="LN">8   </FONT><A NAME="8"></A><FONT ID="Import">import</FONT> repast.simphony.context.space.graph.NetworkBuilder;
+<FONT ID="LN">9   </FONT><A NAME="9"></A><FONT ID="Import">import</FONT> repast.simphony.space.graph.Network;
+<FONT ID="LN">10  </FONT><A NAME="10"></A><FONT ID="Import">import</FONT> repast.simphony.util.collections.IndexedIterable;
+<FONT ID="LN">11  </FONT><A NAME="11"></A><FONT ID="Import">import</FONT> <A HREF="../../agents/BaseHuman.java.html">agents.BaseHuman</A>;
+<FONT ID="LN">12  </FONT><A NAME="12"></A><FONT ID="Import">import</FONT> <A HREF="../../probtools/Distributions.java.html">probtools.Distributions</A>;
+<FONT ID="LN">13  </FONT><A NAME="13"></A><FONT ID="Import">import</FONT> <A HREF="../../probtools/NDParams.java.html">probtools.NDParams</A>;
+<FONT ID="LN">14  </FONT><A NAME="14"></A>
+<FONT ID="LN">15  </FONT><A NAME="15"></A><FONT ID="Public">public</FONT> <FONT ID="Class">class</FONT> ScaleFree {
+<FONT ID="LN">16  </FONT><A NAME="16"></A>    
+<FONT ID="LN">17  </FONT><A NAME="17"></A>    <FONT ID="FormalComment">/**
+<FONT ID="LN">18  </FONT><A NAME="18"></A>     * Adds a BaseHuman class to a Repast Network
+<FONT ID="LN">19  </FONT><A NAME="19"></A>     * @param humanInstance - the instance to be added
+<FONT ID="LN">20  </FONT><A NAME="20"></A>     * @param context - Repast context
+<FONT ID="LN">21  </FONT><A NAME="21"></A>     * @param network - Repast network
+<FONT ID="LN">22  </FONT><A NAME="22"></A>     * @param reciprocate - whether to automatically reciprocate with the node that this instance connects to.
+<FONT ID="LN">23  </FONT><A NAME="23"></A>     * @param reciprocateChance - the chance of an edge being reciprocated
+<FONT ID="LN">24  </FONT><A NAME="24"></A>     */</FONT>
+<FONT ID="LN">25  </FONT><A NAME="25"></A>    <FONT ID="Public">public</FONT> <FONT ID="Static">static</FONT> <FONT ID="Void">void</FONT> addToRSF(<A HREF="../../agents/BaseHuman.java.html">BaseHuman</A> humanInstance, Context&lt;?&gt; context, Network&lt;<A HREF="../../agents/BaseHuman.java.html">BaseHuman</A>&gt; network, <FONT ID="Boolean">boolean</FONT> reciprocate, <FONT ID="Double">double</FONT> reciprocateChance, <A HREF="../../probtools/NDParams.java.html">NDParams</A> nd)
+<FONT ID="LN">26  </FONT><A NAME="26"></A>    {
+<FONT ID="LN">27  </FONT><A NAME="27"></A>        <FONT ID="SingleLineComment">//Add to scale-free network
+<FONT ID="LN">28  </FONT><A NAME="28"></A></FONT>        Iterable&lt;<A HREF="../../agents/BaseHuman.java.html">BaseHuman</A>&gt; nodes = network.getNodes();
+<FONT ID="LN">29  </FONT><A NAME="29"></A>
+<FONT ID="LN">30  </FONT><A NAME="30"></A>        ArrayList&lt;ArrayList&lt;<A HREF="../../agents/BaseHuman.java.html">BaseHuman</A>&gt;&gt; newEdges = <FONT ID="New">new</FONT> ArrayList&lt;ArrayList&lt;<A HREF="../../agents/BaseHuman.java.html">BaseHuman</A>&gt;&gt;();
+<FONT ID="LN">31  </FONT><A NAME="31"></A>        <FONT ID="For">for</FONT>(<A HREF="../../agents/BaseHuman.java.html">BaseHuman</A> current : nodes)
+<FONT ID="LN">32  </FONT><A NAME="32"></A>        {
+<FONT ID="LN">33  </FONT><A NAME="33"></A>            <FONT ID="Double">double</FONT> iDegree = network.getDegree(current);
+<FONT ID="LN">34  </FONT><A NAME="34"></A>            <FONT ID="Double">double</FONT> jSumDegree = <FONT ID="IntegerLiteral">0</FONT>;
+<FONT ID="LN">35  </FONT><A NAME="35"></A>            <FONT ID="For">for</FONT>(<A HREF="../../agents/BaseHuman.java.html">BaseHuman</A> n : network.getNodes())
+<FONT ID="LN">36  </FONT><A NAME="36"></A>            {
+<FONT ID="LN">37  </FONT><A NAME="37"></A>                jSumDegree += network.getDegree(n);
+<FONT ID="LN">38  </FONT><A NAME="38"></A>            }
+<FONT ID="LN">39  </FONT><A NAME="39"></A>            
+<FONT ID="LN">40  </FONT><A NAME="40"></A>            <FONT ID="Double">double</FONT> prob = iDegree / jSumDegree;
+<FONT ID="LN">41  </FONT><A NAME="41"></A>            prob = prob * humanInstance.compatProb(current);
+<FONT ID="LN">42  </FONT><A NAME="42"></A>            <FONT ID="MultiLineComment">/*if(this.isSmoker() != current.isSmoker())
+<FONT ID="LN">43  </FONT><A NAME="43"></A>                prob = prob * 0.5;*/</FONT>
+<FONT ID="LN">44  </FONT><A NAME="44"></A>            
+<FONT ID="LN">45  </FONT><A NAME="45"></A>            <FONT ID="If">if</FONT>(Math.random() &lt;= prob)
+<FONT ID="LN">46  </FONT><A NAME="46"></A>            {
+<FONT ID="LN">47  </FONT><A NAME="47"></A>                ArrayList&lt;<A HREF="../../agents/BaseHuman.java.html">BaseHuman</A>&gt; pair = <FONT ID="New">new</FONT> ArrayList&lt;<A HREF="../../agents/BaseHuman.java.html">BaseHuman</A>&gt;();
+<FONT ID="LN">48  </FONT><A NAME="48"></A>                pair.add(humanInstance);
+<FONT ID="LN">49  </FONT><A NAME="49"></A>                pair.add(current);
+<FONT ID="LN">50  </FONT><A NAME="50"></A>                newEdges.add(pair);
+<FONT ID="LN">51  </FONT><A NAME="51"></A>                
+<FONT ID="LN">52  </FONT><A NAME="52"></A>                <FONT ID="If">if</FONT>(reciprocate &amp;&amp; Math.random() &lt;= reciprocateChance)
+<FONT ID="LN">53  </FONT><A NAME="53"></A>                {
+<FONT ID="LN">54  </FONT><A NAME="54"></A>                    ArrayList&lt;<A HREF="../../agents/BaseHuman.java.html">BaseHuman</A>&gt; rPair = <FONT ID="New">new</FONT> ArrayList&lt;<A HREF="../../agents/BaseHuman.java.html">BaseHuman</A>&gt;();
+<FONT ID="LN">55  </FONT><A NAME="55"></A>                    rPair.add(current);
+<FONT ID="LN">56  </FONT><A NAME="56"></A>                    rPair.add(humanInstance);
+<FONT ID="LN">57  </FONT><A NAME="57"></A>                    newEdges.add(rPair);
+<FONT ID="LN">58  </FONT><A NAME="58"></A>                }
+<FONT ID="LN">59  </FONT><A NAME="59"></A>            }
+<FONT ID="LN">60  </FONT><A NAME="60"></A>        }
+<FONT ID="LN">61  </FONT><A NAME="61"></A>        
+<FONT ID="LN">62  </FONT><A NAME="62"></A>        <FONT ID="For">for</FONT>(ArrayList&lt;<A HREF="../../agents/BaseHuman.java.html">BaseHuman</A>&gt; pair : newEdges)
+<FONT ID="LN">63  </FONT><A NAME="63"></A>        {
+<FONT ID="LN">64  </FONT><A NAME="64"></A>            <FONT ID="SingleLineComment">//check if we have NDParams, if not, no weights.
+<FONT ID="LN">65  </FONT><A NAME="65"></A></FONT>            <FONT ID="SingleLineComment">//System.out.println("Adding an edge...");
+<FONT ID="LN">66  </FONT><A NAME="66"></A></FONT>            <FONT ID="If">if</FONT>(nd == <FONT ID="Null">null</FONT>)
+<FONT ID="LN">67  </FONT><A NAME="67"></A>                network.addEdge(pair.get(<FONT ID="IntegerLiteral">0</FONT>), pair.get(<FONT ID="IntegerLiteral">1</FONT>));
+<FONT ID="LN">68  </FONT><A NAME="68"></A>            <FONT ID="Else">else</FONT>
+<FONT ID="LN">69  </FONT><A NAME="69"></A>                network.addEdge(pair.get(<FONT ID="IntegerLiteral">0</FONT>), pair.get(<FONT ID="IntegerLiteral">1</FONT>), Distributions.getND(nd));
+<FONT ID="LN">70  </FONT><A NAME="70"></A>        }
+<FONT ID="LN">71  </FONT><A NAME="71"></A>    }
+<FONT ID="LN">72  </FONT><A NAME="72"></A>    
+<FONT ID="LN">73  </FONT><A NAME="73"></A>    <FONT ID="FormalComment">/**
+<FONT ID="LN">74  </FONT><A NAME="74"></A>     * 
+<FONT ID="LN">75  </FONT><A NAME="75"></A>     * @param context
+<FONT ID="LN">76  </FONT><A NAME="76"></A>     * @param networkName name of the network to be created
+<FONT ID="LN">77  </FONT><A NAME="77"></A>     * @param startWith number of nodes to start the network with
+<FONT ID="LN">78  </FONT><A NAME="78"></A>     * @param numNodes number of nodes to add to the network
+<FONT ID="LN">79  </FONT><A NAME="79"></A>     * @param reciprocate whether to reciprocate network links (wrt reciprocate chance)
+<FONT ID="LN">80  </FONT><A NAME="80"></A>     * @param reciprocateChance the chance of reciprocating an edge
+<FONT ID="LN">81  </FONT><A NAME="81"></A>     * @return
+<FONT ID="LN">82  </FONT><A NAME="82"></A>     */</FONT>
+<FONT ID="LN">83  </FONT><A NAME="83"></A>    <FONT ID="Public">public</FONT> <FONT ID="Static">static</FONT> Network&lt;<A HREF="../../agents/BaseHuman.java.html">BaseHuman</A>&gt; createRSF(Context&lt;Object&gt; context, 
+<FONT ID="LN">84  </FONT><A NAME="84"></A>            String networkName, <FONT ID="Int">int</FONT> startWith, <FONT ID="Int">int</FONT> numNodes, 
+<FONT ID="LN">85  </FONT><A NAME="85"></A>            <FONT ID="Boolean">boolean</FONT> reciprocate, <FONT ID="Double">double</FONT> reciprocateChance, <FONT ID="Boolean">boolean</FONT> removeOutliers,
+<FONT ID="LN">86  </FONT><A NAME="86"></A>            <A HREF="../../probtools/NDParams.java.html">NDParams</A> nd)
+<FONT ID="LN">87  </FONT><A NAME="87"></A>    {
+<FONT ID="LN">88  </FONT><A NAME="88"></A>        NetworkBuilder&lt;<A HREF="../../agents/BaseHuman.java.html">BaseHuman</A>&gt; builder = <FONT ID="New">new</FONT> NetworkBuilder(networkName, context, <FONT ID="True">true</FONT>);
+<FONT ID="LN">89  </FONT><A NAME="89"></A>        Network&lt;<A HREF="../../agents/BaseHuman.java.html">BaseHuman</A>&gt; network = builder.buildNetwork();
+<FONT ID="LN">90  </FONT><A NAME="90"></A>        
+<FONT ID="LN">91  </FONT><A NAME="91"></A>        <FONT ID="SingleLineComment">//First up, we generate a random starting network
+<FONT ID="LN">92  </FONT><A NAME="92"></A></FONT>        <FONT ID="SingleLineComment">//Add the initial nodes (must be more than 2)
+<FONT ID="LN">93  </FONT><A NAME="93"></A></FONT>        <FONT ID="If">if</FONT>(startWith &lt; <FONT ID="IntegerLiteral">2</FONT>)
+<FONT ID="LN">94  </FONT><A NAME="94"></A>            startWith = <FONT ID="IntegerLiteral">2</FONT>;
+<FONT ID="LN">95  </FONT><A NAME="95"></A>        <FONT ID="For">for</FONT>(<FONT ID="Int">int</FONT> i = <FONT ID="IntegerLiteral">0</FONT>; i &lt; startWith; i++)
+<FONT ID="LN">96  </FONT><A NAME="96"></A>        {
+<FONT ID="LN">97  </FONT><A NAME="97"></A>            <FONT ID="SingleLineComment">//note params don't matter since this is the base
+<FONT ID="LN">98  </FONT><A NAME="98"></A></FONT>            context.add(<FONT ID="New">new</FONT> <A HREF="../../agents/BaseHuman.java.html">BaseHuman</A>(<FONT ID="StringLiteral">"n"</FONT> + i, context, network, <FONT ID="False">false</FONT>, <FONT ID="False">false</FONT>, <FONT ID="IntegerLiteral">0</FONT>, <FONT ID="Null">null</FONT>));
+<FONT ID="LN">99  </FONT><A NAME="99"></A>        }
+<FONT ID="LN">100 </FONT><A NAME="100"></A>        
+<FONT ID="LN">101 </FONT><A NAME="101"></A>        network = buildSFFoundation(context, network, nd);
+<FONT ID="LN">102 </FONT><A NAME="102"></A>
+<FONT ID="LN">103 </FONT><A NAME="103"></A>        <FONT ID="SingleLineComment">//Now add the rest onto the base network
+<FONT ID="LN">104 </FONT><A NAME="104"></A></FONT>        <FONT ID="For">for</FONT>( <FONT ID="Int">int</FONT> i = startWith; i &lt; numNodes ; i ++) {
+<FONT ID="LN">105 </FONT><A NAME="105"></A>            context.add(<FONT ID="New">new</FONT> <A HREF="../../agents/BaseHuman.java.html">BaseHuman</A>(<FONT ID="StringLiteral">"n"</FONT> + i, context, network, <FONT ID="True">true</FONT>, reciprocate, reciprocateChance, nd));
+<FONT ID="LN">106 </FONT><A NAME="106"></A>        }
+<FONT ID="LN">107 </FONT><A NAME="107"></A>        
+<FONT ID="LN">108 </FONT><A NAME="108"></A>        <FONT ID="Return">return</FONT> network;
+<FONT ID="LN">109 </FONT><A NAME="109"></A>    }
+<FONT ID="LN">110 </FONT><A NAME="110"></A>    
+<FONT ID="LN">111 </FONT><A NAME="111"></A>    
+<FONT ID="LN">112 </FONT><A NAME="112"></A>    <FONT ID="Public">public</FONT> <FONT ID="Static">static</FONT> Network&lt;<A HREF="../../agents/BaseHuman.java.html">BaseHuman</A>&gt; SFOnBase(Context&lt;Object&gt; context, 
+<FONT ID="LN">113 </FONT><A NAME="113"></A>            Network&lt;<A HREF="../../agents/BaseHuman.java.html">BaseHuman</A>&gt; currNet, <FONT ID="Int">int</FONT> numNodes, 
+<FONT ID="LN">114 </FONT><A NAME="114"></A>            <FONT ID="Boolean">boolean</FONT> reciprocate, <FONT ID="Double">double</FONT> reciprocateChance, <FONT ID="Boolean">boolean</FONT> removeOutliers,
+<FONT ID="LN">115 </FONT><A NAME="115"></A>            <A HREF="../../probtools/NDParams.java.html">NDParams</A> nd)
+<FONT ID="LN">116 </FONT><A NAME="116"></A>    {
+<FONT ID="LN">117 </FONT><A NAME="117"></A>        
+<FONT ID="LN">118 </FONT><A NAME="118"></A>        Network&lt;<A HREF="../../agents/BaseHuman.java.html">BaseHuman</A>&gt; network = buildSFFoundation(context, currNet, nd);
+<FONT ID="LN">119 </FONT><A NAME="119"></A>        
+<FONT ID="LN">120 </FONT><A NAME="120"></A>        <FONT ID="SingleLineComment">//Now add the rest onto the base network
+<FONT ID="LN">121 </FONT><A NAME="121"></A></FONT>        <FONT ID="For">for</FONT>( <FONT ID="Int">int</FONT> i = context.getObjects(<A HREF="../../agents/BaseHuman.java.html">BaseHuman</A>.<FONT ID="Class">class</FONT>).size(); i &lt; numNodes ; i ++) {
+<FONT ID="LN">122 </FONT><A NAME="122"></A>            context.add(<FONT ID="New">new</FONT> <A HREF="../../agents/BaseHuman.java.html">BaseHuman</A>(<FONT ID="StringLiteral">"n"</FONT> + i, context, network, <FONT ID="True">true</FONT>, reciprocate, reciprocateChance, nd));
+<FONT ID="LN">123 </FONT><A NAME="123"></A>        }
+<FONT ID="LN">124 </FONT><A NAME="124"></A>        
+<FONT ID="LN">125 </FONT><A NAME="125"></A>        <FONT ID="Return">return</FONT> network;
+<FONT ID="LN">126 </FONT><A NAME="126"></A>    }
+<FONT ID="LN">127 </FONT><A NAME="127"></A>    
+<FONT ID="LN">128 </FONT><A NAME="128"></A>    <FONT ID="Private">private</FONT> <FONT ID="Static">static</FONT> Network&lt;<A HREF="../../agents/BaseHuman.java.html">BaseHuman</A>&gt; buildSFFoundation(Context context, Network network, <A HREF="../../probtools/NDParams.java.html">NDParams</A> nd)
+<FONT ID="LN">129 </FONT><A NAME="129"></A>    {
+<FONT ID="LN">130 </FONT><A NAME="130"></A>        IndexedIterable&lt;Object&gt; startNodes = context.getObjects(<A HREF="../../agents/BaseHuman.java.html">BaseHuman</A>.<FONT ID="Class">class</FONT>);
+<FONT ID="LN">131 </FONT><A NAME="131"></A>        
+<FONT ID="LN">132 </FONT><A NAME="132"></A>        <FONT ID="SingleLineComment">//add random edges until everything has &gt;=1 degree
+<FONT ID="LN">133 </FONT><A NAME="133"></A></FONT>        <FONT ID="Boolean">boolean</FONT> acceptableDegree = <FONT ID="False">false</FONT>;
+<FONT ID="LN">134 </FONT><A NAME="134"></A>        
+<FONT ID="LN">135 </FONT><A NAME="135"></A>        Iterable&lt;<A HREF="../../agents/BaseHuman.java.html">BaseHuman</A>&gt; nodes = network.getNodes();
+<FONT ID="LN">136 </FONT><A NAME="136"></A>        Iterator&lt;<A HREF="../../agents/BaseHuman.java.html">BaseHuman</A>&gt; iter = nodes.iterator();
+<FONT ID="LN">137 </FONT><A NAME="137"></A>        <FONT ID="Int">int</FONT> minDegree = <FONT ID="IntegerLiteral">9999999</FONT>;
+<FONT ID="LN">138 </FONT><A NAME="138"></A>        <FONT ID="SingleLineComment">//get the min degree
+<FONT ID="LN">139 </FONT><A NAME="139"></A></FONT>        <FONT ID="While">while</FONT>(iter.hasNext())
+<FONT ID="LN">140 </FONT><A NAME="140"></A>        {
+<FONT ID="LN">141 </FONT><A NAME="141"></A>            <FONT ID="Int">int</FONT> currDegree = network.getDegree(iter.next());
+<FONT ID="LN">142 </FONT><A NAME="142"></A>            <FONT ID="If">if</FONT>(currDegree &lt; minDegree)
+<FONT ID="LN">143 </FONT><A NAME="143"></A>                minDegree = currDegree;
+<FONT ID="LN">144 </FONT><A NAME="144"></A>        }
+<FONT ID="LN">145 </FONT><A NAME="145"></A>        <FONT ID="If">if</FONT>(minDegree &gt; <FONT ID="IntegerLiteral">1</FONT>)
+<FONT ID="LN">146 </FONT><A NAME="146"></A>            acceptableDegree = <FONT ID="True">true</FONT>;
+<FONT ID="LN">147 </FONT><A NAME="147"></A>        
+<FONT ID="LN">148 </FONT><A NAME="148"></A>        <FONT ID="While">while</FONT>(!acceptableDegree)
+<FONT ID="LN">149 </FONT><A NAME="149"></A>        {
+<FONT ID="LN">150 </FONT><A NAME="150"></A>            <FONT ID="SingleLineComment">//Generate src and dest until they're different
+<FONT ID="LN">151 </FONT><A NAME="151"></A></FONT>            <FONT ID="Int">int</FONT> source = (<FONT ID="Int">int</FONT>) Math.round(Math.random() * (startNodes.size()));
+<FONT ID="LN">152 </FONT><A NAME="152"></A>            <FONT ID="Int">int</FONT> dest = (<FONT ID="Int">int</FONT>) Math.round(Math.random() * (startNodes.size()));
+<FONT ID="LN">153 </FONT><A NAME="153"></A>            
+<FONT ID="LN">154 </FONT><A NAME="154"></A>            <FONT ID="SingleLineComment">//Keep regenerating until they're different and within array bounds
+<FONT ID="LN">155 </FONT><A NAME="155"></A></FONT>            <FONT ID="While">while</FONT>(source == dest || (source &lt;= <FONT ID="IntegerLiteral">0</FONT> || source &gt; startNodes.size()) || (dest &lt;= <FONT ID="IntegerLiteral">0</FONT> || dest &gt; startNodes.size()))
+<FONT ID="LN">156 </FONT><A NAME="156"></A>            {
+<FONT ID="LN">157 </FONT><A NAME="157"></A>                source = (<FONT ID="Int">int</FONT>) Math.round(Math.random() * (startNodes.size()));
+<FONT ID="LN">158 </FONT><A NAME="158"></A>                dest = (<FONT ID="Int">int</FONT>) Math.round(Math.random() * startNodes.size());
+<FONT ID="LN">159 </FONT><A NAME="159"></A>            }
+<FONT ID="LN">160 </FONT><A NAME="160"></A>            
+<FONT ID="LN">161 </FONT><A NAME="161"></A>            <FONT ID="SingleLineComment">//check if we have NDParams, if not, no weights.
+<FONT ID="LN">162 </FONT><A NAME="162"></A></FONT>            <FONT ID="SingleLineComment">//System.out.println("Adding an edge...");
+<FONT ID="LN">163 </FONT><A NAME="163"></A></FONT>            <FONT ID="If">if</FONT>(nd == <FONT ID="Null">null</FONT>)
+<FONT ID="LN">164 </FONT><A NAME="164"></A>                network.addEdge((<A HREF="../../agents/BaseHuman.java.html">BaseHuman</A>)startNodes.get(source-<FONT ID="IntegerLiteral">1</FONT>), (<A HREF="../../agents/BaseHuman.java.html">BaseHuman</A>)startNodes.get(dest-<FONT ID="IntegerLiteral">1</FONT>));
+<FONT ID="LN">165 </FONT><A NAME="165"></A>            <FONT ID="Else">else</FONT>
+<FONT ID="LN">166 </FONT><A NAME="166"></A>                network.addEdge((<A HREF="../../agents/BaseHuman.java.html">BaseHuman</A>)startNodes.get(source-<FONT ID="IntegerLiteral">1</FONT>), 
+<FONT ID="LN">167 </FONT><A NAME="167"></A>                        (<A HREF="../../agents/BaseHuman.java.html">BaseHuman</A>)startNodes.get(dest-<FONT ID="IntegerLiteral">1</FONT>), 
+<FONT ID="LN">168 </FONT><A NAME="168"></A>                        Distributions.getND(nd));
+<FONT ID="LN">169 </FONT><A NAME="169"></A>            <FONT ID="SingleLineComment">//check for all degrees being &gt;= 1
+<FONT ID="LN">170 </FONT><A NAME="170"></A></FONT>            nodes = network.getNodes();
+<FONT ID="LN">171 </FONT><A NAME="171"></A>            iter = nodes.iterator();
+<FONT ID="LN">172 </FONT><A NAME="172"></A>            minDegree = <FONT ID="IntegerLiteral">9999999</FONT>;
+<FONT ID="LN">173 </FONT><A NAME="173"></A>            <FONT ID="SingleLineComment">//get the min degree
+<FONT ID="LN">174 </FONT><A NAME="174"></A></FONT>            <FONT ID="While">while</FONT>(iter.hasNext())
+<FONT ID="LN">175 </FONT><A NAME="175"></A>            {
+<FONT ID="LN">176 </FONT><A NAME="176"></A>                <FONT ID="Int">int</FONT> currDegree = network.getDegree(iter.next());
+<FONT ID="LN">177 </FONT><A NAME="177"></A>                <FONT ID="If">if</FONT>(currDegree &lt; minDegree)
+<FONT ID="LN">178 </FONT><A NAME="178"></A>                    minDegree = currDegree;
+<FONT ID="LN">179 </FONT><A NAME="179"></A>            }
+<FONT ID="LN">180 </FONT><A NAME="180"></A>            <FONT ID="If">if</FONT>(minDegree &gt; <FONT ID="IntegerLiteral">1</FONT>)
+<FONT ID="LN">181 </FONT><A NAME="181"></A>                acceptableDegree = <FONT ID="True">true</FONT>;
+<FONT ID="LN">182 </FONT><A NAME="182"></A>        }
+<FONT ID="LN">183 </FONT><A NAME="183"></A>        
+<FONT ID="LN">184 </FONT><A NAME="184"></A>        <FONT ID="Return">return</FONT> network;
+<FONT ID="LN">185 </FONT><A NAME="185"></A>    }
+<FONT ID="LN">186 </FONT><A NAME="186"></A>    
+<FONT ID="LN">187 </FONT><A NAME="187"></A>    
+<FONT ID="LN">188 </FONT><A NAME="188"></A>    
+<FONT ID="LN">189 </FONT><A NAME="189"></A>    
+<FONT ID="LN">190 </FONT><A NAME="190"></A>}
+<FONT ID="LN">191 </FONT><A NAME="191"></A></pre>
+</BODY>
+</HTML>

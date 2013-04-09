@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
+<META NAME="GENERATOR" CONTENT="Java2HTML Version 1.5">
+<TITLE>graphtools.io.converters.GraphFormat (Java2HTML)</TITLE>
+</HEAD>
+<BODY><TABLE id="Header" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+<td colspan="2" width="33%">&nbsp;</td>
+<td align="center" colspan="2" width="33%">
+<font size="4">GraphFormat.java</font>
+</td>
+<td align="right" colspan="2" width="33%">&nbsp;</td>
+</tr>
+</TABLE>
+<pre ID="Classes">
+<FONT ID="LN">1   </FONT><A NAME="1"></A><FONT ID="Package">package</FONT> graphtools.io.converters;
+<FONT ID="LN">2   </FONT><A NAME="2"></A>
+<FONT ID="LN">3   </FONT><A NAME="3"></A><FONT ID="Import">import</FONT> java.util.LinkedList;
+<FONT ID="LN">4   </FONT><A NAME="4"></A>
+<FONT ID="LN">5   </FONT><A NAME="5"></A><FONT ID="Import">import</FONT> <A HREF="../../../agents/BaseHuman.java.html">agents.BaseHuman</A>;
+<FONT ID="LN">6   </FONT><A NAME="6"></A><FONT ID="Import">import</FONT> edu.uci.ics.jung.graph.DirectedSparseMultigraph;
+<FONT ID="LN">7   </FONT><A NAME="7"></A><FONT ID="Import">import</FONT> edu.uci.ics.jung.graph.util.Pair;
+<FONT ID="LN">8   </FONT><A NAME="8"></A><FONT ID="Import">import</FONT> <A HREF="../../../graphtools/samplers/EdgeData.java.html">graphtools.samplers.EdgeData</A>;
+<FONT ID="LN">9   </FONT><A NAME="9"></A><FONT ID="Import">import</FONT> <A HREF="../../../graphtools/samplers/GeneralTools.java.html">graphtools.samplers.GeneralTools</A>;
+<FONT ID="LN">10  </FONT><A NAME="10"></A><FONT ID="Import">import</FONT> repast.simphony.space.graph.Network;
+<FONT ID="LN">11  </FONT><A NAME="11"></A><FONT ID="Import">import</FONT> repast.simphony.space.graph.RepastEdge;
+<FONT ID="LN">12  </FONT><A NAME="12"></A>
+<FONT ID="LN">13  </FONT><A NAME="13"></A><FONT ID="Public">public</FONT> <FONT ID="Class">class</FONT> GraphFormat {
+<FONT ID="LN">14  </FONT><A NAME="14"></A>    
+<FONT ID="LN">15  </FONT><A NAME="15"></A>    <FONT ID="FormalComment">/**
+<FONT ID="LN">16  </FONT><A NAME="16"></A>     * Takes a BaseHuman network and spits out a JUNG DirectedSparseMultigraph of Node IDs against Influence
+<FONT ID="LN">17  </FONT><A NAME="17"></A>     * @param network
+<FONT ID="LN">18  </FONT><A NAME="18"></A>     */</FONT>
+<FONT ID="LN">19  </FONT><A NAME="19"></A>    <FONT ID="Public">public</FONT> <FONT ID="Static">static</FONT> DirectedSparseMultigraph&lt;String, <A HREF="../../../graphtools/samplers/EdgeData.java.html">EdgeData</A>&gt; RepastToJUNG(Network network) {
+<FONT ID="LN">20  </FONT><A NAME="20"></A>        
+<FONT ID="LN">21  </FONT><A NAME="21"></A>        DirectedSparseMultigraph&lt;String, <A HREF="../../../graphtools/samplers/EdgeData.java.html">EdgeData</A>&gt; jnet = <FONT ID="New">new</FONT> DirectedSparseMultigraph&lt;String, <A HREF="../../../graphtools/samplers/EdgeData.java.html">EdgeData</A>&gt;();
+<FONT ID="LN">22  </FONT><A NAME="22"></A>        
+<FONT ID="LN">23  </FONT><A NAME="23"></A>        LinkedList&lt;<A HREF="../../../agents/BaseHuman.java.html">BaseHuman</A>&gt; list = GeneralTools.getBaseHumans(network);
+<FONT ID="LN">24  </FONT><A NAME="24"></A>        <FONT ID="For">for</FONT>(<A HREF="../../../agents/BaseHuman.java.html">BaseHuman</A> bh : list)
+<FONT ID="LN">25  </FONT><A NAME="25"></A>        {
+<FONT ID="LN">26  </FONT><A NAME="26"></A>            jnet.addVertex(bh.getID());
+<FONT ID="LN">27  </FONT><A NAME="27"></A>        }
+<FONT ID="LN">28  </FONT><A NAME="28"></A>        
+<FONT ID="LN">29  </FONT><A NAME="29"></A>        Iterable&lt;RepastEdge&lt;<A HREF="../../../agents/BaseHuman.java.html">BaseHuman</A>&gt;&gt; eIter = network.getEdges();
+<FONT ID="LN">30  </FONT><A NAME="30"></A>        <FONT ID="For">for</FONT>(RepastEdge&lt;<A HREF="../../../agents/BaseHuman.java.html">BaseHuman</A>&gt; re : eIter)
+<FONT ID="LN">31  </FONT><A NAME="31"></A>        {
+<FONT ID="LN">32  </FONT><A NAME="32"></A>            Pair&lt;String&gt; couple = <FONT ID="New">new</FONT> Pair&lt;String&gt;(re.getSource().getID(), re.getTarget().getID());
+<FONT ID="LN">33  </FONT><A NAME="33"></A>            
+<FONT ID="LN">34  </FONT><A NAME="34"></A>            jnet.addEdge(<FONT ID="New">new</FONT> <A HREF="../../../graphtools/samplers/EdgeData.java.html">EdgeData</A>(re.getSource().getID() + <FONT ID="StringLiteral">"-"</FONT> + re.getTarget().getID(), re.getWeight()), couple);
+<FONT ID="LN">35  </FONT><A NAME="35"></A>        }
+<FONT ID="LN">36  </FONT><A NAME="36"></A>        <FONT ID="SingleLineComment">//System.out.println("Repast Network has " + network.size() + " nodes and degree " + network.getDegree());
+<FONT ID="LN">37  </FONT><A NAME="37"></A></FONT>        <FONT ID="SingleLineComment">//System.out.println("JUNG Graph has " + jnet.getVertexCount() + " nodes");
+<FONT ID="LN">38  </FONT><A NAME="38"></A></FONT>        
+<FONT ID="LN">39  </FONT><A NAME="39"></A>        <FONT ID="Return">return</FONT> jnet;
+<FONT ID="LN">40  </FONT><A NAME="40"></A>        
+<FONT ID="LN">41  </FONT><A NAME="41"></A>    }
+<FONT ID="LN">42  </FONT><A NAME="42"></A>
+<FONT ID="LN">43  </FONT><A NAME="43"></A>}
+<FONT ID="LN">44  </FONT><A NAME="44"></A></pre>
+</BODY>
+</HTML>
