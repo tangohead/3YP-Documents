@@ -1,0 +1,75 @@
+\documentclass[]{article}
+\usepackage[margin=1in]{geometry}
+
+\begin{document}
+
+\title{Progress Report}
+\author{Matt Smith}
+\date{\today}
+\maketitle
+\begin{abstract}
+This project provides a proof-of-concept agent-based model for the problem of how social networking impacts on the behaviour of smoking cessation. By attempting to build a basic model of human smoking behaviours and defining interactions, this model allows for  simulations using, in theory, any number of autonomous entities. Through simulations, it appears that the quantity and social location of humans in networks significantly impacts their effect within the graph and, by extension, the quantity of smokers present. Generally, the model shows promise as a proof-of-concept for further development both in the areas of quality of implementation and production of results.
+\end{abstract}
+
+\tableofcontents
+
+% --------------------------------
+%
+%			INTRODUCTION
+%
+% --------------------------------
+\section{Introduction}
+
+\subsection{Project Overview}
+
+\subsection{Project Rationale}
+
+% --------------------------------
+%
+%		END OF INTRODUCTION
+%
+% --------------------------------
+
+% --------------------------------
+%
+%			LIT REVIEW
+%
+% --------------------------------
+\section{Research & Literature Review}
+
+\subsection{Overview}
+\subsection{Social Networking}
+\subsection{Smoking Cessation & Health}
+\subsection{Agent-Based Modelling}
+\subsection{Similar Work}
+\subsection{Summary}
+
+% --------------------------------
+%
+%		END OF LIT REVIEW
+%
+% --------------------------------
+
+% --------------------------------
+%
+%			IMPLEMENTATION
+%
+% --------------------------------
+\section{Model Development & Implementation}
+\subsection{Overview}
+
+\subsection{Technologies & Tools}
+\subsubsection{Repast Simphony}
+\subsubsection{JUNG}
+\subsubsection{Java}
+\subsubsection{Gephi}
+
+\subsection{Model Description}
+\subsubsection{Platform}
+% --------------------------------
+%
+%		END OF IMPLEMENTATION
+%
+% --------------------------------
+
+\end{document}
