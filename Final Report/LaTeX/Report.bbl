@@ -1,3 +1,202 @@
-\begin{thebibliography}{}
+\begin{thebibliography}{10}
+
+\bibitem{NHS-78}
+P.~Eastwood, ``{Statistics on Smoking: England 2012},'' ch.~2, p.~78, Health
+  and Social Care Information Centre, Lifestyle Sections, August 2012.
+
+\bibitem{NHS-44}
+P.~Eastwood, ``Statistics on smoking: England 2012,'' ch.~3, p.~44, Health and
+  Social Care Information Centre, Lifestyle Sections, August 2012.
+
+\bibitem{USN-4}
+C.~Kadushin, {\em Understanding Social Networks: Theories, Concepts and
+  Findings}, ch.~1, p.~4.
+\newblock Oxford University Press, 2012.
+
+\bibitem{NetMark-21}
+J.~Kleinberg and D.~Easley, {\em Networks, Crowds and Markets: Reasoning About
+  a Highly Connected World}, ch.~2, pp.~21--22.
+\newblock Cambridge University Press, 2010.
+
+\bibitem{USN-14}
+C.~Kadushin, {\em Understanding Social Networks: Theories, Concepts and
+  Findings}, ch.~4, p.~44.
+\newblock Oxford University Press, 2012.
+
+\bibitem{NetMark-44}
+J.~Kleinberg and D.~Easley, {\em Networks, Crowds and Markets: Reasoning About
+  a Highly Connected World}, ch.~3, p.~44.
+\newblock Cambridge University Press, 2010.
+
+\bibitem{NetMark-46}
+J.~Kleinberg and D.~Easley, {\em Networks, Crowds and Markets: Reasoning About
+  a Highly Connected World}, ch.~3, pp.~46--48.
+\newblock Cambridge University Press, 2010.
+
+\bibitem{NetMark-66}
+J.~Kleinberg and D.~Easley, {\em Networks, Crowds and Markets: Reasoning About
+  a Highly Connected World}, ch.~3, pp.~66--67.
+\newblock Cambridge University Press, 2010.
+
+\bibitem{USN-18}
+C.~Kadushin, {\em Understanding Social Networks: Theories, Concepts and
+  Findings}, ch.~2, pp.~18--20.
+\newblock Oxford University Press, 2012.
+
+\bibitem{NetMark-81}
+J.~Kleinberg and D.~Easley, {\em Networks, Crowds and Markets: Reasoning About
+  a Highly Connected World}, ch.~4, pp.~81--82.
+\newblock Cambridge University Press, 2010.
+
+\bibitem{inf-papers}
+D.~Kempe, J.~Kleinberg, and E.~Tardos, ``Maximizing the spread of influence
+  through a social network,'' in {\em Proceedings of the ninth ACM SIGKDD
+  international conference on Knowledge discovery and data mining}, KDD '03,
+  pp.~137--146, ACM, 2003.
+
+\bibitem{erdos}
+P.~Erd\"{o}s and A.~R\'{e}nyi, ``{On random graphs, I},'' vol.~6, pp.~290--297,
+  1959.
+
+\bibitem{BA-SciAm}
+Albert-L\`{a}szl\'{o} and E.~Bonabeau, ``Scale-free networks,'' {\em Scientific
+  American}, pp.~60--69, May 2003.
+
+\bibitem{milgram}
+J.~Travers, S.~Milgram, J.~Travers, and S.~Milgram, ``An experimental study of
+  the small world problem,'' {\em Sociometry}, vol.~32, pp.~425--443, 1969.
+
+\bibitem{small-world}
+D.~J. Watts and S.~H. Strogatz, ``Collective dynamics of `small-world'
+  networks,'' {\em nature}, vol.~393, no.~6684, pp.~440--442, 1998.
+
+\bibitem{BAStat}
+R.~Albert and A.-L. Barab{\'a}si, ``Statistical mechanics of complex
+  networks,'' {\em Reviews of modern physics}, vol.~74, no.~1, p.~47, 2002.
+
+\bibitem{NHS-13}
+P.~Eastwood, ``Statistics on smoking: England 2012,'' ch.~2, p.~13, Health and
+  Social Care Information Centre, Lifestyle Sections, August 2012.
+
+\bibitem{NHS-14}
+P.~Eastwood, ``Statistics on smoking: England 2012,'' ch.~2, p.~14, Health and
+  Social Care Information Centre, Lifestyle Sections, August 2012.
+
+\bibitem{SmokOmni}
+R.~Axtell, S.~Durlauf, J.~M. Epstein, R.~Hammond, B.~Klemens, J.~Parker,
+  Z.~Song, T.~Valente, and H.~P. Young, ``Social influences and smoking
+  behaviour,'' The Brookings Institution, February 2006.
+
+\bibitem{NHS-43}
+P.~Eastwood, ``Statistics on smoking: England 2012,'' ch.~3, p.~13, Health and
+  Social Care Information Centre, Lifestyle Sections, August 2012.
+
+\bibitem{malay}
+W.~Ghani, I.~Razak, Y.~Yang, N.~Talib, N.~Ikeda, T.~Axell, P.~Gupta, Y.~Handa,
+  N.~Abdullah, and R.~Zain, ``Factors affecting commencement and cessation of
+  smoking behaviour in malaysian adults,'' {\em BMC Public Health}, vol.~12,
+  no.~1, p.~207, 2012.
+
+\bibitem{UCL-cess}
+X.~Zhou, J.~Nonnemaker, B.~Sherrill, A.~W. Gilsenan, F.~Coste, and R.~West,
+  ``Attempts to quit smoking and relapse: Factors associated with success or
+  failure from the \{ATTEMPT\} cohort study,'' {\em Addictive Behaviors},
+  vol.~34, no.~4, pp.~365 -- 373, 2009.
+
+\bibitem{framingham}
+T.~R. Dawber, G.~F. Meadors, and F.~E. Moore, ``Epidemiological approaches to
+  heart disease: The framingham study *,'' {\em American Journal of Public
+  Health and the Nations Health}, vol.~41, no.~3, pp.~279--286, 1951.
+
+\bibitem{obPap}
+N.~A. Christakis and J.~H. Fowler, ``The spread of obesity in a large social
+  network over 32 years,'' {\em New England journal of medicine}, vol.~357,
+  no.~4, pp.~370--379, 2007.
+
+\bibitem{droves}
+N.~A. Christakis and J.~H. Fowler, ``The collective dynamics of smoking in a
+  large social network,'' {\em New England journal of medicine}, vol.~358,
+  no.~21, pp.~2249--2258, 2008.
+
+\bibitem{repast-tut}
+C.~M. Macal and M.~J. North, ``Tutorial on agent-based modelling and
+  simulation,'' {\em Journal of Simulation}, vol.~4, no.~3, pp.~151--162, 2010.
+
+\bibitem{ABMMethTech}
+E.~Bonabeau, ``Agent-based modeling: Methods and techniques for simulating
+  human systems,'' {\em Proceedings of the National Academy of Sciences of the
+  United States of America}, vol.~99, no.~Suppl 3, pp.~7280--7287, 2002.
+
+\bibitem{UCL-ABM}
+C.~J. Castle and A.~T. Crooks, ``Principles and concepts of agent-based
+  modelling for developing geospatial simulations,'' 2006.
+
+\bibitem{ABM-IEEE}
+E.~Frias-Martinez, G.~Williamson, and V.~Frias-Martinez, ``An agent-based model
+  of epidemic spread using human mobility and social network information,'' in
+  {\em Privacy, security, risk and trust (passat), 2011 ieee third
+  international conference on and 2011 ieee third international conference on
+  social computing (socialcom)}, pp.~57--64, 2011.
+
+\bibitem{emergency}
+G.~I. Hawe, G.~Coates, D.~T. Wilson, and R.~S. Crouch, ``Agent-based simulation
+  for large-scale emergency response: A survey of usage and implementation,''
+  {\em ACM Computing Surveys (CSUR)}, vol.~45, no.~1, p.~8, 2012.
+
+\bibitem{epid}
+A.~M. El-Sayed, P.~Scarborough, L.~Seemann, and S.~Galea, ``Social network
+  analysis and agent-based modeling in social epidemiology,'' {\em
+  Epidemiologic Perspectives \& Innovations}, vol.~9, no.~1, p.~1, 2012.
+
+\bibitem{SmokOmni-pap1}
+Z.~Song, ``Social influences and smoking behaviour,'' ch.~Addiction and
+  Cessation Functions in the Agent‐Based Smoking Model, The Brookings
+  Institution, February 2006.
+
+\bibitem{SmokOmni-pap2}
+R.~Hammond, ``Social influences and smoking behaviour,'' ch.~Social Influence,
+  Reactance, and Tobacco, The Brookings Institution, February 2006.
+
+\bibitem{SmokOmni-pap3}
+B.~Klemens, ``Social influences and smoking behaviour,'' ch.~How to Form a
+  Network of Junior High School Students, The Brookings Institution, February
+  2006.
+
+\bibitem{repast-main}
+M.~J. North, N.~T. Collier, J.~Ozik, E.~R. Tatara, C.~M. Macal, M.~Bragen, and
+  P.~Sydelko, ``Complex adaptive systems modeling with repast simphony,'' {\em
+  Complex Adaptive Systems Modeling}, vol.~1, no.~1, pp.~1--26, 2013.
+
+\bibitem{repast-simp}
+``Repast simphony.'' \url{http://repast.sourceforge.net/repast_simphony.html}.
+\newblock Accessed: 2013-04-21.
+
+\bibitem{repast-HPC}
+``Repast for high performance computing.''
+  \url{http://repast.sourceforge.net/repast_hpc.html}.
+\newblock Accessed: 2013-04-21.
+
+\bibitem{graphml}
+U.~Brandes, M.~Eiglsperger, I.~Herman, M.~Himsolt, and M.~S. Marshall,
+  ``Graphml progress report - structural layer proposal,'' 2002.
+
+\bibitem{SNAP}
+``Stanford network analysis platform.''
+  \url{http://snap.stanford.edu/about.html}.
+\newblock Accessed: 2013-04-15.
+
+\bibitem{snowball}
+L.~A. Goodman, ``Snowball sampling,'' {\em The annals of mathematical
+  statistics}, vol.~32, no.~1, pp.~148--170, 1961.
+
+\bibitem{NetMark-44-cluster}
+J.~Kleinberg and D.~Easley, {\em Networks, Crowds and Markets: Reasoning About
+  a Highly Connected World}, ch.~3, pp.~44--45.
+\newblock Cambridge University Press, 2010.
+
+\bibitem{SNAP-email}
+``Stanford network analysis platform - eu email communication network.''
+  \url{http://snap.stanford.edu/data/email-EuAll.html}.
+\newblock Accessed: 2013-04-15.
 
 \end{thebibliography}

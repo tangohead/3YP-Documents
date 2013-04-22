@@ -1,44 +1,46 @@
 \contentsline {chapter}{\numberline {1}Introduction}{2}
 \contentsline {section}{\numberline {1.1}Project Overview}{2}
 \contentsline {section}{\numberline {1.2}Project Rationale}{2}
-\contentsline {chapter}{\numberline {2}Research \& Literature Review}{3}
-\contentsline {section}{\numberline {2.1}Overview}{3}
-\contentsline {section}{\numberline {2.2}Social Networking}{3}
-\contentsline {section}{\numberline {2.3}Smoking Cessation \& Health}{3}
-\contentsline {section}{\numberline {2.4}Agent-Based Modelling}{3}
-\contentsline {section}{\numberline {2.5}Similar Work}{3}
-\contentsline {section}{\numberline {2.6}Summary}{3}
-\contentsline {chapter}{\numberline {3}Model Development \& Implementation}{4}
-\contentsline {section}{\numberline {3.1}Overview}{5}
-\contentsline {section}{\numberline {3.2}Technologies \& Tools}{5}
-\contentsline {subsection}{\numberline {3.2.1}Repast Simphony}{5}
-\contentsline {subsection}{\numberline {3.2.2}JUNG}{5}
-\contentsline {subsection}{\numberline {3.2.3}Java}{5}
-\contentsline {subsection}{\numberline {3.2.4}Gephi}{5}
-\contentsline {section}{\numberline {3.3}Model Description}{5}
-\contentsline {subsection}{\numberline {3.3.1}Platform}{5}
-\contentsline {subsubsection}{Input \& Output}{5}
-\contentsline {subsubsection}{Simulation Monitoring}{5}
-\contentsline {subsubsection}{Statistics \& Constants}{5}
-\contentsline {subsection}{\numberline {3.3.2}Social Network}{5}
-\contentsline {subsubsection}{Representation}{5}
-\contentsline {subsubsection}{Influence}{5}
-\contentsline {subsubsection}{Graph Generation \& Sampling}{5}
-\contentsline {subsubsection}{Graph Stability}{5}
-\contentsline {subsection}{\numberline {3.3.3}Agent}{5}
-\contentsline {subsubsection}{Attributes}{5}
-\contentsline {subsubsection}{Action Overview}{5}
-\contentsline {subsubsection}{Neighbourhood Actions}{5}
-\contentsline {subsubsection}{Decision Tree Actions}{5}
-\contentsline {subsubsection}{Connection Reconfiguration Actions}{5}
-\contentsline {chapter}{\numberline {4}Simulation Results \& Model Analysis}{6}
-\contentsline {section}{\numberline {4.1}Overview}{6}
-\contentsline {section}{\numberline {4.2}Simulation Analysis}{6}
-\contentsline {subsection}{\numberline {4.2.1}Simulation Parameters \& Agent Attributes}{6}
-\contentsline {subsection}{\numberline {4.2.2}Decision Tree Analysis}{6}
-\contentsline {subsection}{\numberline {4.2.3}Sampled Networks}{6}
-\contentsline {section}{\numberline {4.3}Model Analysis}{6}
-\contentsline {subsection}{\numberline {4.3.1}Commercial Analysis}{6}
-\contentsline {subsection}{\numberline {4.3.2}Model Analysis}{6}
-\contentsline {subsection}{\numberline {4.3.3}Further Improvements}{6}
-\contentsline {chapter}{\numberline {5}Conclusion}{7}
+\contentsline {chapter}{\numberline {2}Research \& Literature Review}{4}
+\contentsline {section}{\numberline {2.1}Overview}{4}
+\contentsline {section}{\numberline {2.2}Social Networking}{4}
+\contentsline {section}{\numberline {2.3}Smoking Cessation \& Health}{6}
+\contentsline {section}{\numberline {2.4}Agent-Based Modelling}{6}
+\contentsline {section}{\numberline {2.5}Similar Work}{7}
+\contentsline {section}{\numberline {2.6}Summary}{8}
+\contentsline {chapter}{\numberline {3}Model Development \& Implementation}{9}
+\contentsline {section}{\numberline {3.1}Overview}{9}
+\contentsline {section}{\numberline {3.2}Technologies \& Tools}{10}
+\contentsline {subsection}{\numberline {3.2.1}Repast Simphony}{10}
+\contentsline {subsection}{\numberline {3.2.2}JUNG}{10}
+\contentsline {subsection}{\numberline {3.2.3}Java}{10}
+\contentsline {subsection}{\numberline {3.2.4}Gephi}{11}
+\contentsline {subsection}{\numberline {3.2.5}Git/GitHub}{11}
+\contentsline {section}{\numberline {3.3}Model Description}{11}
+\contentsline {subsection}{\numberline {3.3.1}Platform}{11}
+\contentsline {subsubsection}{Input \& Output}{11}
+\contentsline {subsubsection}{Graph Tools}{12}
+\contentsline {subsubsection}{Simulation Monitoring}{12}
+\contentsline {subsubsection}{Statistics \& Constants}{13}
+\contentsline {subsection}{\numberline {3.3.2}Social Network}{13}
+\contentsline {subsubsection}{Representation}{13}
+\contentsline {subsubsection}{Influence}{15}
+\contentsline {subsubsection}{Graph Generation \& Sampling}{16}
+\contentsline {subsubsection}{Graph Stability}{19}
+\contentsline {subsection}{\numberline {3.3.3}Agent}{20}
+\contentsline {subsubsection}{Attributes}{21}
+\contentsline {subsubsection}{Action Overview}{24}
+\contentsline {subsubsection}{Neighbourhood Actions}{24}
+\contentsline {subsubsection}{Decision Tree Actions}{25}
+\contentsline {subsubsection}{Connection Reconfiguration Actions}{25}
+\contentsline {chapter}{\numberline {4}Simulation Results \& Model Analysis}{26}
+\contentsline {section}{\numberline {4.1}Overview}{26}
+\contentsline {section}{\numberline {4.2}Simulation Analysis}{26}
+\contentsline {subsection}{\numberline {4.2.1}Simulation Parameters \& Agent Attributes}{26}
+\contentsline {subsection}{\numberline {4.2.2}Decision Tree Analysis}{26}
+\contentsline {subsection}{\numberline {4.2.3}Sampled Networks}{26}
+\contentsline {section}{\numberline {4.3}Model Analysis}{26}
+\contentsline {subsection}{\numberline {4.3.1}Commercial Analysis}{26}
+\contentsline {subsection}{\numberline {4.3.2}Model Analysis}{26}
+\contentsline {subsection}{\numberline {4.3.3}Further Improvements}{26}
+\contentsline {chapter}{\numberline {5}Conclusion}{27}
