@@ -32,15 +32,15 @@
 \contentsline {subsubsection}{Action Overview}{24}
 \contentsline {subsubsection}{Neighbourhood Actions}{24}
 \contentsline {subsubsection}{Decision Tree Actions}{25}
-\contentsline {subsubsection}{Connection Reconfiguration Actions}{25}
-\contentsline {chapter}{\numberline {4}Simulation Results \& Model Analysis}{26}
-\contentsline {section}{\numberline {4.1}Overview}{26}
-\contentsline {section}{\numberline {4.2}Simulation Analysis}{26}
-\contentsline {subsection}{\numberline {4.2.1}Simulation Parameters \& Agent Attributes}{26}
-\contentsline {subsection}{\numberline {4.2.2}Decision Tree Analysis}{26}
-\contentsline {subsection}{\numberline {4.2.3}Sampled Networks}{26}
-\contentsline {section}{\numberline {4.3}Model Analysis}{26}
-\contentsline {subsection}{\numberline {4.3.1}Commercial Analysis}{26}
-\contentsline {subsection}{\numberline {4.3.2}Model Analysis}{26}
-\contentsline {subsection}{\numberline {4.3.3}Further Improvements}{26}
-\contentsline {chapter}{\numberline {5}Conclusion}{27}
+\contentsline {subsubsection}{Connection Reconfiguration Actions}{35}
+\contentsline {chapter}{\numberline {4}Simulation Results \& Model Analysis}{38}
+\contentsline {section}{\numberline {4.1}Overview}{38}
+\contentsline {section}{\numberline {4.2}Simulation Analysis}{38}
+\contentsline {subsection}{\numberline {4.2.1}Simulation Parameters \& Agent Attributes}{38}
+\contentsline {subsection}{\numberline {4.2.2}Decision Tree Analysis}{38}
+\contentsline {subsection}{\numberline {4.2.3}Sampled Networks}{42}
+\contentsline {section}{\numberline {4.3}Model Analysis}{42}
+\contentsline {subsection}{\numberline {4.3.1}Commercial Analysis}{42}
+\contentsline {subsection}{\numberline {4.3.2}Model Analysis}{46}
+\contentsline {subsection}{\numberline {4.3.3}Further Improvements}{47}
+\contentsline {chapter}{\numberline {5}Conclusion}{49}
