@@ -27,10 +27,10 @@
 \contentsline {subsubsection}{Representation}{14}
 \contentsline {subsubsection}{Influence}{14}
 \contentsline {subsubsection}{Graph Generation \& Sampling}{16}
-\contentsline {subsubsection}{Graph Stability}{17}
+\contentsline {subsubsection}{Graph Stability}{19}
 \contentsline {subsection}{\numberline {3.4.3}Agent}{20}
-\contentsline {subsubsection}{Attributes}{20}
-\contentsline {subsubsection}{Action Overview}{23}
+\contentsline {subsubsection}{Attributes}{21}
+\contentsline {subsubsection}{Action Overview}{24}
 \contentsline {subsubsection}{Neighbourhood Actions}{24}
 \contentsline {subsubsection}{Decision Tree Actions}{25}
 \contentsline {subsubsection}{Connection Reconfiguration Actions}{35}
@@ -39,9 +39,9 @@
 \contentsline {section}{\numberline {4.2}Simulation Analysis}{38}
 \contentsline {subsection}{\numberline {4.2.1}Simulation Parameters \& Agent Attributes}{38}
 \contentsline {subsection}{\numberline {4.2.2}Decision Tree Analysis}{42}
-\contentsline {subsection}{\numberline {4.2.3}Sampled Networks}{46}
-\contentsline {section}{\numberline {4.3}Model Analysis}{51}
-\contentsline {subsection}{\numberline {4.3.1}Commercial Analysis}{51}
-\contentsline {subsection}{\numberline {4.3.2}Model Analysis}{55}
-\contentsline {subsection}{\numberline {4.3.3}Further Improvements}{56}
-\contentsline {chapter}{\numberline {5}Conclusion}{58}
+\contentsline {subsection}{\numberline {4.2.3}Sampled Networks}{47}
+\contentsline {section}{\numberline {4.3}Model Analysis}{52}
+\contentsline {subsection}{\numberline {4.3.1}Commercial Analysis}{52}
+\contentsline {subsection}{\numberline {4.3.2}Model Analysis}{56}
+\contentsline {subsection}{\numberline {4.3.3}Further Improvements}{57}
+\contentsline {chapter}{\numberline {5}Conclusion}{59}
