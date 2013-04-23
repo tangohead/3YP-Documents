@@ -10,26 +10,27 @@
 \contentsline {section}{\numberline {2.6}Summary}{8}
 \contentsline {chapter}{\numberline {3}Model Development \& Implementation}{9}
 \contentsline {section}{\numberline {3.1}Overview}{9}
-\contentsline {section}{\numberline {3.2}Technologies \& Tools}{10}
-\contentsline {subsection}{\numberline {3.2.1}Repast Simphony}{10}
-\contentsline {subsection}{\numberline {3.2.2}JUNG}{10}
-\contentsline {subsection}{\numberline {3.2.3}Java}{10}
-\contentsline {subsection}{\numberline {3.2.4}Gephi}{11}
-\contentsline {subsection}{\numberline {3.2.5}Git/GitHub}{11}
-\contentsline {section}{\numberline {3.3}Model Description}{11}
-\contentsline {subsection}{\numberline {3.3.1}Platform}{11}
-\contentsline {subsubsection}{Input \& Output}{11}
+\contentsline {section}{\numberline {3.2}Project Management}{9}
+\contentsline {section}{\numberline {3.3}Technologies \& Tools}{10}
+\contentsline {subsection}{\numberline {3.3.1}Repast Simphony}{10}
+\contentsline {subsection}{\numberline {3.3.2}JUNG}{10}
+\contentsline {subsection}{\numberline {3.3.3}Java}{11}
+\contentsline {subsection}{\numberline {3.3.4}Gephi}{11}
+\contentsline {subsection}{\numberline {3.3.5}Git/GitHub}{11}
+\contentsline {section}{\numberline {3.4}Model Description}{11}
+\contentsline {subsection}{\numberline {3.4.1}Platform}{12}
+\contentsline {subsubsection}{Input \& Output}{12}
 \contentsline {subsubsection}{Graph Tools}{12}
-\contentsline {subsubsection}{Simulation Monitoring}{12}
+\contentsline {subsubsection}{Simulation Monitoring}{13}
 \contentsline {subsubsection}{Statistics \& Constants}{13}
-\contentsline {subsection}{\numberline {3.3.2}Social Network}{13}
-\contentsline {subsubsection}{Representation}{13}
-\contentsline {subsubsection}{Influence}{15}
+\contentsline {subsection}{\numberline {3.4.2}Social Network}{13}
+\contentsline {subsubsection}{Representation}{14}
+\contentsline {subsubsection}{Influence}{14}
 \contentsline {subsubsection}{Graph Generation \& Sampling}{16}
-\contentsline {subsubsection}{Graph Stability}{19}
-\contentsline {subsection}{\numberline {3.3.3}Agent}{20}
-\contentsline {subsubsection}{Attributes}{21}
-\contentsline {subsubsection}{Action Overview}{24}
+\contentsline {subsubsection}{Graph Stability}{17}
+\contentsline {subsection}{\numberline {3.4.3}Agent}{20}
+\contentsline {subsubsection}{Attributes}{20}
+\contentsline {subsubsection}{Action Overview}{23}
 \contentsline {subsubsection}{Neighbourhood Actions}{24}
 \contentsline {subsubsection}{Decision Tree Actions}{25}
 \contentsline {subsubsection}{Connection Reconfiguration Actions}{35}
@@ -37,10 +38,10 @@
 \contentsline {section}{\numberline {4.1}Overview}{38}
 \contentsline {section}{\numberline {4.2}Simulation Analysis}{38}
 \contentsline {subsection}{\numberline {4.2.1}Simulation Parameters \& Agent Attributes}{38}
-\contentsline {subsection}{\numberline {4.2.2}Decision Tree Analysis}{38}
-\contentsline {subsection}{\numberline {4.2.3}Sampled Networks}{42}
-\contentsline {section}{\numberline {4.3}Model Analysis}{42}
-\contentsline {subsection}{\numberline {4.3.1}Commercial Analysis}{42}
-\contentsline {subsection}{\numberline {4.3.2}Model Analysis}{46}
-\contentsline {subsection}{\numberline {4.3.3}Further Improvements}{47}
-\contentsline {chapter}{\numberline {5}Conclusion}{49}
+\contentsline {subsection}{\numberline {4.2.2}Decision Tree Analysis}{42}
+\contentsline {subsection}{\numberline {4.2.3}Sampled Networks}{46}
+\contentsline {section}{\numberline {4.3}Model Analysis}{51}
+\contentsline {subsection}{\numberline {4.3.1}Commercial Analysis}{51}
+\contentsline {subsection}{\numberline {4.3.2}Model Analysis}{55}
+\contentsline {subsection}{\numberline {4.3.3}Further Improvements}{56}
+\contentsline {chapter}{\numberline {5}Conclusion}{58}

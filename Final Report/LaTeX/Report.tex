@@ -126,6 +126,7 @@ In general, whilst there are few similar projects, if the fields are separated i
 %
 % --------------------------------
 \chapter{Model Development \& Implementation}
+\label{sec:dev}
 \section{Overview}
 Based on the research detailed above, it was clear to see that the agent-based modelling approach was a good match to the problem domain – at a high level, the social network could be represented by a graph, the humans being agents (and as such nodes in said graph), with connections between them mapping relationships and being edges within the graph. The model, including details as to how the final version was reached, is below.
 
@@ -135,9 +136,11 @@ Adding to this, a number of input and output methods are supported. Whilst the s
 
 Throughout the project, a series of existing technologies and toolkits were utilised; given that graph and simulation techniques were heavily incorporated into the model, using libraries for these was key since they are both complex fields within themselves. Furthermore, by using these tools, more time could be spent on the development of the solution itself rather than the back-end representation and management of data.
 
-Due to the project being research driven, a lot of time was spent referencing existing information so more traditional development methodologies were not directly applicable - in both the initial research section and the development of the model, a loose spiral approach was taken, meaning that there were a number of short cycles, each analysing the work so far, understanding what needs to change then working on those changes [ref spiral]. In particular, this was very useful during the creation of the final model since upon each group of changes, the effect on the behaviour of the model needed to be checked to ensure that it didn't become imbalanced. Although the balancing will be detailed below, issues can stem from the fact that the simulation involves autonomous interaction of many agents, meaning a small change can result in wide-scale effects within the model, often unexpected. Controlling these changes is important as developing on top of an unbalanced model results in subsequent issues later in the project.
+\section{Project Management}
 
-\emph{MORE ON PROJECT MANAGEMENT HERE? problems, how to get over them etc}
+Due to the project being research driven, a lot of time was spent referencing existing information so more traditional development methodologies were not directly applicable – in both the initial research section and the development of the model, a loose iterative approach was taken, meaning that there were a number of short cycles, each analysing the work so far, understanding what needs to change then working on those changes. In particular, this was very useful during the creation of the final model since upon each group of changes, the effect on the behaviour of the model needed to be checked to ensure that it didn't become imbalanced. Although the balancing will be detailed below, issues can stem from the fact that the simulation involves autonomous interaction of many agents, meaning a small change can result in wide-scale effects within the model, often unexpected. Controlling these changes is important as developing on top of an unbalanced model results in subsequent issues later in the project.
+
+Generally, the project was split into three sections: research, development and analysis. The first third of the project, around 10 weeks, was spent on researching the background of the different areas required with the specific topics of research being driven by experimenting with tools, algorithms and other applicable technologies. Following this the bulk of the time, 15 weeks, was used to create and balance the model since having an effective model was key to producing useful results. Completing the process was took the final 5 weeks which was used to perform simulations and analyse both the model and the results generated. By following this development schedule, sufficient time was spent on each area to produce a complete project. Furthermore, by having an extensive research section at the start, the development of the model was streamlined as a number of misleading ideas were ruled out at an early stage. Adding to this, since a number of the tools used had a learning curve, this time provided an opportunity to tackle this. Although problems were encountered in the process of development, an experimentation-based approach was used to work around them which comprised of trying to implement other features or adjust existing ones to see how the model behaved and if it fixed the issue. Whilst this lead to the introduction of some more artificial elements into the simulation, it produced a more balanced model overall. Specific issues will be highlighted where necessary in the sections below.
 
 \section{Technologies \& Tools}
 As described previously, existing tools and libraries were critical to the progress of the project. Using these not only sped up development due to many of the fundamental tasks being settled, such as representing graphs, but added to the reliability of the project due to being developed by communities of experts. Due to this, the project could focus specifically on the project at hand and the tools required to achieve this rather than building from the basics.
@@ -265,7 +268,7 @@ From both multi-hop influence and influenced attributes, it can be seen that the
 \label{sec:GGS}
 As described in section \ref{sec:platform}, a number of graph generation and sampling methods are available to provide networks for use within a simulation. Since this system is designed to simulate upon smaller networks than a commercial environment might, using large, real-world networks is not ideal. This is because networks of many thousands of nodes, each requiring many operations to work out influence, attributes and decisions, causes simulations to last for a very long time. As such, an alternative was required that could provide a number of realistic but smaller networks for the simulations.
 
-Scale-free networks were included due to their regularity of appearance within social circles – typically, they provide a low to medium edge density across nodes, with a number of hub nodes\cite{BASciAm}. This is particularly useful since it allows the investigation of `social hubs' within a network to see whether this kind of figure has a specific effect on the smoking behaviours of those around them. A disadvantage with this type of network is that, on the examples generated for this project, nodes tended to have a fairly low degree. Since edges represent relationships here, it could be argued that it is not representative of a realistic group. To counter this, nodes within this graph could be considered as groups of humans (and in effect a small-world network) or simply a less dense friendship group, such as an office of workers where ties are more likely to show acquaintance than friendship. As an aside, this type of graph was most useful for testing the model on since it clearly exhibited any signs of imbalance or lack of change over simulation steps. An example scale-free graph can be seen in figure \ref{img:ex-scale-free} with the generation algorithm in figure \ref{code:sf-code}.
+Scale-free networks were included due to their regularity of appearance within social circles – typically, they provide a low to medium edge density across nodes, with a number of hub nodes\cite{BA-SciAm}. This is particularly useful since it allows the investigation of `social hubs' within a network to see whether this kind of figure has a specific effect on the smoking behaviours of those around them. A disadvantage with this type of network is that, on the examples generated for this project, nodes tended to have a fairly low degree. Since edges represent relationships here, it could be argued that it is not representative of a realistic group. To counter this, nodes within this graph could be considered as groups of humans (and in effect a small-world network) or simply a less dense friendship group, such as an office of workers where ties are more likely to show acquaintance than friendship. As an aside, this type of graph was most useful for testing the model on since it clearly exhibited any signs of imbalance or lack of change over simulation steps. An example scale-free graph can be seen in figure \ref{img:ex-scale-free} with the generation algorithm in figure \ref{code:sf-code}.
 
 \begin{figure}
 \label{img:ex-scale-free}
@@ -441,8 +444,6 @@ infPcGivingUp		&	Double	&	The influenced percentage of neighbours who are giving
 
 Aside from the `ideal figure' attributes that are calculated for the current agent, a number of figures that describe the current basic state of those in the neighbourhood are calculated. Percentages of the graph which smokes and is giving up are particularly useful in creating the effect of peer-pressure within decisions and are also a possible representation of what the agent would be surrounded by in their life. This can be furthered by including the influence of the surrounding nodes into these percentages, which can be seen in figure \ref{eq:inf-perct} where $n$ is a neighbourhood node, $s$ a node of a specific dispositon (e.g. a smoker) and $n_{i}$ being the influence of $n$. This enables the system to attempt to model situations where a person's susceptibility to peer pressure depends on how influential those surrounding them are; should they be of low influence, it is unlikely that the person would adopt a behaviour that they are displaying.
 
-FIG Y – comparison of normal and influence percentage
-
 \begin{equation}
 \label{eq:inf-perct}
 \frac{\sum_{\forall s \in N} s_{i}}{\sum_{\forall n \in N} n_{i}}
@@ -452,6 +453,7 @@ As described previously, the compound influence across a multi-hop route can be 
 
 \label{sec:neighbourhood}
 \subsubsection{Decision Tree Actions}
+\label{sec:dectree}
 In order to change their own attribute values, an agent must go through a series of decisions to choose which value to change. The aim of this approach is to model a human decision making process in a logical and maintainable way, so that decisions can be rearranged, inserted or removed easily. In general, more important decisions are placed higher in the tree since they are more likely to be reached by an agent than any decision lower in the tree, by which point the decision in question becomes one in many. Due to this, when importance of decisions is discussed, those of higher importance will be higher in the tree than ones of lower importance. Throughout the development, a major focus was to uphold balance within the tree. This means that where possible, feedback loops causing extreme attribute values should be minimised and excessive clustering within the network should be avoided. Both of these had to be monitored by testing different versions of the decision tree, with changes being made as necessary.
 
 To begin with, an approach was taken to combine a number of attributes into calculations that can be seen in figure \ref{eq:v0.9probs}, the labels referring to points in the tree as seen in figure \ref{img:init-dectree}. Generally, the tree was kept fairly shallow in favour of producing values similar to probabilities or range checks. For example, in figure \ref{eq:v0.9probs}, B shows how the decision is made based on whether the agent attributes are within 10\% of the influenced attributes – if so, the number of cigarettes smoked is adjusted. As each decision required such a combination, to build a sufficient series of decisions the same parameters would have to be formed in different ways for each choice. It became clear that this approach was flawed as it lent itself into collapsing many separate attribute choices into one. This meant that control over how each parameter effects the end choice was lost and also made it very difficult to add new decisions as most were already represented in some way in the existing steps. Furthermore, using combinations of attributes led to extra complexity being added, making it unclear exactly which attributes are causing different effects. Since a substantial part of this project is to understand what the model is showing, difficulty in isolating attributes and judging their effects is problematic. Due to this, the decision tree was heavily separated out into single attribute decisions that lead into one another.
@@ -700,6 +702,7 @@ In order to introduce external influences to a neighbourhood, every agent has a 
 %
 % --------------------------------
 \chapter{Simulation Results \& Model Analysis}
+\label{sec:analysis}
 \section{Overview}
 
 To understand whether the developed model provides useful results and meets the initial specification, two separate methods were used. Firstly, using the model to run simulations provides a number of pieces of information. In regards to the problem domain, finding out new information about the impact of social networking upon smoking is a key aim, but at the same time, these simulations should help to demonstrate whether the model is balanced, efficient and a good base for future work. Following this, analysis of the model from a qualitative viewpoint will form the second part of this section. As a part of the specification concerns itself with understanding whether the model is a suitable proof of concept for a commercial model, this is combined with general thoughts on the quality of the model and any future improvements. The basis of this analysis comes from both the design decisions and the results of the simulations carried out.
@@ -711,14 +714,76 @@ For all simulations, 30,000 simulation steps were carried out with graph and att
 
 \subsection{Simulation Parameters \& Agent Attributes}
 
+Given the number of agent attributes and system parameters, there are many initial configurations to try to model. Since some of these do not map to real-world concepts in the problem domain, they will not be covered. A high-level investigation into the percentage of smokers and of those giving up was conducted using a base graph as seen in figure \ref{img:simbase}. The aim of this test was to get a better understanding of how starting combinations of composition of the graph, relative to percentages of smokers and non-smokers, related to the number of non-smokers left at end of the simulation. 
 
+%A number of runs were executed with the results visible in FIG Y.
 
+\begin{figure}
+\label{img:simbase}
+\begin{center}
+\includegraphics[scale=0.4]{simbase.png}
+\end{center}
+\caption{Simulation Base Graph}
+\end{figure}
 
+%\begin{figure}
+%\begin{center}
+%\label{tab:stats}
+%\begin{tabular}{|l|l|l|l||l|l|l|l|}
+%\hline
+%\multicolumn{4}{|p{5cm}|}{Starting Split} & \multicolumn{4}{|p{5cm}|}{Ending Split}
+%\hline
+%Smoking & Giving Up & Non-Smoking & Non-Smoking/Giving Up & Smoking & Giving Up & Non-Smoking & Non-Smoking/Giving Up\\
+%\hline
+%\end{tabular}
+%\end{center}
+%\caption{Scoring Algorithm Upper and Lower Bounds for Scores}
+%\end{figure}
+
+From figure \ref{img:smok-give}, it can be seen that as the ratio of those giving up compared to those smoking (num smoking/num giving up) at the start of the simulation increases, the final percentage of those who do not smoke at the end becomes much more unpredictable. One possible explanation for this is that these people, since they have already given up once, will find it easier to relapse to smoking; if many people start to do this, the influence will then persuade others to do the same causing the final split of smokers and non-smokers to be largely dependent on how connections have formed over the earlier stages of the simulations. Continuing from this, figure \ref{img:smok-pct} shows the percentage of smokers in the network at the start against those who are not smoking at the end. For lower starting percentages of smoking such as 20\%, the percentage not smoking at the end is around 70\%, which is as expected from a stable simulation. When the percentage of smokers increases though, the range of ending percentages increases to the point where at 80\% to start, the amount giving up at the end is between 30\% and 75\%. This points to the possible effect of a core of people giving up having an effect on the smoking population – at low percentages of smokers, those giving up are less likely to interact with smokers so have a lower chance of influencing them. For higher percentages, the people giving up are much more likely to be surrounded by smokers and as such be affected by the influence. As described above, the impact of this influence largely depends on how the network has changed since in the case where around 80\% of the smokers start and the simulation ends at 75\%, wide-spread cessation occurred but on another run with the same starting smokers but different amount giving up (22\%), significantly fewer were non-smokers at the end.
+
+\begin{figure}
+\label{img:smok-give}
+\begin{center}
+\includegraphics[scale=0.5]{smok-giveup.png}
+\end{center}
+\caption{A comparison of the ratio between the percentage of smokers and those giving up at the start of the simulation against the percentage of non-smokers (including those giving up) at the end.}
+\end{figure}
+
+\begin{figure}
+\label{img:smok-pct}
+\begin{center}
+\includegraphics[scale=0.5]{smok-pct.png}
+\end{center}
+\caption{A comparison of starting percentage of smokers in the graph and the ending percentage of non-smokers.}
+\end{figure}
+
+In terms of other parameters that affect simulation results, the period of time taken before someone who is `giving up' becomes a complete non-smoker displayed an interesting trend. By varying the number of simulation steps required for this change, values between 750 and 1250 displayed an 86-94\% non-smoker finish percentage for a graph starting with 50\% non-smokers, of which 25\% are giving up which is shown by the dip in the graph in figure \ref{img:give-up}. Compared to the other values tested, which produced non-smoking end figures of around 60-70\%, this is a significant drop. Should this be mapped to a more realistic scenario, it could imply that subjecting those who are giving up to pressure to maintain this for extended periods of time can actually have a negative effect but at the same time, allowing those who have only given up for a short time to consider themselves non-smokers can lead to many failed attempts, resulting in more smokers overall.
+
+\begin{figure}
+\label{img:give-up}
+\begin{center}
+\includegraphics[scale=0.5]{give-up.png}
+\end{center}
+\caption{The effect of the number of steps required for an agent to `give up' for before they become a non-smoker who is not giving up.}
+\end{figure}
+
+Another parameter which appeared to change the results of simulations was that of the mean value used to distribute the number of cigarettes smoked per day. As the graph in figure \ref{img:mean-cig} shows, increasing the value up to around 25 cigarettes per day causes the number of non-smokers in the network by the end of the simulation to peak at around 95\%. Since this is the value used to base the normal distribution of the cigarettes smoked per day at the start of the simulation, this result indicates that when heavier smoking is the norm, more of these smokers tend to quit. This could be due to a `group quit' as the group gradually lowers the number of cigarettes until they quit though in general, this result is not as predicted. As described in Decision Tree description (Section \ref{sec:dectree}), it was presumed that those of lower cigarette consumption would be more likely to cease smoking. It is definitely the case, however, that the majority of smokers would, at the start of the simulation, pass through the section of the decision tree for heavy smokers (seen in figure \ref{img:dectree-left}), where if they are of low willpower and lower than average health, they will stand a good chance of giving up. In regards to this being related to a realistic situation, it might be the case that lighter smokers see less of an effect on their health and if they are surrounded by those of similar consumption, they will be less likely to quit. Heavy smokers, on the other hand, notice more of a health effect and as such are more likely to give up.
+
+\begin{figure}
+\label{img:mean-cig}
+\begin{center}
+\includegraphics[scale=0.5]{mean-cig.png}
+\end{center}
+\caption{The effect of the number of steps required for an agent to `give up' for before they become a non-smoker who is not giving up.}
+\end{figure}
+
+Whilst there is no clear conclusion from these tests, it does provide insight into the model itself. It appears that having a larger proportion of those giving up or not smoking as part of the network to begin with destabilises the results somewhat. It indicates that, due to the higher quantity of smokers surrounding those giving up or not smoking, relapses are more common. Additionally, a high percentage of smokers takes a longer time to persuade to give up via influence. As a result, it may be the case that agents attempt but fail to give up smoking regularly, never providing a constant source of influence to others but instead dissipating inconsistent influence to others. This inconsistency then can spread throughout the network to others who are trying to give up and given that there is a larger portion of the network able to do this when the majority of the graph smokers, this could explain the unpredictability in the above results. In regards to real-world behaviour, the main discovery is that trying to get networks saturated with smokers to give up is very difficult and simply introducing some non-smokers is not enough. Instead, it would seem that the optimal way for this to be tackled is that large chunks of the network would need to give up simultaneously, driving down the percentage of smokers overall.
 
 
 \subsection{Decision Tree Analysis}
 Decision Tree Analysis
-As the decision tree is the major factor in selecting the behaviours of agents, the number of 'hits' upon each decision reveals a lot about how individuals are guided to their final choice. To get a dataset for this, a scale-free graph with 483 nodes, 20\% smokers and 10\% giving up in order to be close to the UK smoking statistics [REF], was simulated over a period of 30000 steps with every decision made by an agent being recorded. The final percentages of smokers was around 9\%, a moderate decrease in quantity but by no means significant due to the ratio of smokers to non-smokers. Figures \ref{img:dectree-right-lab} and \ref{img:dectree-left-lab}  shows the decision tree labelled with both the percentage of total 1hits' and the percentage share of hits for the parent decision.
+As the decision tree is the major factor in selecting the behaviours of agents, the number of 'hits' upon each decision reveals a lot about how individuals are guided to their final choice. To get a dataset for this, a scale-free graph with 483 nodes, 20\% smokers and 10\% giving up in order to be close to the UK smoking statistics~\cite{NHS-12}\cite{NHS-43}, was simulated over a period of 30000 steps with every decision made by an agent being recorded. The final percentages of smokers was around 9\%, a moderate decrease in quantity but by no means significant due to the ratio of smokers to non-smokers. Figures \ref{img:dectree-right-lab} and \ref{img:dectree-left-lab}  shows the decision tree labelled with both the percentage of total `hits' and the percentage share of hits for the parent decision.
 
 \begin{landscape}
 \begin{figure}
@@ -751,15 +816,44 @@ The final section of the tree is that of non-smokers who are not currently givin
 In general, the decision tree reveals a number of pointers for how to drive the network in the direction of giving up smoking then avoiding relapsing. Having smokers be convinced to either smoke less per day or be surrounded by healthy, non-smokers helps in getting them to quit whilst positioning those who are giving up in the correct neighbourhood has a large effect on their chance of relapse, the exact composition of this neighbourhood depending on how many times the person has tried to quit before.
 
 \subsection{Sampled Networks}
+In order to consider how the model functions with real networks, an example dataset was sampled. This is from the Stanford SNAP~\cite{SNAP} which provides a number of large datasets sampled from various internet sources. To maintain consistency with the system as a whole, only directed non-multi-graphs were used; undirected graphs would lack the required level relationship information whilst multi-graphs could have many of the same edge which is not catered for in this model. Generally, these datasets were very large and due the timescale of the project, the simulations could not take place on a cluster or high-performance computer (HPC) so instead, a sample using the previously mentioned snowball sampler was taken and simulations run upon it. The simulation ran for 30,000 steps.
 
+The dataset was of an email network~\cite{SNAP-email}, with the starting and ending states shown in figures \ref{img:sample-init} and \ref{img:sample-fin}. It was started with 50\% of the network smoking, and of those not smoking, 50\% giving up whereas by the end, 80\% of the network was not smoking. Over the course of the simulation, the average degree of the graph increased slightly from 2.198 to 2.431 with the network diameter decreasing from 34 to 25 and the average clustering coefficient going from 0.02 to 0.009. Although the connectivity of the graph increased, with both degree increasing and diameter decreasing, the average path length increases from 8.998 to 9.372. Generally, this implies that the graph has become slightly more disconnected over the course of the simulation which is not necessarily desirable – higher connectivity allows greater spread of influence. This is illustrated by the contraction of the graph – the nodes in figure \ref{img:sample-init} are more spaced than in figure \ref{img:sample-fin}.
 
+\begin{figure}
+\label{img:sample-init}
+\begin{center}
+\includegraphics[scale=0.4]{sample-init.png}
+\end{center}
+\caption{Sampled network at the start of the simulation. Note that lighter nodes are smokers, whereas darker ones are non-smokers.}
+\end{figure}
+\begin{figure}
+\label{img:sample-fin}
+\begin{center}
+\includegraphics[scale=0.5]{sample-fin.png}
+\end{center}
+\caption{Sampled network at the start of the simulation. Note that lighter nodes are smokers, whereas darker ones are non-smokers.}
+\end{figure}
 
+More interestingly, if the smokers (figure \ref{img:email-nonsmok}) and non-smokers (figure \ref{img:email-smok}) are separated out into separate graphs, it can be seen that the remaining smokers at the end of the simulation are, mainly, highly connected. This explains the percentage of smokers remaining after such a large proportion of the graph not smoking as they are influencing each other in continuing to avoid giving up. Finding this kind of group is very important in the attempt to encourage cessation as without direct intervention, their connectivity means the influence sways towards keeping smoking. Having a cluster of non-smokers inside this group could break this influence and cause further cessation.
+Furthermore, figure \ref{img:email-smok}, the separated non-smokers, appear to be of a form similar to a small-world network due to the large, central cluster. When compared to figure \ref{img:email-nonsmok}, the separated smokers, this is clear since the smokers appear to adopt a more scale-free form. The occurrence of the latter is revealed by a number of `hub' nodes which have a higher degree than average. To make a change within this sub-network of smokers, these hubs could be targeted since they have the potential to influence many other nodes and in turn, spread smoking cessation further. In terms of targeted attempts to cause smoking cessation, it would seem that this type of network is more effective as the non-smoker network, due to the high connectivity, means that many more nodes would have to be changed in order to spread the same influence. This is because in small-world networks, hubs are much less prevalent and within a group of nodes, the chance of each being connected to each other is higher as described in the Literature Review (Section \ref{sec:litrev}).
 
+\begin{figure}
+\label{img:email-smok}
+\begin{center}
+\includegraphics[scale=0.4]{email-smokers.png}
+\end{center}
+\caption{Smokers Within Email Dataset at 30,000 Steps - Note the scale-free type structure present between smokers at the end of the simulation, indicating why a core of smokers remained.}
+\end{figure}
+\begin{figure}
+\label{img:email-nonsmok}
+\begin{center}
+\includegraphics[scale=0.4]{email-nonsmok.png}
+\end{center}
+\caption{Non-Smokers Within Email Dataset at 30,000 Steps - A small-world type network is present, which explains the fact that most of the network are now non-smokers.}
+\end{figure}
 
-
-
-
-
+Using real-world datasets, as shown above, is useful when attempting to understand behaviours like smoking cessation but as can be seen in graphs such as\ref{img:sample-init}, the method of sampling lends itself to generating small-world type samples. As other sampling methods were not implemented, it cannot be ascertained that this structure is endemic of realistic graphs or the particular dataset, but the process of performing a derivative from a depth-first search means that some hubs are included which have extremely high degree as seen in figure \ref{img:email-smok}. These are the nodes that are used to start the sample or are reached in the early stages so whilst expected, it is not desirable as the nodes take on a very influential role within the network. This does not detract from the results, however, as each node has the opportunity to have many other nodes influencing them which, due to the aggregate methods in calculating influence, reduce the impact of the hubs. As a final note, the type of network from which the data is sampled should be considered – some online social networks may have more similarities with the type of network represented in this project than others which will have an effect on the results they produce, however understanding the requisite features for this is beyond the scope of this project.
 
 \section{Model Analysis}
 \subsection{Commercial Analysis}
@@ -814,7 +908,7 @@ As visible in figure \ref{img:SF-gen}, the generation time for scale-free graphs
 \caption{Small-World Runs: Time taken (ms) against the size of graph generated where a lower time is more desirable. As with small-world generation (figure \ref{img:SW-gen}), the time taken increases linearly with the number of nodes in the run.}
 \end{figure}
 
-Perhaps more important than this is the time taken for simulations to run. This is a difficult area to quantify since two graphs of identical node count can vary in many ways such as edge density, average degree and more, in turn affecting how the graph may behave. Using the graphs generated for the previous tests, the results of the simulations carried out can be seen in figures \ref{SF-run} and \ref{SW-run}. A point to note is that due to the scale-free method not producing graphs of exactly the number of nodes required, creating a 3000 node graph to match the upper limit of the small-world tests would have been very difficult. It can be seen that both follow a linear increase as nodes are added, with simulations of around 750 nodes taking around 4 minutes for a small-world graph and just over 5 minutes for a scale-free one. The similarity in the trends of these graphs indicate that the type of graph may be independent of how long a simulation on it takes. If this is the case for all graphs, then the focus for scalability improvements lie within agent efficiency, as detailed above. In regards to the simulation times at the moment, whilst 20 minutes for a 3000 node small-world graph may seem high, if run on a cluster or HPC, the runtime would be much shorter. As such, increasing the number of agents significantly would not cause untenable runtimes, should the requisite computing power be available. From this basic investigation, the model appears to be fairly scalable but would benefit from work on agent efficiency if simulations were to take place on personal computers.
+Perhaps more important than this is the time taken for simulations to run. This is a difficult area to quantify since two graphs of identical node count can vary in many ways such as edge density, average degree and more, in turn affecting how the graph may behave. Using the graphs generated for the previous tests, the results of the simulations carried out can be seen in figures \ref{img:SF-run} and \ref{img:SW-run}. A point to note is that due to the scale-free method not producing graphs of exactly the number of nodes required, creating a 3000 node graph to match the upper limit of the small-world tests would have been very difficult. It can be seen that both follow a linear increase as nodes are added, with simulations of around 750 nodes taking around 4 minutes for a small-world graph and just over 5 minutes for a scale-free one. The similarity in the trends of these graphs indicate that the type of graph may be independent of how long a simulation on it takes. If this is the case for all graphs, then the focus for scalability improvements lie within agent efficiency, as detailed above. In regards to the simulation times at the moment, whilst 20 minutes for a 3000 node small-world graph may seem high, if run on a cluster or HPC, the runtime would be much shorter. As such, increasing the number of agents significantly would not cause untenable runtimes, should the requisite computing power be available. From this basic investigation, the model appears to be fairly scalable but would benefit from work on agent efficiency if simulations were to take place on personal computers.
 
 On the whole, the system displays a good level of extensibility and ease of maintenance. From the start of development, focus has been on building not only a useful model but also a platform on which makes it easier to improve said model. This was done by ensuring that any tools developed were done so in as general a manner as possible, as well as grouping them into related packages. The agent itself separates out its actions into methods, especially the three steps of neighbourhood finding, running the decision tree and reconfiguring connections. A useful feature that this allows is the easy replacement of any of these components, without having to disentangle them from the rest of the agent implementation – a company could use this to create a number of separate approaches to the decision tree and network reconfiguring and test them by simply changing the method calls.
 
@@ -845,7 +939,7 @@ From the results above, it is clear that the decision tree for cessation and soc
 \subsection{Further Improvements}
 Given that this model is a starting point rather than a complete solution to the problem, there are many possible changes that would bolster the performance and accuracy. These range from minor changes to reworking of entire sections and in general were not included due to time constraints or simply being too complex to include.
 
-The agent itself could be adjusted to include more attributes and for those already included, more accurate models. The former is a difficult proposition since to make these additions, it should be the case that the attributes have been shown to have some effect on smoking through other research. Due to how circumstantial smoking behaviours seem to be, acquiring general information about factors in smoking cessation is not straightforward. As such, to undertake this, the best route would be to undertake specialist research in the field with the specific intention of understanding smoking behaviour contributing factors. In spite of this, some attributes such as stress could be included, assuming a reasonable model could be incorporated which would account for both internal and external contributors to the stress. Accurately modelling existing parameters is easier since as shown in the Research \& Literature Review section (\ref{sec:litrev}), work towards this has already been done. The process for each attribute would involve isolating each concept and investigating it individually, through which a mathematical model could be developed for it. To prove the accuracy, these models would then have to be tested against some real-world measure. Whilst this would aid in the general result quality of the model, it could incur extra computational cost which may be a problem if large simulations are the main focus. Avoiding this would then require either efficient attribute representations or only modelling the most significant ones in such a detailed manner.
+The agent itself could be adjusted to include more attributes and for those already included, more accurate models. The former is a difficult proposition since to make these additions, it should be the case that the attributes have been shown to have some effect on smoking through other research. Due to how circumstantial smoking behaviours seem to be, acquiring general information about factors in smoking cessation is not straightforward. As such, to undertake this, the best route would be to undertake specialist research in the field with the specific intention of understanding smoking behaviour contributing factors. In spite of this, some attributes such as stress could be included, assuming a reasonable model could be incorporated which would account for both internal and external contributors to the stress. Accurately modelling existing parameters is easier since as shown in the Research \& Literature Review (Section \ref{sec:litrev}), work towards this has already been done. The process for each attribute would involve isolating each concept and investigating it individually, through which a mathematical model could be developed for it. To prove the accuracy, these models would then have to be tested against some real-world measure. Whilst this would aid in the general result quality of the model, it could incur extra computational cost which may be a problem if large simulations are the main focus. Avoiding this would then require either efficient attribute representations or only modelling the most significant ones in such a detailed manner.
 
 In terms of the decision tree, there are a number of design-level changes that, whilst would not impact the operation of the tree, would allow for much faster and easier tree prototyping, in turn making it more straightforward when developing new or adapting existing trees. A modular approach could be used where a decision is represented by some abstract type, allowing the specification of which attributes to decide on and their relevant thresholds for each as well as some list of which decisions lead to others. This would remove the need for extra programming when implementing new decision trees so would make the model more usable for those who do not know how to program. On top of this, it would be easier to build visualisation tools for and get an understanding of the tree at a glance compared to the current implementation which uses nested if statements.
 
@@ -866,6 +960,16 @@ Finally, some extra tools would be very useful in order to produce graphs more a
 %
 % --------------------------------
 \chapter{Conclusion}
+
+Producing an agent-based model had a number of challenges associated with it. Firstly and most significantly, attaining balance within the model was very difficult due to the amount of interaction and influence within the system. This lead to a lot of time being spent on adjusting this balance and trying to maintain it which in turn meant that the scope of the work had to be restricted. Whilst a model with many features and little balance could have been created, it would have provided no useful results as even at the most basic level, extracting a ‘baseline’ for the simulations would be extremely difficult. The scope restriction did result in slightly less depth to agent features such as the decision tree and network reconfiguration but by not implementing this extra complexity, further, more extensive, balancing work was also avoided.
+
+Adding to this is the size of this kind of task. As stated in this report, the model only intended to be a basic representation of both social networking and smoking behaviours but still required a great deal of background research and development. Taking this kind of model to a commercial level would require either a long period of time for a solo-developer or, to reduce this timescale to a more reasonable one, a team of developers experienced in agent-based modelling. Even then, it is likely that they would encounter the same type of issues seen within the development of this project but on a much larger and more complex scale.
+
+The model itself, due to its limited number of attributes and interaction methods, is heavily influenced based. Multiple decisions rely on what the neighbourhood of a node is doing which, although important for the social aspect of the project, may not be as heavy an actor in such decisions. Should it be the case that it is a major part of the decisions, the introduction of further attribute changes, interaction methods and decision routes would add a lot of depth to the model and could provide a more detailed representation of human behaviour – this may then provide richer results from simulations which would aid analysis.
+
+A useful part of the development time was that of platform creation. This involved building a series of tools and preparing the development environment in such a way to allow for creation of the model without having to spend too much time writing `wrapper code' to handle input and output, for example. Though it does not necessarily contribute to the project producing a good model, it did encourage consistent software development throughout and helped to organise code into a more manageable structure. 
+
+As can be seen, a number of discoveries have been made through the course of this project, ranging from key factors in specific areas of the model to the task as a whole. In general, the main aim was to produce a model for investigating the interplay between smoking cessation and social networking. As can be seen in both the Implementation (Section \ref{sec:dev}) and Results (Section \ref{sec:analysis}), this was achieved and although not as decisive as one might hope, interesting insights into this interaction of fields were gained. Furthermore, through the research, development and analysis for this project, a number of areas that would warrant further investigation have been highlighted. Given that the model is a proof-of-concept, the revealing of these areas opens up the possibility of further research and the development of a more comprehensive, commercial model of how smoking behaviours and social networking actions interact.
 % --------------------------------
 %
 %			END OF CONCLUSION

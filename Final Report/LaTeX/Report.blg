@@ -1,7 +1,6 @@
 This is BibTeX, Version 0.99dThe top-level auxiliary file: Report.aux
 The style file: ieeetr.bst
 Database file #1: biblio.bib
-Warning--I didn't find a database entry for "BASciAm"
 Warning--empty booktitle in NHS-78
 Warning--empty booktitle in NHS-44
 Warning--empty booktitle in erdos
@@ -13,4 +12,5 @@ Warning--empty journal in UCL-ABM
 Warning--empty booktitle in SmokOmni-pap1
 Warning--empty booktitle in SmokOmni-pap2
 Warning--empty booktitle in SmokOmni-pap3
+Warning--empty booktitle in NHS-12
 (There were 12 warnings)
