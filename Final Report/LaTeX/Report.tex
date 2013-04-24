@@ -213,7 +213,7 @@ As discussed in the Literature Review (Section \ref{sec:litrev}), the social net
 
 \subsubsection{Representation}
 
-At the most basic level, the way in which the network is represented provides the foundation for the model. As found in the research section (\ref{sec:litrev-socnet} of the project), a graph provides the functionality needed to hold both humans and the connections between them at a sufficient level of abstraction. This level of abstraction is important since modelling relationships accurately and with a lot of detail is very difficult due to a wide variety of internal and external factors to said relationship being able to change it, either gradually or suddenly. As is common within ABMs, nodes within the graph represent humans whilst edges map to some relationship between two humans, an example of which can be seen in figure \ref{img:ex-graph}.
+At the most basic level, the way in which the network is represented provides the foundation for the model. The research undertaken (Section \ref{sec:litrev-socnet}), a graph provides the functionality needed to hold both humans and the connections between them at a sufficient level of abstraction. This abstraction is important since modelling relationships accurately is very difficult due to a wide variety of internal and external factors to said relationship being able to change it, either gradually or suddenly. As is common in ABM, nodes within the graph represent humans whilst edges map to some relationship between two humans, an example of which can be seen in figure \ref{img:ex-graph}.
 
 \begin{figure}
 \begin{center}
@@ -223,7 +223,7 @@ At the most basic level, the way in which the network is represented provides th
 \label{img:ex-graph}
 \end{figure}
 
-It was decided that the graph should be directed to better model a relationship – undirected edges only indicate a connection, whereas directed edges reveal much more. Working on the principle that a friendship is not necessarily mutual since one person may consider another a friend whilst the other may not reciprocate. Due to this, an edge from node A to node B represents `has a relationship with' and by extension `influences' as seen in figure \ref{img:ex-edge}.
+It was decided that the graph should be directed in order to to better model a relationship as undirected edges only indicate a connection, whereas directed edges reveal much more. This works on the principle that a friendship is not necessarily mutual since one person may consider another a friend whilst the other may not reciprocate. Due to this, an edge from node A to node B represents `has a relationship with' and by extension `influences' as seen in figure \ref{img:ex-edge}.
 
 \begin{figure}
 \begin{center}
@@ -234,316 +234,321 @@ It was decided that the graph should be directed to better model a relationship 
 \end{figure}
 
 \subsubsection{Influence}
-The concept of influence is modelled in a manner similar to a probability; it is a weight on an edge with a value between 0 and 1, where 0 represents no influence and 1 represents absolute influence. In general, this makes it easier to calculate multi-hop influence as well and influenced attributes and in doing so, drastically reduces the complexity of operations carried out on a regular basis. Furthermore, a fundamental aim of this model is to keep the complexity to a minimum. Rather than emulate relationships and their influences at a more realistic level, this basic approach was judged more reasonable since it would not require further complexity when it involves it interacting with other elements of the model. 
+The concept of \emph{influence} is modelled in a manner similar to a probability; it is a weight on an edge with a value between 0 and 1, where 0 represents no influence and 1 represents absolute influence. In general, this makes it easier to calculate multi-hop influence and influenced attributes; in doing so it drastically reduces the complexity of operations carried out on a regular basis over multi-value or object-based approaches. Rather than emulate relationships and their influences at a more complex level, this basic approach was judged more reasonable since it would not require further conversion when it interacts with other elements of the model. 
 
-Importantly, this implementation of influence remaps the concept of positive and negative opinions of a person to a linear scale, for example a person may dislike another, causing them to not want to take on their traits. As such, a negative figure should be viewed as one which has a low influence value and a positive one being seen as holding a higher influence.
-Multi-hop influence within the model aims to map to the idea of `friends-of-friends', with the belief being that should an individual's friend be influenced by a third-party, that party should, in turn, influence the individual in some way. In the graph, this is represented by a series of edges from one node to another, as seen in figure \ref{img:multihop-inf}. The extent to which this influence acts on the individual is a matter for tuning of the model and will be discussed in the Agent section of this document. Obviously, the influence at one hop is simply the weight of the influencing edge, whereas to calculate the influence at n hops, the formula seen in figure \ref{eq:multihop-inf} is used, where $w_{i}$ is the influence value of an edge, $w_{0}$ is the edge to the current node and the route from $0$ to $n$ (seen in figure \ref{img:multihop-inf-calc}. By multiplying the influence of each hop together, a likeness to weakening influence across the mutual friends is incorporated along with the method also giving a probability-alike value that can be used when calculating influenced attributes. A common situation may be that there are a number of routes to a given destination node from a source and as such there may be a number of possible influence values for this `friend-of-a-friend'. Once again, simplicity is maintained by taking the highest value – this is based on the assumption that the higher value represents a chain of stronger influences (i.e. friendships) and due to this, a person is likely to opt for that input rather than the ones of weaker influence.
+Importantly, this implementation of influence remaps the concept of positive and negative opinions of a person to a linear scale, for example a person may dislike another, causing them to not want to take on their traits. As such, a negative figure should be relating to a low influence value and a positive one being seen as holding a higher influence.
+\emph{Multi-hop influence} within the model aims to recreate the idea of `friends-of-friends', with the belief being that should the friends of an individual are influenced by a third-party, that party should, in turn, influence the individual in some way. In the graph, this is represented by a series of edges from one node to another, as seen in figure \ref{img:multihop-inf}. The extent to which this influence acts on the individual is a matter for tuning of the model and will be discussed in the agent description (Section \ref{sec:agent}). Obviously, the influence at one hop is simply the weight of the influencing edge, whereas to calculate the influence at $n$ hops, the formula \ref{eq:multihop-inf} is used, where $w_{i}$ is the influence value of an edge, $w_{0}$ is the edge to the current node and the route from $0$ to $n$ (seen in figure \ref{img:multihop-inf-calc}. By multiplying the influence of each hop together, a likeness to weakening influence across the mutual friends is incorporated along with the method giving a probability-alike value that can be used when calculating influenced attributes. A common situation may be that there are a number of routes to a given destination node from a source and as a result, a number of possible influence values for this `friend-of-a-friend'. Once again, simplicity is maintained by taking the highest value - this is based on the assumption that the higher value represents a chain of stronger influences (i.e. friendships) and due to this, a person is likely to opt for that input rather than the ones of weaker influence.
 
 \begin{figure}
-\label{img:multihop-inf}
 \begin{center}
 \includegraphics[scale=0.75]{multi-inf.png}
 \end{center}
 \caption{Indirect Influence: Influence Across Multiple Hops}
+\label{img:multihop-inf}
 \end{figure}
 
 \begin{equation}
-\label{eq:multihop-inf}
 \prod_{i=0}^{n}w_{i}
+\label{eq:multihop-inf}
 \end{equation}
 
 \begin{figure}
-\label{img:multihop-inf-calc}
 \begin{center}
 \includegraphics[scale=0.75]{multihop-inf.png}
 \end{center}
 \caption{Calculating Influence Across Multiple Hops}
+\label{img:multihop-inf-calc}
 \end{figure}
-Influenced attributes, in this model, are defined as how an individual perceives another's actions affecting themselves, with the intention being that the influence provides some form of weighting against the actual value of the attribute. As will be described later in section \ref{sec:neighbourhood}, part of the \emph{Agent} definition, the idea is for an agent to have an `ideal figure' to which they move towards, where the attributes for this figure are calculated using averages of these influenced attributes. In regards to calculating the attributes, the general formula used can be seen in figure \ref{eq:inf-attr} where $N$ is the neighbourhood of the current node, $\text{attribute}_{n}$ is an attribute value and $\text{influence}_{n}$ is the influence of that node. There were a number of changes that were required for some data types but, since these depend on the specific attribute they will be described in the Agent section (\ref{sec:agent}).
+\emph{Influenced attributes}, in this model, are defined as how an individual perceives the actions of another affecting themselves with the intention being that the influence provides some form of weighting against the actual value of the attribute. As will be described in section \ref{sec:neighbourhood}, part of the agent definition, the idea is for an agent to have an `ideal agent' to which they move towards, where the attributes for this figure are calculated using averages of these influenced attributes. In regards to calculating the attributes, the general formula used can be seen in equation \ref{eq:inf-attr} where $N$ is the neighbourhood (defined in Section \ref{sec:neigh}) of the current node, $\text{\emph{attribute}}_{n}$ is an attribute value and $\text{influence}_{n}$ is the influence of that node. There were a number of changes that were required for some data types but, since these depend on the specific attribute they will be detailed in section \ref{sec:agent}.
 
 \begin{equation}
+\frac{\sum_{\forall n \in N} \text{\emph{attribute}}_{n} \times \text{\emph{influence}}_{n}}{\sum_{\forall n \in N}\text{\emph{influence}}_{n}}
 \label{eq:inf-attr}
-\frac{\sum_{\forall n \in N} \text{attribute}_{n} \times \text{influence}_{n}}{\sum_{\forall n \in N}\text{influence}_{n}}
 \end{equation}
-From both multi-hop influence and influenced attributes, it can be seen that there is not a direct representation of negative opinion causing a person to act in an opposite manner to the figure they dislike. This is a move away from a realistic behaviour as generally, it would be expected for someone to avoid behaving like a person that they do not get along with, though including this would require some form of state in the relationships between nodes to be maintained. Since it was decided that weighted edges were a simple but expressive method, storing state on these is difficult and requires a great deal of extra computational complexity on each turn to determine the current state as well as how this effects the influence.
+From both multi-hop influence and influenced attributes, it can be seen that there is not a direct representation of negative opinion causing a person to act in an opposite manner to the figure they dislike. This is a move away from a realistic behaviour as generally, it would be expected for someone to avoid behaving like a person that they do not get along with though including this would require some form of state in the relationships between nodes to be maintained. Since it was decided that weighted edges were a simple but expressive method and that storing state on these is difficult, requiring a great deal of extra computational complexity on each turn, it was omitted.
 
 \subsubsection{Graph Generation \& Sampling}
 \label{sec:GGS}
-As described in section \ref{sec:platform}, a number of graph generation and sampling methods are available to provide networks for use within a simulation. Since this system is designed to simulate upon smaller networks than a commercial environment might, using large, real-world networks is not ideal. This is because networks of many thousands of nodes, each requiring many operations to work out influence, attributes and decisions, causes simulations to last for a very long time. As such, an alternative was required that could provide a number of realistic but smaller networks for the simulations.
+As described in the platform description (Section \ref{sec:platform}), a number of graph generation and sampling methods are available to provide networks for use within a simulation. Since this system is designed to simulate upon smaller networks than a commercial environment might, using large, real-world networks is not always ideal. This is because networks of many thousands of nodes, each requiring many operations to work out influence, attributes and decisions, causes simulations to last for a very long time. An alternative was required that could provide a number of realistic but smaller networks for the simulations.
 
-Scale-free networks were included due to their regularity of appearance within social circles – typically, they provide a low to medium edge density across nodes, with a number of hub nodes~\cite{BA-SciAm}. This is particularly useful since it allows the investigation of `social hubs' within a network to see whether this kind of figure has a specific effect on the smoking behaviours of those around them. A disadvantage with this type of network is that, on the examples generated for this project, nodes tended to have a fairly low degree. Since edges represent relationships here, it could be argued that it is not representative of a realistic group. To counter this, nodes within this graph could be considered as groups of humans (and in effect a small-world network) or simply a less dense friendship group, such as an office of workers where ties are more likely to show acquaintance than friendship. As an aside, this type of graph was most useful for testing the model on since it clearly exhibited any signs of imbalance or lack of change over simulation steps. An example scale-free graph can be seen in figure \ref{img:ex-scale-free} with the generation algorithm in figure \ref{code:sf-code}.
+\emph{Scale-free} networks were included due to their regularity of appearance within social circles – typically, they provide a low-to-medium edge density across nodes, with a number of hub nodes~\cite{BA-SciAm}. This is particularly useful since it allows the investigation of `social hubs' within a network to see whether this kind of figure has a specific effect on the smoking behaviours of those around them. A disadvantage with this type of network is that, on the examples generated for this project the average node tended to have a fairly low degree. Since edges represent relationships, it could be argued that it is not representative of a realistic group. To counter this, nodes within this graph could be considered as groups of humans (and in effect a small-world network) or simply a less dense friendship group, such as an office of workers, where ties are more likely to show acquaintance than friendship. As an aside, this type of graph was most useful for testing the model on since it clearly exhibited any signs of imbalance or lack of change over a number of simulation steps. An example scale-free graph can be seen in figure \ref{img:ex-scale-free} with the generation algorithm being given in figure \ref{code:sf-code}.
 
 \begin{figure}
-\label{img:ex-scale-free}
 \begin{center}
-\includegraphics[scale=0.25]{ex-scale-free.png}
+\includegraphics[scale=0.4]{ex-scale-free.png}
 \end{center}
 \caption{Example Scale-Free Graph with 196 Nodes}
+\label{img:ex-scale-free}
 \end{figure}
 
 \begin{figure}
-\label{code:sf-code}
 \begin{enumerate}
 \item Begin with a graph of $m_{0}$ nodes, where $m_{0} \geq 2$ and each node has degree of at least 1.
 \item Add new nodes incrementally. For each new node consider connecting to each other node $i$ with the probability $p$, calculated using equation \ref{eq:SF-formula} where $k_{i}$ is the degree of $i$.
-\caption{Generation Algorithm for Scale-Free Graphs by the Barab\'{a}si-Albert Model~\cite{BAStat}}
 \end{enumerate}
+\caption{Generation Algorithm for Scale-Free Graphs by the Barab\'{a}si-Albert Model~\cite{BAStat}}
+\label{code:sf-code}
 \end{figure}
 
-Small-world networks are another useful inclusion – the main aim with this type of network was to be able to simulate the effects of groups of close friends like one might find in a club or society~\cite{small-world}. In general, a small-world network displays high connectivity relative to the number of nodes present (assuming that the mean number of edges it is generated with is of reasonable size). The key downside of this method is that due to the raised level of connectivity, the chance of small feedback loops forming is very high. This can cause large-scale imbalance within the simulation due to nodes influencing each other to more extreme behaviour and thus exuding this influence to their respective neighbours. As such, this type of network should be used with caution and balanced carefully to avoid these situations – when small-world networks are used, the relevant balancing will be stated. Figure \ref{img:ex-small-world} shows an example small-world network with figure \ref{code:sw-code} displaying the generation algorithm.
+\emph{Small-world} networks are another useful inclusion; the main aim with this type of network was to be able to simulate the effects of groups of close friends like one might find in a club or society~\cite{small-world}. In general, a small-world network displays high connectivity relative to the number of nodes present (assuming that the mean number of edges it is generated with is of reasonable size). The key downside of this method is that due to the raised level of connectivity, the chance of small feedback loops forming is much higher than scale-free networks. This can cause imbalance within the simulation due to nodes influencing each other to take on more extreme behaviours and thus exuding this influence to their respective neighbours. As a result, this type of network should be used with caution and balanced carefully to avoid these situations. When small-world networks are used, the relevant balancing will be stated. Figure \ref{img:ex-small-world} shows an example small-world network with figure \ref{code:sw-code} displaying the generation algorithm.
 
 \begin{figure}
-\label{img:ex-small-world}
 \begin{center}
 \includegraphics[scale=0.25]{ex-small-world.png}
 \end{center}
 \caption{Example Small-World Graph with 250 Nodes}
+\label{img:ex-small-world}
 \end{figure}
 
 \begin{figure}
-\label{code:sw-code}
-For building a network of $N$ nodes, mean degree $K$ and a value $\beta$, where $0 \leq \beta \geq 1$ :
+For building a network of $N$ nodes, mean degree $K$ and a value $\beta$, where $0 \leq \beta \leq 1$ :
 \begin{enumerate}
 \item Create a ring lattice of $N$ nodes where each node is connected to its first $K$ neighbours, where it has $\frac{K}{2}$ on each side. For a sparse but connected network, $N \gg K \gg \ln{N} \gg 1$.
 \item For each node in the graph, consider each of its edges that connect to yet-unencountered nodes and rewire that edge to connect to a randomly chosen node with probability $\beta$, not allowing self-connection or duplicate edges.
 \end{enumerate}
 \caption{Generation Algorithm for Small-World Graphs by the Watts-Strogatz Model~\cite{BAStat}}
+\label{code:sw-code}
 \end{figure}
 
-Snowball sampling was the chosen method due to its simplicity in terms of implementation. Due to the nature of this sampling method, one of a breadth-first search from a random node, it characteristically produces graphs that have one major hub from which most edges emerge. Due to the fact that it can be run on graphs sampled from real-world social networks, the product is often a mix between what might be expected of small-world and scale-free networks. Whilst this was not particularly useful for developing the model upon due to the often high level of connectedness, it does allow for a much wider range of tests to be carried out using the system. This tool is included primarily for the sampling of real-world networks since sampling generated networks is simply replaced with generating networks of the required size. Instead, the number of nodes required can be extracted from datasets sampled from social networks, giving the simulation the ability to run on real graphs. An example of a snowball sample can be seen in figure \ref{img:ex-snowball}, gathered from an email dataset by the SNAP project~\cite{SNAP-email}
+\emph{Snowball sampling} was the chosen method for real-world graph sampling, due to its simplicity in terms of implementation. Because of the nature of this sampling method, one of a breadth-first search from a random node, it characteristically produces graphs that have one major hub from which most edges emerge. Due to the fact that it can be run on graphs sampled from real-world social networks, the product is often a mix between what might be expected of small-world and scale-free networks. Whilst this was not particularly useful for developing the model upon due to the often high level of connectedness, it does allow for a much wider range of tests to be carried out using the system. This tool is included primarily for the sampling of real-world networks since sampling generated networks is simply replaced with generating networks of the required size. Instead, the number of nodes required can be extracted from datasets sampled from social networks, giving the simulation the ability to run on real graphs. An example of a snowball sample can be seen in figure \ref{img:ex-snowball}, gathered from an email dataset by the \emph{SNAP} project~\cite{SNAP-email}
 
 \begin{figure}
-\label{img:ex-snowball}
 \begin{center}
-\includegraphics[scale=0.25]{ex-snowball.png}
+\includegraphics[scale=0.4]{ex-snowball.png}
 \end{center}
 \caption{Example Snowball Sample Graph with 2790 Nodes}
+\label{img:ex-snowball}
 \end{figure}
 
 \subsubsection{Graph Stability}
-In the early stages of development a regular occurrence was for the graph to, due to actions undertaken by agents, exhibit very high clustering coefficients for a number of nodes. Due to the complexity of many agents interacting on a regular basis, it was too difficult to balance this entirely through careful parameter selection and agent actions. In order to maintain this a balance, the WatchMan was used to intervene should the graph become too clustered.
+In the early stages of development a regular occurrence was for the graph to, exhibit very high clustering coefficients for a number of nodes, due to actions undertaken by agents. This was caused by many agents interacting on a regular basis, the complexity of which it was too difficult to balance entirely through careful parameter selection and agent action changes. In order to maintain this a balance, the \emph{WatchMan} was used to intervene should the graph become too clustered.
 
-The way in which intervention was judged necessary had an effect on the workings of the network and as such, two different methods were implemented and tested. The first of these takes the average clustering coefficient of all nodes in the graph and, if above a system parameter threshold, the 10\% of the nodes in the graph, ordered by highest clustering coefficient first, has each edge (both in and out) considered for removal with a 50\% chance. Whilst an artificial way to maintain balance, it did provide a more stable graph since by thinning out edges on the nodes central to the clusters, feedback loops are removed which helps to slow the compression of the network.
+The way in which intervention was judged necessary had an effect on the workings of the network and to account for this, two different methods were implemented and tested. The first of these takes the average clustering coefficient of all nodes in the graph and, if above a threshold set as a system parameter, 10\% of the nodes in the graph ordered by highest clustering coefficient first have each edge (both in- and out-) considered for removal with a 50\% chance. Whilst an artificial way to maintain balance, it did provide a more stable graph since thinning out edges on the nodes central to the clusters reduces the number of feedback loops, which helps to slow the compression of the network.
 
-The other method was to choose 10\% of the nodes from the graph at random and calculate the average clustering coefficient at one hop for each. If over a separate system parameter threshold to the above, they are stored as a locally high clustering coefficient. Each of these nodes is then considered in a similar manner to the above method, in that they have their edges considered for removal with the chance of this happening at 50\%. This is a more targeted approach that aims to prevent strongly bound clusters forming at an earlier stage by again thinning out their ties. In testing, the value of the threshold was revealed to be very important as due to the 'early stage' prevention of heavy clustering, the removal had the ability to become overzealous and make the graph sparse. By increasing the threshold for a node to be classed as a locally high clustering coefficient, this method is reserved for only extreme cases.
+The other method was to choose 10\% of the nodes from the graph at random and calculate the average clustering coefficient at one hop for each. If over a separate simulation parameter threshold to the above, they are stored as a locally high clustering coefficient node. Each of these nodes is then analysed in a similar manner to the previous method, in that they have each of their edges considered for removal with the chance of this happening at 50\%. This is a more targeted approach that aims to prevent strongly-bound clusters forming at an earlier stage by again thinning out their ties. In testing, the value of the threshold was revealed to be very important as due to the `early stage' prevention of heavy clustering, the removal could become overzealous and make the graph sparse. By increasing the threshold for a node to be classed as a locally high clustering coefficient, this method is reserved for only extreme cases.
 
-To illustrate the effects of these stability measures, figure \ref{img:pre-watchman} displays how a non-stabilised graph may appear after 120 steps compared to the stabilised version, figure \ref{img:post-watchman} at around 120 steps. Even though the external intervention does mean that the model loses some faithfulness to real-world interaction in respect to balance, the fact that the network can provide much more useful results by running for longer simulations outweighs this. Furthermore, to have the model balance itself through the interactions themselves would require a significantly more involved representation of agent networking which is beyond the scope of this project.
+To illustrate the effects of these stability measures, figure \ref{img:pre-watchman} displays how a non-stabilised graph may appear after 120 steps compared to the stabilised version, figure \ref{img:post-watchman} at around 120 steps. Even though the external intervention does mean that the model loses some faithfulness to real-world interaction in respect to balance, the fact that the network can provide much more useful results by running longer simulations outweighs this. Furthermore, to have the model balance itself through the interactions themselves would require a significantly more involved representation of agent networking with a lot of time spent on balancing, which is beyond the scope of this project.
 
 \begin{figure}
-\label{img:pre-watchman}
 \begin{center}
-\includegraphics[scale=0.25]{pre-balance.png}
+\includegraphics[scale=0.4]{pre-balance.png}
 \end{center}
 \caption{Unstable Graph with 155 Nodes}
+\label{img:pre-watchman}
 \end{figure}
 
 \begin{figure}
-\label{img:post-watchman}
 \begin{center}
-\includegraphics[scale=0.25]{post-balance.png}
+\includegraphics[scale=0.5]{post-balance.png}
 \end{center}
 \caption{Stable Graph with 152 Nodes}
+\label{img:post-watchman}
 \end{figure}
 
 \subsection{Agent}
 \label{sec:agent}
-The agent is the most significant section of the project development, in both operation and time taken to build. Within this section of the ABM, decisions are made about how to change behaviours, influence is acted upon and connections to other nodes are reconfigured; since the social network provides the framework within which the agents act, a lot of the ability to tune the model arises through various aspects of the agent. It is split into two sections: attributes, the data that defines the agent and by extension, the human, and actions which are the functions that an agent can perform in a simulation step.
+The agent was the most significant section of the project in both function and time taken to build. Within this section of the model, decisions are made about how to change behaviours, influence is acted upon and connections to other nodes are reconfigured; since the social network provides the framework within which the agents act, most of the ability to tune the model arises through various aspects of the agent. It is split into two sections: \emph{attributes}, the data that defines the agent and by extension, the human, and \emph{actions} which are the functions that an agent can perform in a simulation step.
 
-The basic principle for the agent is that within their local neighbourhood, i.e. the nodes that surround them, influence is used to generate an 'ideal person'. This figure is a set of attributes that is effectively the average of this neighbourhood and to which the agent in question would consider the ideal. Using both these attributes and a number of metrics about the surroundings, the agent then follows a decision tree which provides the chance for an attribute change. On the back of this, the agent can then reconfigure their social connections based on their current attributes, scoring themselves against others in their neighbourhood.
+The basic principle for the agent is that within their \emph{local neighbourhood}, i.e. the nodes that they are within one hop of, influence is used to generate an `ideal person'. This figure is a set of attributes that is effectively the `average' of this neighbourhood and to which the agent in question would apsire. Using both these attributes and a number of metrics about the surroundings, the agent then follows a decision tree which provides the chance for an attribute change. On the back of this, the agent can reconfigure their social connections based on their current attributes, scoring themselves against others in their neighbourhood.
 
-Throughout the development of the model, testing was carried out by running the simulation on a scale-free graph and observing how it behaved. In general, the expected behaviour was for the network to avoid collapsing into a feedback loop and a high average clustering coefficient whilst there being some change within the graph. This was considered to be a display of a balanced model, which is an aim of the project – an example of both a balanced and imbalanced model can be seen in figures \ref{img:ex-simbase}, \ref{img:ex-noncrunch} and \ref{img:ex-crunch}, the difference between the latter two being that the imbalanced network has an extremely high concentration of edges in one sub-area whereas the balance network has a more distributed concentration.
+Throughout the development of the model, testing was carried out by running the simulation on a scale-free graph and observing how it behaved. In general, the expected behaviour was for the network to avoid collapsing into a feedback loop and/or having a high average clustering coefficient whilst displaying some change. This was considered to be an indication of a balanced model, which is an aim of the project – an example of both a balanced and imbalanced model can be seen in figures \ref{img:ex-simbase}, \ref{img:ex-noncrunch} and \ref{img:ex-crunch}, the difference between the latter two being that the imbalanced network has an extremely high concentration of edges in one sub-area whereas the balanced network has a more distributed concentration.
 
 \begin{figure}
-\label{img:ex-simbase}
+
 \begin{center}
-\includegraphics[scale=0.25]{simbase.png}
+\includegraphics[scale=0.4]{simbase.png}
 \end{center}
 \caption{Baseline Graph with 196 Nodes}
+\label{img:ex-simbase}
 \end{figure}
+
 \begin{figure}
-\label{img:ex-noncrunch}
 \begin{center}
 \includegraphics[scale=0.25]{non-crunch.png}
 \end{center}
 \caption{Balanced Graph with 196 Nodes}
+\label{img:ex-noncrunch}
 \end{figure}
+
 \begin{figure}
-\label{img:ex-crunch}
 \begin{center}
 \includegraphics[scale=0.25]{crunched.png}
 \end{center}
 \caption{Imbalanced Graph with 196 Nodes}
+\label{img:ex-crunch}
 \end{figure}
 
 
 \subsubsection{Attributes}
-A number of attributes were considered with the intention of modelling human smoking behaviour as accurately as possible, however this is a difficult notion due to the lack of detailed information relating about smoking cessation. A large part of the information that does exist, such as NHS statistics~\cite{NHS-43}, is based on survey information which in turn may bring an element of bias. Generally speaking, the attributes were added on an ad-hoc basis in the early stages of development; once an idea of the kind of factors involved in smoking cessation were known through research, specific ones were implemented on the basis of simplicity and usefulness within the model.
+Many attributes were considered with the intention of modelling human smoking behaviour as accurately as possible, however this is a difficult notion due to the lack of detailed information relating about smoking cessation. A large part of the information that does exist, such as NHS statistics~\cite{NHS-43}, is based on survey information which in turn may bring an element of bias. Generally speaking, the attributes were added on an ad-hoc basis in the early stages of development; once an idea of the type of factors involved in smoking cessation were known through research, specific ones were implemented on the basis of simplicity and usefulness within the model.
 
-Initially, a number of attributes were considered that extended the smoking cessation decisions into areas of lifestyle such as alcohol consumption and stress~\cite{malay}~\cite{NHS-44}. Early on in development, it was decided to avoid using these since the methods to simplify and represent them would remove a large part of the usefulness – for example, representing stress would require two functions, one to map produce values for stress caused externally to the system and one for stress as a result of the actions chosen. This is a complicated endeavour since modelling stress in itself is field worthy of research. A similar decision was made for alcohol consumption as attempting to model factors such as social smoking when under the influence of alcohol is difficult and again could be the focus of a modelling project itself.
-The attributes chosen for the agent can be seen in table X.
+Initially, a number of attributes were considered that extended the smoking cessation decisions into areas of lifestyle such as alcohol consumption and stress~\cite{NHS-44}~\cite{malay}. Early on in development, it was decided to avoid using these since the methods to simplify and represent them would remove a large part of the usefulness – for example representing stress would require two functions, one to map produce values for stress caused externally to the system and one for stress as a result of the actions chosen. This is a complicated endeavour since modelling stress in itself is field worthy of research. A similar decision was made for alcohol consumption as attempting to model factors such as social smoking when under the influence of alcohol is difficult and again could be the focus of a modelling project itself.
+The attributes chosen for the agent can be seen in table \ref{tab:attr}.
 
 \begin{figure}
 \begin{center}
-\label{tab:attr}
 \begin{tabular}{|l||l|p{5cm}|p{5cm}|}
 \hline
 \bf{Name} & \bf{Type} & \bf{Lower of Range Represents} & \bf{Upper of Range Represents} \\
 \hline
-isSmoker 					& Boolean & False - does not smoke											& True - smokes \\
-willpower					&	Double	&	0 - has no resistance to change							& 1 - has high resistance to change \\
-health						&	Double	&	0 - is of very poor health e.g. has disease &	1 - is of perfect health \\
-smokedPerDay			&	Integer	&	0 - no cigarettes per day										& 70 - 70 cigarettes per day \\
-givingUp					&	Boolean	&	False - is not giving up smoking						& True - is giving up smoking \\
-giveUpAttempts		&	Integer	&	0 - No previous attempts at giving up				& No upper limit \\
-stepsSinceGiveUp	&	Integer	&	0 - No simulation steps since giving up began/is not giving up	& 500 - simulation steps since giving up began \\
-sociable					&	Double	&	0 - is a social recluse											& 1	- is an extrovert \\
-influenceability	&	Double	&	0 - is not easily influenced								& 1 - is easily influenced \\
+\emph{isSmoker} 					& Boolean & \emph{False} - Does not smoke											& \emph{True} - Smokes \\
+\emph{willpower}					&	Double	&	\emph{0} - Has no resistance to change							& \emph{1} - Has high resistance to change \\
+\emph{health}						&	Double	&	\emph{0} - Is of very poor health e.g. has disease &	\emph{1} - Is of perfect health \\
+\emph{smokedPerDay}			&	Integer	&	\emph{0} - No cigarettes per day										& \emph{70} - 70 cigarettes per day \\
+\emph{givingUp}					&	Boolean	&	\emph{False} - Is not giving up smoking						& \emph{True} - Is giving up smoking \\
+\emph{giveUpAttempts}		&	Integer	&	\emph{0} - No previous attempts at giving up				& No upper limit \\
+\emph{stepsSinceGiveUp}	&	Integer	&	\emph{0} - No simulation steps since giving up began/is not giving up	& \emph{500} - Simulation steps since giving up began \\
+\emph{sociable}					&	Double	&	\emph{0} - Is a social recluse											& \emph{1}	- Is an extrovert \\
+\emph{influenceability}	&	Double	&	\emph{0} - Is not easily influenced								& \emph{1} - Is easily influenced \\
 \hline
 
 \end{tabular}
 \end{center}
 \caption{Description of Agent Attribute Types and Ranges}
+\label{tab:attr}
 \end{figure}
 
 
-The most basic attribute is that of isSmoker, which simply shows if an agent is currently a smoker or not. This is coupled with smokedPerDay, representing the number of cigarettes smoked per day, form the fundamental smoking behaviour for the model. The number smoked per day is very important since statistics indicate that heavy smokers, those smoking over 20 cigarettes a day, are less likely to want to quit than lighter smokers~\cite{NHS-43} and as such, this is crucial in deciding if an agent should give up. As can be seen in the table, there is an upper cap on this value; since feedback loops are almost inevitable in the system  - and may be natural in real-world networks – this cap prevents one feedback loop causing excessive damage to the rest of the environment. In early tests without the cap, it was not uncommon for agents to be smoking upwards of 1000 cigarettes per day due to a few nodes influencing others with their higher than average smoking rates, in turn spreading this throughout the network. Although the cap is artificial, it in some way maps to a physical and reasonable limit of cigarettes smokeable in a day.
+The most basic attribute is that of \emph{isSmoker}, which simply shows if an agent is currently a smoker or not. This is coupled with \emph{smokedPerDay}, representing the number of cigarettes smoked per day, form the fundamental smoking behaviour in the model. The number of cigarettes smoked per day is very important since statistics indicate that heavy smokers, those smoking over 20 cigarettes a day, are less likely to want to quit than lighter smokers~\cite{NHS-43} which is crucial in deciding whether an agent should give up. As can be seen in the table, there is an upper cap on this value; since feedback loops are almost inevitable in the system  - and may be natural in real-world networks - this cap prevents one feedback loop causing excessive damage to the rest of the environment. In early tests without the cap, it was not uncommon for agents to be smoking upwards of 1000 cigarettes per day due to a few nodes influencing others with their higher than average smoking rates, in turn spreading this throughout the network. Although the cap is artificial, it in some way maps to a physical limit of cigarettes smokeable in a day.
 
-Health is another important inclusion as the quality of a person's health impacts their views of smoking and their likeliness to continue~\cite{NHS-43}. Although only a basic method of including health in the model, using a value between 0 and 1 means that it can act in a similar manner as a probability. In a commercial model, this attribute could be implemented in a much more detailed way, including types of illness, how developed an illness is and a more accurate function of how health quality changes over time. There is a strong interplay between the status of the agent as a smoker and the change in health. Since the health in this model is in respect to smoking-related illness, being a smoker decreases health slightly on each turn, whereas being a non-smoker increases it.
+\emph{Health} is another important inclusion as the quality of a person's health impacts their views of smoking and their likeliness to continue~\cite{NHS-43}. Although only a basic method of including health in the model, using a value between 0 and 1 means that it can act in a similar manner as a probability. In a commercial model, this attribute could be implemented in a much more detailed way, including types of illness, how developed an illness is and a more accurate function of how health quality changes over time. There is a strong interplay between the status of the agent as a smoker and the change in health. Since the health in this model is in respect to smoking-related illness, being a smoker decreases health slightly on each turn, whereas being a non-smoker increases it.
 
-Three separate attributes handle the process of giving up. As indicated in the research for this project, those who are in the process of giving up smoking are likely to relapse and restart smoking~\cite{NHS-44} and being able to incorporate for how long someone has been giving up models the process more accurately. The isGivingUp field stores whether an agent is in the process of giving up, and can only be true when that individual is not a smoker. Furthermore, to simulate the giving up period, \emph{stepsSinceGiveUp} is set to 0 whenever a giving up attempt is started and incremented on every simulation step. Obviously, a point arises where the individual no longer considers themselves to no longer be someone `giving up' and instead just a non-smoker. The simulation does this by limiting the number of steps someone `gives up' for, and at that point sets \emph{isGivingUp} to false so that the effect of attempting to quit no longer impacts on the choice to relapse into smoking. A final aspect is that of the number of attempts at giving up someone has – again indicated by the NHS statistics, those who have attempted to give up smoking and failed before are more likely to fail again~\cite{NHS-44}. By tallying the number of giving up attempts to date (incremented every time an agent changes isSmoker from false to true) this can be factored in to the decision tree.
+Three separate attributes handle the process of giving up. As indicated in the research for this project, those who are in the process of giving up smoking are likely to relapse and restart smoking~\cite{NHS-44}; being able to incorporate for how long someone has been giving up models the process more accurately. The \emph{isGivingUp} field stores whether an agent is in the process of giving up and can only be true when that individual is not a smoker. Furthermore, to simulate the giving up period, \emph{stepsSinceGiveUp} is set to 0 whenever a giving up attempt is started and incremented on every simulation step. Obviously, a point arises where the individual no longer considers themselves to no longer be someone `giving up' and instead just a non-smoker. The simulation does this by limiting the number of steps someone `gives up' for, and at that point sets \emph{isGivingUp} to false so that the effect of attempting to quit no longer impacts on the choice to relapse into smoking. A final aspect is that of the number of attempts at giving up someone has. Again indicated by the NHS statistics, those who have attempted to give up smoking and failed before are more likely to fail again~\cite{NHS-44}. By tallying the number of giving up attempts to date (incremented every time an agent changes \emph{isSmoker} from \emph{false} to \emph{true}) this can be factored in to the decision tree.
 
-The final attributes are those of sociability and influenceability, or how easy the person is influenced. Again values between 0 and 1, the former attempts to represent some aspect of willingness to form new social connections. Although not directly related to smoking cessation, it adds an individual trait to agents when it comes to reconfiguring their connections. The latter is used as an extra factor in deciding when agents change their behaviour, i.e. give up/begin smoking, to model the idea that in order for those who reject most influence would require a lot of sustained pressure to take on the influenced behaviour. In addition to this, it provides two extra attributes for comparison of agents, specifically in terms of assessing similarity, as people who seek social connections will naturally be more likely to connect to others who are doing the same.
+The final attributes are those of \emph{sociability} and \emph{influenceability}. Again values between 0 and 1, the former attempts to represent some aspect of willingness to form new social connections. Although not directly related to smoking cessation, it adds an individual trait to agents for reconfiguring their connections. The latter, how easy the person is influenced, is used as an extra factor in deciding when agents change their behaviour, i.e. give up/begin smoking, to model the idea that in order for those who reject most influence would require a lot of sustained pressure to take on the influenced behaviour. In addition to this, it provides two extra attributes for comparison of agents, specifically in terms of assessing similarity, as people who seek social connections will naturally be more likely to connect to others who are doing the same.
 
-In terms of assigning values to these attributes, the normal distribution was widely used for numerical attributes. Due to the abstraction of the attributes – representing largely unquantifiable concepts with decimal numbers – determining appropriate values for the means and standard deviation was a matter of balance for the model. As such, by setting the mean and standard deviation sets for all attributes as system parameters, they can be adjusted through different simulations, allowing for analysis into how this affects the network.  Generally, opting for a mean of around 0.5 and a standard deviation of 1 provides a reasonable spread of values across the agents. For the boolean attributes of isSmoker and isGivingUp, system parameters specify the probability for each being true with uniform random numbers being tested against them. Again, this allows for the user to investigate different starting states of the simulation with regard to the number of smokers/non-smokers present.
+In terms of assigning values to these attributes, a normal distribution was widely used for numerical attributes. Due to the abstraction of the attributes - representing largely unquantifiable concepts with decimal numbers - determining appropriate values for the means and standard deviation was a matter of balance for the model. By including the mean and standard deviation sets for all attributes as system parameters, they can be adjusted through different simulations allowing for analysis into how this affects the network.  Generally, opting for a mean of around 0.5 and a standard deviation of 1 provides a reasonable spread of values across the agents. For the Boolean attributes of \emph{isSmoker} and \emph{isGivingUp}, system parameters specify the probability for each being true with uniform random numbers being tested against them. Again, this allows for the user to investigate different starting states of the simulation with regard to the number of smokers/non-smokers present.
 
 \subsubsection{Action Overview}
-In regards to the `rules' section of this agent, there are three parts to each simulation step. First, the agent calculates a series of metrics in regards to its surrounding nodes, then uses these as part of a decision process organised into a decision tree. This allows the agent a chance to modify its own attributes and from there reconfigure its connections to other nodes, if necessary.
+In regards to the `rules' section of this agent, there are three parts to each simulation step. First, the agent calculates a series of metrics in regards to its surrounding nodes, then uses these as part of a decision process organised into a decision tree. A decision tree can be described as a tree structure where the nodes are decisions to be made and branches are different options for a given decision. This allows the agent a chance to modify its own attributes and from there reconfigure its connections to other nodes, if necessary.
 \subsubsection{Neighbourhood Actions}
-In the network, every agent connected to one or more other node has a neighbourhood. This is defined to be the set of nodes that can be reached within n hops, where n is a parameter to the simulation. This represents the concept of influence through `friends-of-friends' and the assumption was made that $n=2$ was a more resonable choice since during development,  graphs of hundreds, rather than thousands, of nodes tended to have an average path length of less than 10. Having nodes draw upon more than a two-hop neighbourhood would result in a much larger portion of the network impacting a node, in terms of node count and network diameter. To avoid a case of very distant nodes playing too much of a role in influence, $n$ was kept low. In terms of attributes calculated using this neighbourhood, figure \ref{tab:neighbour} provides more information.
+\label{sec:neigh}
+In the network, every agent connected to one or more other node has a \emph{neighbourhood}. This is defined to be the set of nodes that can be reached within $n$ hops, where $n$ is a parameter to the simulation. This represents the concept of influence through `friends-of-friends' and the assumption was made that $n=2$ was a more resonable choice since during development,  graphs of hundreds, rather than thousands, of nodes tended to have an average path length of less than 10. Requiring nodes to draw upon more than a two-hop neighbourhood would result in a much larger portion, in terms of node count and network diameter, of the whole network impacting a node. To avoid a case of very distant nodes playing too much of a role in influence, $n$ was kept low. In terms of attributes calculated using this neighbourhood, figure \ref{tab:neighbour} provides more information.
 
 \begin{figure}
 \begin{center}
-\label{tab:neighbour}
+
 \begin{tabular}{|l||l|p{10cm}|}
 \hline
 \bf{Name} & \bf{Type} & \bf{Represents}\\
 \hline
-infIsSmokerVal 	& Double 	&	The calculated influenced attribute of isSmoker, with $\leq 0$ being false and $\geq 0$ being true.									\\
-infIsSmoker			&	Boolean	&	A boolean value representing the outcome of infIsSmokerVal							\\
-infHealth				&	Double	&	The influenced attribute of health \\
-infWillpower		&	Double	&	The influenced attribute of willpower										\\
-infCigPerDay		&	Double	&	The influenced attribute of smokedPerDay						\\
-avgCigPerDay		&	Double	&	The average of all non-zero smokedPerDay values in the neighbourhood				\\
-pcSmokes				&	Double	&	The percentage of neighbours who smoke\\
-pcGivingUp			&	Double	&	The percentage of neighbours who are giving up smoking (and are not just non-smokers)\\
-infPcSmokes			&	Double	&	The influenced percentage of neighbours who smoke								\\
-infPcGivingUp		&	Double	&	The influenced percentage of neighbours who are giving up							\\
+\emph{infIsSmokerVal} 	& Double 	&	The calculated influenced attribute of \emph{isSmoker}, with $\leq 0$ being false and $\geq 0$ being true.									\\
+\emph{infIsSmoker}			&	Boolean	&	A boolean value representing the outcome of \emph{infIsSmokerVal}							\\
+\emph{infHealth}				&	Double	&	The influenced attribute of \emph{health} \\
+\emph{infWillpower}		&	Double	&	The influenced attribute of \emph{willpower}										\\
+\emph{infCigPerDay}		&	Double	&	The influenced attribute of \emph{smokedPerDay}						\\
+\emph{avgCigPerDay}		&	Double	&	The average of all non-zero \emph{smokedPerDay} values in the neighbourhood				\\
+\emph{pcSmokes}				&	Double	&	The percentage of neighbours who smoke\\
+\emph{pcGivingUp}			&	Double	&	The percentage of neighbours who are giving up smoking (and are not just non-smokers)\\
+\emph{infPcSmokes}			&	Double	&	The influenced percentage of neighbours who smoke								\\
+\emph{infPcGivingUp}		&	Double	&	The influenced percentage of neighbours who are giving up							\\
 \hline
-
 \end{tabular}
 \end{center}
 \caption{Description of Agent Attribute Types and Ranges}
+\label{tab:neighbour}
 \end{figure}
 
-Aside from the `ideal figure' attributes that are calculated for the current agent, a number of figures that describe the current basic state of those in the neighbourhood are calculated. Percentages of the graph which smokes and is giving up are particularly useful in creating the effect of peer-pressure within decisions and are also a possible representation of what the agent would be surrounded by in their life. This can be furthered by including the influence of the surrounding nodes into these percentages, which can be seen in figure \ref{eq:inf-perct} where $n$ is a neighbourhood node, $s$ a node of a specific dispositon (e.g. a smoker) and $n_{i}$ being the influence of $n$. This enables the system to attempt to model situations where a person's susceptibility to peer pressure depends on how influential those surrounding them are; should they be of low influence, it is unlikely that the person would adopt a behaviour that they are displaying.
+Aside from the `ideal agent' attributes that are calculated for the current agent, a number of figures that describe the current basic state of those in the neighbourhood are calculated. Percentages of the graph which smoke and are giving up are particularly useful in creating the effect of peer-pressure within decisions, as well as being a possible representation of what the agent would be surrounded by in their life. This can be furthered by including the influence of the surrounding nodes into these percentages, which can be seen in formula \ref{eq:inf-perct} where $n$ is a neighbourhood node, $s$ a node of a specific dispositon (e.g. a smoker) and $n_{i}$ being the influence of $n$. This enables the system to attempt to model situations where a person's susceptibility to peer pressure depends on how influential those surrounding them are; should they be of low influence, it is unlikely that the person would adopt a behaviour that they are displaying.
 
 \begin{equation}
 \label{eq:inf-perct}
 \frac{\sum_{\forall s \in N} s_{i}}{\sum_{\forall n \in N} n_{i}}
 \end{equation}
 
-As described previously, the compound influence across a multi-hop route can be calculated so from this, the influence to each node within the neighbourhood can be given. Using this information, the `ideal figure' for this neighbourhood is then produced using influenced attributes by effectively averaging attributes over all of the nodes in the neighbourhood. The way in which influence attributes are calculated is slightly different for Booleans but in general, the formula in figure \ref{eq:inf-perct} is used. Booleans instead have values of true mapped to 1 and false to -1 to allow for influence to be worked into the 'ideal figure'. Once summed over the whole neighbourhood, a negative value indicates false and positive true. Notice that the sum of $\text{influence} \times \text{attribute}$ is divided by the total influence, not the number of nodes. This is because, through experimentation, division by the number of nodes resulted in very low values for influenced attributes whereas using the sum of influence gave typically more reasonable figures. Due to this, it is less a straight average, instead more of a weighed one based on the influence of a node. It should be noted that this will never exceed the values that would be generated by simply averaging out attributes since that would be a case where all nodes were at an influence of 1. Another point to note is that when calculating with smokedPerDay, cases of non-smokers (and in turn those who smoke no cigarettes) were excluded to avoid artificially lowering the average.
+As described previously, the compound influence across a multi-hop route can be calculated so from this, the influence to each node within the neighbourhood can be gathered. Using this information, the `ideal figure' for this neighbourhood is then produced using influenced attributes by effectively averaging attributes over all of the nodes in the neighbourhood. The way in which influence attributes are calculated is slightly different for Boolean variables but in general, formula \ref{eq:inf-perct} is used. Booleans instead have values of true mapped to 1 and false to -1 to allow for influence to be worked into the `ideal person'. Once summed over the whole neighbourhood, a negative value indicates \emph{false} and positive \emph{true}. Notice that the sum of $\text{\emph{influence}} \times \text{\emph{attribute}}$ is divided by the total influence, not the number of nodes. This is because, through experimentation, division by the number of nodes resulted in very low values for influenced attributes whereas using the sum of influence gave typically more reasonable figures. Due to this, it is less a normal average, instead weighted based on the influence of a node. It should be noted that this will never exceed the values that would be generated by simply averaging out attributes since that would be a case where all nodes were at an influence of 1. Another point to note is that when calculating with influenced \emph{smokedPerDay}, cases of non-smokers (i.e. those who smoke no cigarettes) were excluded to avoid artificially lowering the average.
 
 \label{sec:neighbourhood}
+
 \subsubsection{Decision Tree Actions}
 \label{sec:dectree}
-In order to change their own attribute values, an agent must go through a series of decisions to choose which value to change. The aim of this approach is to model a human decision making process in a logical and maintainable way, so that decisions can be rearranged, inserted or removed easily. In general, more important decisions are placed higher in the tree since they are more likely to be reached by an agent than any decision lower in the tree, by which point the decision in question becomes one in many. Due to this, when importance of decisions is discussed, those of higher importance will be higher in the tree than ones of lower importance. Throughout the development, a major focus was to uphold balance within the tree. This means that where possible, feedback loops causing extreme attribute values should be minimised and excessive clustering within the network should be avoided. Both of these had to be monitored by testing different versions of the decision tree, with changes being made as necessary.
+In order to change their own attribute values, an agent must go through a series of decisions to choose which value to change. The aim of this approach is to model a human decision making process in a logical and maintainable way, so that decisions can be rearranged, inserted or removed easily. In general, more important decisions are placed higher in the tree since they are more likely to be reached by an agent than any decision lower in the tree, by which point the decision in question becomes one in many. Because of this, when the importance of decisions is discussed those of higher importance will be referred to as higher in the tree than ones of lower importance. Throughout the development, a major focus was to uphold balance within the tree. This means that where possible, feedback loops causing extreme attribute values should be minimised and excessive clustering within the network should be avoided. Both of these had to be monitored by testing different versions of the decision tree, with changes being made as necessary.
 
-To begin with, an approach was taken to combine a number of attributes into calculations that can be seen in figure \ref{eq:v0.9probs}, the labels referring to points in the tree as seen in figure \ref{img:init-dectree}. Generally, the tree was kept fairly shallow in favour of producing values similar to probabilities or range checks. For example, in figure \ref{eq:v0.9probs}, B shows how the decision is made based on whether the agent attributes are within 10\% of the influenced attributes – if so, the number of cigarettes smoked is adjusted. As each decision required such a combination, to build a sufficient series of decisions the same parameters would have to be formed in different ways for each choice. It became clear that this approach was flawed as it lent itself into collapsing many separate attribute choices into one. This meant that control over how each parameter effects the end choice was lost and also made it very difficult to add new decisions as most were already represented in some way in the existing steps. Furthermore, using combinations of attributes led to extra complexity being added, making it unclear exactly which attributes are causing different effects. Since a substantial part of this project is to understand what the model is showing, difficulty in isolating attributes and judging their effects is problematic. Due to this, the decision tree was heavily separated out into single attribute decisions that lead into one another.
+To begin with, an approach was taken to combine a number of attributes into calculations that can be seen in figure \ref{eq:v0.9probs}, the labels referring to points in the tree as seen in figure \ref{img:init-dectree}. Generally, the tree was kept fairly shallow in favour of producing values for manipulating attributes, similar to probabilities or range checks. For example, in figure \ref{eq:v0.9probs}, \emph{B} shows how the decision is made based on whether the agent attributes are within 10\% of the influenced attributes – if so, the number of cigarettes smoked is adjusted. As each decision required such a combination, to build a sufficient series of decisions the same parameters would have to be formed in different ways for each choice. It became clear that this approach was flawed as it lent itself into collapsing many separate attribute choices into one. This lost control over how each parameter effects the end choice and made it very difficult to add new decisions as most were already represented in some way in the existing steps. Furthermore, using combinations of attributes led to extra complexity making it unclear exactly which attributes are causing different effects. Since a substantial part of this project is to understand what the model is showing, difficulty in isolating attributes and judging their effects is problematic. As a result, the decision tree was heavily separated out into single attribute decisions that lead into one another.
 
 \begin{figure}
-\label{eq:v0.9probs}
+
 	$\forall n \in N$ where $N$ is the Neighbourhood of a node:
 	\begin{enumerate}
-		\item p(give up smoking)=$(1-health_{n}) \times \frac{|\text{Nodes giving up smoking}|}{|\text{Nodes}|}$ \\
-		\item If $n$ smokes $\pm10\%$ of the influence sum for cigarettes smoked, and $\text{health}_{n}$ is within $\pm10\%$ of the influence sum of health. \\
-		\item $change = (\text{influence sum of smoked per day} - {smokedPerDay}_{n}) \times influenceability_{n}$, else there is no change. \\
-		\item p(take up smoking) = $health_{n} \times \frac{|\text{Nodes giving up smoking}|}{|\text{Nodes}|} \times \frac{|\text{Nodes who smoke}|}{|\text{Nodes}|}$ \\
-		\item If the influenced sum of the number of cigarettes per day is $< 0$, then $smokedPerDay = 5$, otherwise \\
+		\item p(\emph{give up smoking})=$(1-health_{n}) \times \frac{|\text{Nodes giving up smoking}|}{|\text{Nodes}|}$ \\
+		\item If $n$ smokes $\pm10\%$ of the influence sum for \emph{cigarettes smoked per day}, and $\text{\emph{health}}_{n}$ is within $\pm10\%$ of the influence sum of \emph{health}. \\
+		\item $change = (\text{influence sum of \emph{smoked per day}} - {smokedPerDay}_{n}) \times influenceability_{n}$, else there is no change. \\
+		\item p(\emph{take up smoking}) = $health_{n} \times \frac{|\text{Nodes giving up smoking}|}{|\text{Nodes}|} \times \frac{|\text{Nodes who smoke}|}{|\text{Nodes}|}$ \\
+		\item If the influenced sum of the \emph{number of cigarettes per day} is $< 0$, then $smokedPerDay = 5$, otherwise \\
 		$smokedPerDay = \operatorname{round}(\frac{\sum_{\forall n \in Neighbours} smokedPerDay_{n} \times influence_{n}}{\sum_{\forall n \in N} influence_{n}})$
 	\end{enumerate}
 	\caption{Initial Decision Tree Probability Calculations}
+	\label{eq:v0.9probs}
 \end{figure}
 
+An example of the results of the transformation that took place can be seen from \emph{equation 4} in \ref{eq:v0.9probs} to figure \ref{img:example-decision}, where each part of the combined decision is put into a `level' of the new tree with some stages being removed. By doing this, not only is the tree more structured and manageable but decisions can be traced through each branch revealing how different configurations can affect the decision making. The overall result of this stage was to move the tree from figure \ref{img:init-dectree} to figure \ref{img:0.9-dectree}. The values on each edge in figure \ref{img:0.9-dectree} represent the thresholds that need to be matched for that branch to be followed.
+
+It is worth noting the inclusion of an \emph{irrational choice}, as seen in figure \ref{img:example-decision}. This is to add a human characteristic into the simulation and introduce a small element of unpredictability. The probability of an irrational choice is a simulation parameter so can be changed easily. Importantly, this probability should relate to the number of nodes in the network since keeping the probability the same whilst increasing the number of nodes, each making a decision every turn, will result in more irrational choices. The method of inclusion is to simply override the decision in question by logically `or-ing' it with a function that returns if an irrational choice is to happen. This function is a uniform random decimal number generator, only returning \emph{true} when the random number is less than the choice probability.
+
+All branches eventually arrive at one of two final decisions, shown in figure \ref{img:end-dec}; one decision is to either give up smoking or adjust how many the agent smokes per day and the other is to begin smoking or adjust their \emph{willpower} value. Different thresholds can be provided to these decisions in that if the threshold is exceeded, the agent will give up smoking/begin smoking. These calculations can be seen in figure \ref{eq:end-thresh}; the intention for the `giving up' threshold is to compare the input against the number of others in the neighbourhood who are either also giving up or not smoking, with the latter requiring a higher threshold due to having similar but not quite the same behaviours. This maps to a `group mentality' approach to giving up, in that someone is more likely to give up if those around them are also doing the same~\cite{droves}. A similar concept applies for starting smoking, where the threshold instead is based on those who are smokers - should the person begin smoking, they start by smoking the influenced attribute value of the number of cigarettes smoked per day. In addition to the threshold being exceeded, the agent must generate a probability less than their \emph{influenceability} value, to emulate a humans potential resistance to influence. Both also have the ability for an irrational choice to override the decision.
+
 \begin{figure}
-\label{img:init-dectree}
 \begin{center}
 \includegraphics[scale=0.8]{DecTreeBasic2.png}
 \end{center}
 \caption{Initial Decision Tree}
+\label{img:init-dectree}
 \end{figure}
 
-An example of the results of the transformation that took place can be seen from equation 4 in \ref{eq:v0.9probs} to figure \ref{img:example-decision}, where each separate part of the combined decision is put into a `level' of the new tree with some stages being removed. By doing this, not only is the tree much more structured and manageable this way, but decisions can be traced through each branch, revealing how different set-ups can affect the decision making. The overall result of this stage was to move from figure \ref{img:init-dectree} to figure \ref{img:0.9-dectree}. The values on each edge represent the thresholds that need to be matched for that branch to be followed.
-
 \begin{figure}
-\label{img:example-decision}
 \begin{center}
 \includegraphics[scale=1]{example-decision.png}
 \end{center}
 \caption{Example Decision From Combination Decision}
+\label{img:example-decision}
 \end{figure}
 
 \begin{landscape}
 \begin{figure}
 \begin{center}
 \includegraphics[width=\paperwidth,keepaspectratio]{DecTreev09.jpg}
-\label{img:0.9-dectree}
 \caption{Revised Decision Tree}
 \end{center}
+\label{img:0.9-dectree}
 \end{figure}
 \end{landscape}
 
-Also to note is the inclusion of an irrational choice, as seen in figure \ref{img:example-decision} – this is to add a human characteristic into the simulation and introduce a small element of unpredictability. The probability of an irrational choice is a simulation parameter so can be changed easily. Importantly, the probability of an irrational choice should relate to the number of nodes in the network, since if the probability is kept the same a higher number of nodes, each making a decision every turn, will result in more irrational choices. The method of inclusion is to simply override the decision in question by logically or-ing it with a function that returns if an irrational choice is to happen. This function is a uniform random decimal number generator, only returning true when the random number is less than the probability.
-
-All branches eventually arrive at one of two final decisions, shown in figure \ref{img:end-dec}; one decision is to either give up smoking or adjust how many the agent smokes per day, and the other is to begin smoking or adjust their willpower value. Different thresholds can be provided to these decisions in that if the threshold is exceeded, the agent will give up smoking/begin smoking. These calculations can be seen in figure \ref{eq:end-thresh}; the intention for the giving up threshold is to compare the input against the number of others in the neighbourhood who are either also giving up or not smoking, with the latter giving a higher threshold due to having similar but not quite the same behaviours. This maps to a `group mentality' approach to giving up, in that someone is more likely to give up if those around them are also doing the same. A similar concept applies for starting smoking, where the threshold instead is based on those who are smokers – should the person begin smoking, they start by smoking the influenced attribute value of the number of cigarettes. In addition to the threshold being exceeded, the agent must generate a probability less than their influenceability value, to emulate a humans potential resistance to influence. Both also have the ability for an irrational choice to override the decision.
-
 \begin{figure}
-\label{img:end-dec}
 \begin{center}
 \includegraphics[scale=1]{End-DecA.png}
 \includegraphics[scale=1]{End-DecB.png}
 \end{center}
 \caption{End Decisions in the Final Decision Tree}
+\label{img:end-dec}
 \end{figure}
 
 \begin{figure}
-\label{eq:end-thresh}
 Given a percentage threshold $p$, a node gives up if one or more of the below are true:
 \begin{itemize}
-\item $\text{influenced \% giving up} > p$
-\item $\text{\% non-smokers} > 120\% \times p$ and $\text{random number} < \text{influenceability}_{n}$
+\item $\text{influenced \% of neighbourhood giving up} > p$
+\item $\text{\% non-smokers in neighbourhood} > 120\% \times p$ and $\text{random number} < \text{\emph{influenceability}}_{n}$
 \item An irrational choice is made
 \end{itemize}
 
 Given a percentage threshold $p$, a node relapses if one or more of the below are true:
 \begin{itemize}
-\item $\text{influenced \% smoke} > p$
-\item $\text{random number} < \text{influenceability}_{n}$
+\item $\text{influenced \% of neighbourhood smoke} > p$
+\item $\text{random number} < \text{\emph{influenceability}}_{n}$
 \item An irrational choice is made
 \end{itemize}
 \caption{Threshold Formulae for Decision Tree End Decisions}
+\label{eq:end-thresh}
 \end{figure}
 
-During the course of development, some agents were borderline between smokers and non smokers. This meant that they would switch between the two on a regular basis, potentially causing others in the neighbourhood to do the same. In an effort to this, a measure was introduced that counts the number of turns since the last change and produces a probability, seen in equation \ref{eq:turns}, that slows down this rate of change by guarding the attribute swap from/to a smoker with this probability against a uniform random number.
+During the course of development, simulations showed that some agents were on the borderline between smokers and non-smokers. This meant that they would switch between the two on a regular basis, potentially causing others in the neighbourhood to do the same. In an effort to avoid this, a measure was introduced that counts the number of turns since the last change and produces a probability, seen in equation \ref{eq:turns}, that slows down this rate of change by guarding the attribute swap from/to being a smoker with this probability against a uniform random number.
 
 \begin{equation}
+p(\text{\emph{change}}) = 1-\frac{1}{\text{turns since last change}\times 1000}
 \label{eq:turns}
-p(\text{change}) = 1-\frac{1}{\text{turns since last change}\times 1000}
 \end{equation}
 
-For the giving up decision, labelled as A, either the process of giving up begins (described in the attributes section of this document) or the number of cigarettes smoked per day is adjusted. The latter is done by comparing the influenced attribute value for cigarettes smoked per day against a percentage threshold – the threshold is a system parameter and creates a range around the agent's own attribute. Should the influenced attribute be outside of this range, the agent has its attribute moved towards the influenced value by half of the influenced value. This provides a gradual change. In terms of B, a small amount of willpower is removed should they relapse to smoking, otherwise it is added. These formulae can be see in figure \ref{eq:end-attr}
+For the `giving up' decision, labelled as \emph{A} in figure \ref{img:end-dec}, either the process of giving up begins (described in the attributes section above) or the number of cigarettes smoked per day is adjusted. The latter is done by comparing the influenced attribute value for cigarettes smoked per day against a percentage threshold. The threshold is a system parameter and creates a range around the agents own attribute. Should the influenced attribute be outside of this range, the agent has its attribute moved towards the influenced value by half of the influenced value, providing a gradual change. In terms of B, a small amount of willpower is removed should they relapse to smoking, otherwise it is added. These formulae can be see in figure \ref{eq:end-attr}
 \begin{figure}
-\label{eq:end-attr}
 End Decision A - The value of $\text{\emph{smokedPerDay}}_{n}$ is changed for some node $n$:
 \begin{itemize}
 \item If a irrational choice is made or $\text{\emph{influenced smokedPerDay}}_{n} < \text{\emph{smokedPerDay}}_{n}\times\text{lower \% threshold}$, then $\text{\emph{smokedPerDay}}_{n} = \text{\emph{smokedPerDay}}_{n} - \frac{\text{\emph{influenced smokedPerDay}}_{n}}{2}$ 
@@ -557,15 +562,15 @@ End Decision B - The value of $\text{\emph{willpower}}_{n}$ is changed for some 
 \item If $n$ remains a non-smoker, and a $\text{random number} < \text{\emph{influenceability}}_{n}$ then $\text{\emph{willpower}}_{n} = \text{\emph{willpower}}_{n} + \text{\emph{willpower}}_{n}\times 0.001\%$
 \end{itemize}
 \caption{Attribute Changes for Decision Tree End Decisions}
+\label{eq:end-attr}
 \end{figure}
 
 Although this simplifies the decision-making process beyond that of human cognition, it allows a basic model of peer pressure and susceptibility to general influence. There is the potential for improvement through swapping this decision series with a more accurately modelled one would be straightforward. For the purposes of this model, it provides sufficient complexity and configurability since the thresholds can be set through the decision tree as part of the tuning process.
-The final decision tree had a number of extra 'decision layers' added to attempt a more accurate mapping of a real decision process; it can be seen in figures \ref{img:dectree-left} and \ref{img:dectree-right}. The aim of this was to provide a more configurable and realistic decision-making model than the previous version, whilst keeping each attribute in a separate layer. Figure \ref{tab:attr-change} shows at which point in the tree any attributes are changed (outside of the end-states A and B), which are marked as \emph{ATTR}.
+The final decision tree had a number of extra `decision layers' added to attempt a more accurate mapping of a real decision process; it can be seen in figures \ref{img:dectree-left} and \ref{img:dectree-right} with the initial decision that links the two in \ref{img:overarch}. The aim of this was to provide a more configurable and realistic decision-making model than the previous version, whilst keeping each attribute in a separate layer. Figure \ref{tab:attr-change} shows at which point in the tree any attributes are changed (outside of the end-states A and B), which are marked as \emph{ATTR}.
 
 
 \begin{figure}
 \begin{center}
-\label{tab:attr-change}
 \begin{tabular}{|l||l|p{10cm}|}
 \hline
 \bf{Label} & \bf{Attribute} & \bf{Change}\\
@@ -578,19 +583,30 @@ ATTR-3	&	\emph{health}					&	$\text{\emph{health}}_{n} = \frac{\text{\emph{steps
 \end{tabular}
 \end{center}
 \caption{In-Tree Attribute Changes}
+\label{tab:attr-change}
 \end{figure}
-For the currently smoking arm of the tree, a number of changes were made. The ability to give up in the `normal' smoker range (here 5 to 15 per day, but this could be adjusted) was only allowed by an irrational choice. The rationale behind this is that whilst lighter smokers are likely to be more able to go without smoking~\cite{NHS-43}, gradually reducing their own consumption until they quit completely. On the other side of this, heavy smokers are likely be stronger in their resolve against giving up smoking and as such, their willpower may important decision factor than their health due to the habit being harder to break. Health, however, is deemed more important for lighter smokers since any change in the number of cigarettes smoked is likely to have more of an impact than for a heavy smoker. Furthermore, the fact that influenced health is used aims to represent how being less healthy than those in the neighbourhood would provide more encouragement of the person to attempt to give up, with the other side of this being that if someone smokes and is of above average health, they will not feel as much social pressure with regards to said health.
+For the currently `smoking' arm of the tree, a number of changes were made. The ability to give up in the `normal' smoker range (here 5 to 15 per day, but this could be adjusted) was only allowed by above average health. The rationale behind this is that whilst lighter smokers are likely to be more able to go without smoking~\cite{NHS-43}, gradually reducing their own consumption until they quit completely. On the other hand, heavy smokers are more likely to be strong in their resolve against giving up smoking, making their willpower an important decision factor compared to their health, due to the habit being harder to break. Health, however, is deemed more important for lighter smokers since any change in the number of cigarettes smoked may have more of an impact than for a heavy smoker. Furthermore, the fact that influenced health is used aims to represent how being less healthy than those in the neighbourhood would provide more encouragement of the person to attempt to give up, with the other side of this being that if someone smokes and is of above average health, they will not feel as much social pressure with regards to health.
 
-For the non-smokers, the tree was expanded to include a number of new layers. If the agent hasn't failed at giving up before, then the willpower is considered most important as it represents their ability to continue the process of giving up. Health is included as a sub-point, since if someone is healthier than their neighbours they might see that as a reason to continue their giving up effort. For those who have tried to give up a few times (between 1 and 5), the percentage of non-smokers/those giving in the area dictates which route they should take which then leads into a decision based on willpower. The idea here is that since the agent has relapsed to smoking a number of times, the encouragement of the neighbourhood may have a greater effect on their own actions. In addition to this, the willpower decision is based on the influenced attribute for willpower, so the agent is effectively comparing their own resilience to those who surround them – if they are more resilient then it is assumed that they require more of their neighbours to be smoking to cause a relapse. If many (in this case more than 5) attempts at giving up have been made, a crowd mentality approach is used, where the giving up status of those around the agent dictates how susceptible they are to relapsing again. Influenced health is included since willpower appears to be irrelevant to these individuals; being more healthy than those in the neighbourhood leads to a lower chance of relapsing. Those who are not currently giving up are diverted to a more simplistic tree as they do not need their decision to be affected by how many times they have tried to quit before. Given that they have displayed the willpower to not smoke in the first place, it is assumed that this is a less important factor than their health. In terms of health, the agent's own value is compared to the influenced attribute in an effort to model an attitude of health-awareness; if someone is of good health relative to others then they are less likely to risk it by smoking, whereas if they are of below average health, they may perceive smoking to make little difference.
+For the non-smokers, the tree arm was also expanded to include new layers. If the agent hasn't failed at giving up before, then the willpower is considered most important as it represents their ability to continue the process of giving up. Health is included as a sub-point since if someone is healthier than their neighbours they might see that as a reason to continue their giving up effort. For those who have tried to give up a few times (between 1 and 5), the percentage of non-smokers/those giving up in the area dictates which route they should take, then leading into a decision based on willpower. The idea here is that since the agent has relapsed to smoking a number of times, the encouragement of the neighbourhood may have a greater effect on their own actions. In addition to this, the willpower decision is based on the influenced attribute for willpower, so the agent is effectively comparing their own resilience to those who surround them - if they are more resilient then it is assumed that they require more of their neighbours to be smoking to cause a relapse. If many (in this case more than 5) attempts at giving up have been made, a crowd mentality approach is used, where the giving up status of those around the agent dictates how susceptible they are to relapsing again. Influenced health is included since willpower appears to be irrelevant to these individuals; being more healthy than those in the neighbourhood leads to a lower chance of relapsing. Those who are not currently giving up are diverted to a more simplistic tree as they do not need their decision to be affected by how many times they have tried to quit before. Given that they have displayed the willpower to not smoke anyway, it is assumed that this is a less important factor than their health. In terms of health, the agent's own value is compared to the influenced attribute in an effort to model an attitude of health-awareness; if someone is of good health relative to others then they are less likely to risk it by smoking, whereas if they are of below average health, they may perceive smoking to make little difference.
 
-The end-state decisions for each branch have a percentage threshold stated – the values shown on the diagram have been selected through a process of trial and error with the aim of providing as balanced a simulation as possible. Since some decision routes are more popular than others, the percentages need to account for this. With this in mind, they also represent the relative effect of that branch on the chance of giving up. An example is that if someone is a light smoker (< 10 cigarettes a day), has never tried to give up before and has higher than the influenced health, then it would be reasonable for them to be hard to convince to give up as they don't smoke a lot and are, compared to their social connections, quite healthy. To show this, that particular end-state requires more than 70\% of their neighbours to also be giving up before they will do the same.
+The end-state decisions for each branch have a percentage threshold stated; the values shown on the diagram have been selected through a process of trial and error with the aim of providing as balanced a simulation as possible. Since some decision routes are more popular than others, the percentages need to account for this. With this in mind, they also represent the relative effect of that branch on the chance of giving up. An example is that if someone is a light smoker ($< 10$ cigarettes a day), has never tried to give up before and has higher than the influenced health, then it would be reasonable for them to be hard to convince to give up as they do not smoke a lot and are, compared to their social connections, quite healthy. To show this, that particular end-state requires more than 70\% of their neighbours to also be giving up before they will do the same.
+
+In general, whilst this configuration of the decision tree was settled upon for performing simulations using the model, extra levels could easily be added or decisions rearranged. Ideally, this kind of decision-making process would be developed alongside in-depth psychological studies into the field so that an accurate and expansive tree can be built. Because this was beyond the scope of the project, an ad-hoc approach was used by designing the tree in accordance to model balance and real-life comparison, leading to assumptions about human behaviour having to be made.
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=1]{overarch.png}
+\caption{Overarching Decision Between the Smoking and Non-Smoking Arms of the Decision Tree}
+\label{img:overarch}
+\end{center}
+\end{figure}
 
 \begin{landscape}
 \begin{figure}
 \begin{center}
 \includegraphics[width=\paperwidth,keepaspectratio]{Dectree-left.png}
+\caption{Smoking Arm of the Final Decision Tree. Note that \emph{Inf} is influence and \emph{WP} is willpower.}
 \label{img:dectree-left}
-\caption{Smoking Arm of the Final Decision Tree}
 \end{center}
 \end{figure}
 \end{landscape}
@@ -599,43 +615,43 @@ The end-state decisions for each branch have a percentage threshold stated – t
 \begin{figure}
 \begin{center}
 \includegraphics[width=\paperwidth,keepaspectratio]{dectree-right.png}
+\caption{Non-Smoking Arm of the Final Decision Tree. Note that \emph{Inf} is influence and \emph{WP} is willpower.}
 \label{img:dectree-right}
-\caption{Non-Smoking Arm of the Final Decision Tree}
 \end{center}
 \end{figure}
 \end{landscape}
 
-In general, whilst this configuration of the decision tree was settled upon for performing simulations using the ABM, extra levels could easily be added or decisions rearranged. Ideally, this kind of decision-making process would be developed alongside in-depth psychological studies into the field, so that an accurate and expansive tree can be built. Because this was beyond the scope of the project, a more ad-hoc approach was used by designing the tree in accordance to model balance and real-life comparison, leading to some assumptions about human behaviour having to be made.
 
 \subsubsection{Connection Reconfiguration Actions}
 
-The final stage of the agent actions is to reconfigure their connections to the neighbourhood. By this stage, the agent has assessed the neighbourhood and made changes to their attributes where appropriate so based on this new information, the agent can now look for any relationships to others who are now too dissimilar or for new matches that are closer to their interests. From the initial research and development stage of the project, the chosen method of comparing agents was to generate a scoring algorithm, seen in figure \ref{code:scoring}. This way, any two agents could be compared at any point and a figure to represent their similarity produced.
+The final stage of the agent actions is to reconfigure their connections to the neighbourhood. By this point, the agent has assessed the neighbourhood and made changes to their attributes where appropriate, so based on this new information the agent can now look to remove any relationships to others who are now too dissimilar or for new agents that are closer to their personalities. From the initial research, the concept of homophily emphasises the importance of this likeness so to emulate this, the chosen method of comparing agents was to generate a scoring algorithm, seen in figure \ref{code:scoring}. This way, any two agents could be compared at any point and a valur to represent their similarity produced.
 
-Different attributes will have different weightings when it comes to comparing agents. As the algorithm is intended to imitate the process of a human looking to their circle of connections for other similar people, someone's willpower is likely to have less impact than whether they have the same smoking behaviours. To account for this, the scoring algorithm uses different score values for each attribute – this can be seen in figure \ref{tab:reconfig}. Another factor in the weighting is that of how the difference is scored. The algorithm offers three options, the formulas for which can be seen in \ref{code:comp-methods}: percentage difference, attribute comparison and linear scoring.
+Different attributes have different weightings when it comes to comparing agents. As the algorithm is intended to imitate the process of a human looking to their circle of connections for  similar people, someones \emph{influenceability} is likely to have less impact than whether they have the same smoking behaviours, for example. To account for this, the scoring algorithm uses different score values for each attribute which can be seen in figure \ref{tab:reconfig}. Another factor in the weighting is that of how the difference is used in scoring. The algorithm offers three options, the formulas for which can be seen in figure \ref{code:comp-methods}: \emph{percentage difference}, \emph{attribute comparison} and \emph{linear scoring}.
 
-Percentage difference is most commonly used since it provides a scaled score within one interval plus and minus of the current agent's attribute score. Obviously this means slightly different things for different attributes but in general, the higher scoring someone is in an attribute, the more accepting they are of others; an example might be that light smokers would consider someone who smokes a few more cigarettes a day more to be of similar difference to themselves as a heavy smoker would to someone who smokes half their intake. Attribute comparison is a more straightforward mechanism, simply handing out an amount of points should two attributes be the same, or in the case of stepsSinceGiveUp, below a certain value. Finally, linear scoring is only used by influenceability and is a way to incorporate the susceptibility of someone to peer pressure into the score. No scoring is done against the other agent for linear scoring, since it is based on the attributes of the current agent only. A disadvantage of this method is that it greatly simplifies what humans might look for in social ties as it assumes that they are only interested in those who behave similarly. Obviously this is not the case in reality though for the sake of avoiding modelling this connection seeking in a high level of detail, the assumption will stand for the project. If required, the scoring method could be substituted for one which accounts for one which handles the interplay of personality in a more detailed manner.
+\emph{Percentage difference} is most commonly used since it provides a scaled score within a range of $\pm50\%$ of the current agents attribute score. This means slightly different things for different attributes but in general, the higher scoring someone is in an attribute, the more accepting they are of others; an example might be that light smokers would consider someone who smokes a few more cigarettes a day more to be of similar difference to themselves as a heavy smoker would to someone who smokes half their intake. \emph{Attribute comparison} is a more straightforward mechanism, simply giving an amount of points should two attributes be the same, or in the case of \emph{stepsSinceGiveUp}, below a certain value. Finally, \emph{linear scoring} is only used by \emph{influenceability} and is a way to incorporate the susceptibility of someone to peer pressure into the score. No scoring is done against the other agent for linear scoring, since it is based on the attributes of the current agent only. A disadvantage of this method is that it greatly simplifies what humans might look for in social ties as it assumes that they are only interested in those who behave similarly. Although this is not the case in reality though for the sake of avoiding modelling this connection seeking in a high level of detail, which would take a lot of time, the assumption will stand for the project. If required, the scoring method could be substituted for one which accounts for one which handles the interplay of personality in a more detailed manner.
 
 \begin{figure}
 \begin{center}
-\label{tab:reconfig}
+
 \begin{tabular}{|l||l|l|l|}
 \hline
 \bf{Attribute} & \bf{Minimum Score} & \bf{Maximum Score}\\
 \hline
-isSmoker 						& 0	&	1\\
-givingUp						&	0	&	2\\
-health							&	0	& 5\\
-willpower						&	0	&	5\\
-sociable						&	0	&	2\\
-influenceability		&	0	&	3\\
-stepsSinceGiveUp		&	0	&	5\\
-smokedPerDay				&	0	&	5\\
+\emph{isSmoker} 						& 0	&	1\\
+\emph{givingUp}						&	0	&	2\\
+\emph{health}							&	0	& 5\\
+\emph{willpower}						&	0	&	5\\
+\emph{sociable}						&	0	&	2\\
+\emph{influenceability}		&	0	&	3\\
+\emph{stepsSinceGiveUp}		&	0	&	5\\
+\emph{smokedPerDay}				&	0	&	5\\
 
 \hline
 
 \end{tabular}
 \end{center}
 \caption{Scoring Algorithm Upper and Lower Bounds for Scores}
+\label{tab:reconfig}
 \end{figure}
 
 \begin{figure}
@@ -674,25 +690,27 @@ for(Node n : Neighbours)
 }
 	\end{lstlisting}
 \end{center}
-\label{code:scoring}
+
 \caption{Scoring Algorithm Pseudocode}
+\label{code:scoring}
 \end{figure}
 
 \begin{figure}
-\label{code:comp-methods}
+
 \begin{itemize}
 \item \emph{Linear Scoring} - The attribute is multiplied by the maximum s
 \item \emph{Percentage Scoring} - The percentage difference between attributes is calculated ($\frac{\text{attr}_{this}-\text{attr}_{other}}{\text{attr}_{other}}$). If they are separated by more than 100\%, the minimum score is given, otherwise $\text{\emph{score}} = \text{\emph{maximum score}} - \text{\emph{\% difference}} \times \text{\emph{maximum score}}$.
 \item \emph{Attribute Comparison} - Two values are compared and if they are the same (or within some defined range), the maximum score is given, otherwise a lesser score is given.
 \end{itemize}
 \caption{Comparison Methods Between Agents}
+\label{code:comp-methods}
 \end{figure}
 
-Once a score has been calculated and normalised to between 0 and 1, this can be used to determine if the two agents should form a connection, remove an existing one or do nothing. The method for this is to have two simulation parameters, ConnectionScoreRemoveBound and ConnectionScoreAddBound, which dictate the boundaries for action to be taken. The `remove boundary’ must be lower than the `add boundary’ and if the score is below this value, the edge is remove. Should the agent score be above the add boundary, then the edge is added. New edges have their influence set through a normal distribution with a mean of their similarity score, with 0.5 being deducted to avoid the mean exceeding 1 and preventing the value from one above the boundary (meaning if the score was set to be the similarity score as a mean, all edges would probably be of high influence since to be connected, they must be of high score) to a more central position. Experimentation has shown this to give a more reasonable distribution of influences.
+Once a score has been calculated and normalised to between 0 and 1, this can be used to determine if the two agents should form a connection, remove an existing one or do nothing. The method for this is to have two simulation parameters, \emph{ConnectionScoreRemoveBound} and \emph{ConnectionScoreAddBound}, which dictate the boundaries for action to be taken. The `remove boundary’ must be lower than the `add boundary’ and if the score is below the former boundary, the edge is removed. Should the agent score be above the add boundary, then the edge between the agents is added. New edges have their influence set through a normal distribution with a mean of their normalised similarity score, minus 0.5 to a more central position rather than the generally higher value that would be given otherwise. This is because a high score is required to connect to begin with, so all new edges would be of influences higher than the `add boundary'. Experimentation has shown this to give a more reasonable distribution of influences.
 
-It should be noted that as part of the effort to keep the model balanced, limits were imposed on the number of connections that each node can have. Should another edge be added when the node has reached its limit, the lowest influence edge is removed in favour of the new connection. Once again, the limit a simulation parameter so can be changed to investigate the effects that is has, though testing indicated that it helped avoid clustering and excessive connection-forming with other nodes. Especially important in this area is the boundary values. By lowering the upper bound to 0.6, the graph significantly increased its chance to become very dense and turn into a tight cluster  (figure \ref{img:ex-crunch}), whereas a raising it to 0.7 maintained a much better balance and avoided the clustering, as seen in figure \ref{img:ex-noncrunch}.
+It should be noted that as part of the effort to keep the model balanced, limits were imposed on the number of connections that each node can have. Should another edge be added when the node has reached its limit, the lowest influence edge is removed in favour of the new connection. Once again, the limit a simulation parameter so can be changed to investigate the effects that is has, though testing indicated that it mainly helped avoid clustering and excessive connection-forming with other nodes. Especially important in this area are the boundary values. By lowering the upper bound to 0.6, the graph significantly increased its chance to become very dense and turn into a tight cluster  (figure \ref{img:ex-crunch}), whereas a raising it to 0.7 maintained a much better balance and avoided the clustering, as seen in figure \ref{img:ex-noncrunch}, whilst the removal boundary was kept at 0.4.
 
-In order to introduce external influences to a neighbourhood, every agent has a small chance to form a random connection to some other agent in the graph. This is deliberately set to have a very low occurrence rate as testing showed that setting the probability to be any more than 0.002\% of sociability lead to regular addition of edges, effectively rendering the scoring algorithm useless and resulting in an incredibly dense graph. By making this a rare event, it attempts to model the day-to-day chance of a new influence entering a human's life i.e. that of meeting a new person or taking on a new role-model. Over the course of the simulation, there is a chance that nodes may become disconnected from others. As it is slightly unrealistic for humans to have absolutely no social connections, the model reconnects them to a random node in the network with a 30\% chance of connection. This is not a certain reconnection since to reach a disconnected state, the edge must have held attributes such that it fell below the removal boundary of its neighbour nodes.
+Finally, in order to introduce external influences to a neighbourhood, every agent has a small chance to form a random connection to some other agent in the graph. This is deliberately set to have a very low occurrence rate as testing showed that setting the probability to be any more than 0.002\% of \emph{sociability} lead to regular addition of edges, effectively rendering the scoring algorithm useless and resulting in an incredibly dense graph. By making this a rare event, it attempts to model the day-to-day chance of a new influence entering a humans life i.e. meeting a new person or taking on a new role-model. Over the course of the simulation, there is a chance that nodes may become disconnected from others. As it is unrealistic for humans to have absolutely no social connections, the model reconnects them to a random node in the network with a 30\% chance of connection. This is not a certain reconnection since to reach a disconnected state, the edge must have held attributes such that it fell below the removal boundary of its neighbour nodes; by doing this, it gives the node a chance to connect and move to a new area of the network.
 
 % --------------------------------
 %

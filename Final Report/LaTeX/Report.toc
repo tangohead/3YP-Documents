@@ -29,19 +29,19 @@
 \contentsline {subsubsection}{Graph Generation \& Sampling}{16}
 \contentsline {subsubsection}{Graph Stability}{19}
 \contentsline {subsection}{\numberline {3.3.3}Agent}{20}
-\contentsline {subsubsection}{Attributes}{21}
-\contentsline {subsubsection}{Action Overview}{24}
-\contentsline {subsubsection}{Neighbourhood Actions}{24}
-\contentsline {subsubsection}{Decision Tree Actions}{25}
-\contentsline {subsubsection}{Connection Reconfiguration Actions}{35}
-\contentsline {chapter}{\numberline {4}Simulation Results \& Model Analysis}{38}
-\contentsline {section}{\numberline {4.1}Overview}{38}
-\contentsline {section}{\numberline {4.2}Simulation Analysis}{38}
-\contentsline {subsection}{\numberline {4.2.1}Simulation Parameters \& Agent Attributes}{38}
-\contentsline {subsection}{\numberline {4.2.2}Decision Tree Analysis}{43}
-\contentsline {subsection}{\numberline {4.2.3}Sampled Networks}{47}
-\contentsline {section}{\numberline {4.3}Model Analysis}{52}
-\contentsline {subsection}{\numberline {4.3.1}Commercial Analysis}{52}
-\contentsline {subsection}{\numberline {4.3.2}Model Analysis}{56}
-\contentsline {subsection}{\numberline {4.3.3}Further Improvements}{57}
-\contentsline {chapter}{\numberline {5}Conclusion}{59}
+\contentsline {subsubsection}{Attributes}{20}
+\contentsline {subsubsection}{Action Overview}{25}
+\contentsline {subsubsection}{Neighbourhood Actions}{26}
+\contentsline {subsubsection}{Decision Tree Actions}{27}
+\contentsline {subsubsection}{Connection Reconfiguration Actions}{36}
+\contentsline {chapter}{\numberline {4}Simulation Results \& Model Analysis}{39}
+\contentsline {section}{\numberline {4.1}Overview}{39}
+\contentsline {section}{\numberline {4.2}Simulation Analysis}{39}
+\contentsline {subsection}{\numberline {4.2.1}Simulation Parameters \& Agent Attributes}{39}
+\contentsline {subsection}{\numberline {4.2.2}Decision Tree Analysis}{44}
+\contentsline {subsection}{\numberline {4.2.3}Sampled Networks}{48}
+\contentsline {section}{\numberline {4.3}Model Analysis}{53}
+\contentsline {subsection}{\numberline {4.3.1}Commercial Analysis}{53}
+\contentsline {subsection}{\numberline {4.3.2}Model Analysis}{57}
+\contentsline {subsection}{\numberline {4.3.3}Further Improvements}{58}
+\contentsline {chapter}{\numberline {5}Conclusion}{60}
