@@ -1,4 +1,6 @@
-This is BibTeX, Version 0.99dThe top-level auxiliary file: Report.aux
+This is BibTeX, Version 0.99d (TeX Live 2012)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: Report.aux
 The style file: ieeetr.bst
 Database file #1: biblio.bib
 Warning--empty booktitle in NHS-78
@@ -6,11 +8,53 @@ Warning--empty booktitle in NHS-44
 Warning--empty booktitle in erdos
 Warning--empty booktitle in NHS-13
 Warning--empty booktitle in NHS-14
-Warning--empty booktitle in SmokOmni
+Warning--empty booktitle in SmokBig
 Warning--empty booktitle in NHS-43
 Warning--empty journal in UCL-ABM
+Warning--empty booktitle in SmokOmni
 Warning--empty booktitle in SmokOmni-pap1
 Warning--empty booktitle in SmokOmni-pap2
 Warning--empty booktitle in SmokOmni-pap3
 Warning--empty booktitle in NHS-12
-(There were 12 warnings)
+You've used 44 entries,
+            1876 wiz_defined-function locations,
+            710 strings with 9094 characters,
+and the built_in function-call counts, 11218 in all, are:
+= -- 1072
+> -- 372
+< -- 0
++ -- 145
+- -- 101
+* -- 766
+:= -- 1511
+add.period$ -- 57
+call.type$ -- 44
+change.case$ -- 35
+chr.to.int$ -- 0
+cite$ -- 57
+duplicate$ -- 605
+empty$ -- 1213
+format.name$ -- 101
+if$ -- 2852
+int.to.chr$ -- 0
+int.to.str$ -- 44
+missing$ -- 48
+newline$ -- 148
+num.names$ -- 40
+pop$ -- 214
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 388
+stack$ -- 0
+substring$ -- 595
+swap$ -- 220
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 13
+while$ -- 103
+width$ -- 46
+write$ -- 427
+(There were 13 warnings)

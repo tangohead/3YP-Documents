@@ -82,10 +82,9 @@ P.~Eastwood, ``Statistics on smoking: England 2012,'' ch.~2, p.~13, Health and
 P.~Eastwood, ``Statistics on smoking: England 2012,'' ch.~2, p.~14, Health and
   Social Care Information Centre, Lifestyle Sections, August 2012.
 
-\bibitem{SmokOmni}
-R.~Axtell, S.~Durlauf, J.~M. Epstein, R.~Hammond, B.~Klemens, J.~Parker,
-  Z.~Song, T.~Valente, and H.~P. Young, ``Social influences and smoking
-  behaviour,'' The Brookings Institution, February 2006.
+\bibitem{SmokBig}
+D.~Lader, ``Opinions survey report no. 40: Smoking-related behaviour and
+  attitudes 2008/9,'' ch.~3, Office for National Statistics, 2009.
 
 \bibitem{NHS-43}
 P.~Eastwood, ``Statistics on smoking: England 2012,'' ch.~3, p.~13, Health and
@@ -147,6 +146,11 @@ G.~I. Hawe, G.~Coates, D.~T. Wilson, and R.~S. Crouch, ``Agent-based simulation
 A.~M. El-Sayed, P.~Scarborough, L.~Seemann, and S.~Galea, ``Social network
   analysis and agent-based modeling in social epidemiology,'' {\em
   Epidemiologic Perspectives \& Innovations}, vol.~9, no.~1, p.~1, 2012.
+
+\bibitem{SmokOmni}
+R.~Axtell, S.~Durlauf, J.~M. Epstein, R.~Hammond, B.~Klemens, J.~Parker,
+  Z.~Song, T.~Valente, and H.~P. Young, ``Social influences and smoking
+  behaviour,'' The Brookings Institution, February 2006.
 
 \bibitem{SmokOmni-pap1}
 Z.~Song, ``Social influences and smoking behaviour,'' ch.~Addiction and
