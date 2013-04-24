@@ -213,21 +213,21 @@ As discussed in the Literature Review section (\ref{sec:litrev}), the social net
 At the most basic level, the way in which the network is represented provides the foundation for the model. As found in the research section (\ref{sec:litrev-socnet} of the project), a graph provides the functionality needed to hold both humans and the connections between them at a sufficient level of abstraction. This level of abstraction is important since modelling relationships accurately and with a lot of detail is very difficult due to a wide variety of internal and external factors to said relationship being able to change it, either gradually or suddenly. As is common within ABMs, nodes within the graph represent humans whilst edges map to some relationship between two humans, an example of which can be seen in figure \ref{img:ex-graph}.
 
 \begin{figure}
+\label{img:ex-graph}
 \begin{center}
 \includegraphics[scale=0.25]{example-graph.png}
 \end{center}
 \caption{Example Network Representation}
-\label{img:ex-graph}
 \end{figure}
 
 It was decided that the graph should be directed to better model a relationship – undirected edges only indicate a connection, whereas directed edges reveal much more. Working on the principle that a friendship is not necessarily mutual since one person may consider another a friend whilst the other may not reciprocate. Due to this, an edge from node A to node B represents `has a relationship with' and by extension `influences' as seen in figure \ref{img:ex-edge}.
 
 \begin{figure}
+\label{img:ex-edge}
 \begin{center}
 \includegraphics[scale=0.5]{example-edge.png}
 \end{center}
 \caption{Example Edge: Node A influences Node B}
-\label{img:ex-edge}
 \end{figure}
 
 \subsubsection{Influence}
