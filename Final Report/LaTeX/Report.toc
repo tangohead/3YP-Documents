@@ -38,10 +38,10 @@
 \contentsline {section}{\numberline {4.1}Overview}{39}
 \contentsline {section}{\numberline {4.2}Simulation Analysis}{39}
 \contentsline {subsection}{\numberline {4.2.1}Simulation Parameters \& Agent Attributes}{39}
-\contentsline {subsection}{\numberline {4.2.2}Decision Tree Analysis}{44}
-\contentsline {subsection}{\numberline {4.2.3}Sampled Networks}{48}
-\contentsline {section}{\numberline {4.3}Model Analysis}{53}
-\contentsline {subsection}{\numberline {4.3.1}Commercial Analysis}{53}
-\contentsline {subsection}{\numberline {4.3.2}Model Analysis}{57}
-\contentsline {subsection}{\numberline {4.3.3}Further Improvements}{58}
-\contentsline {chapter}{\numberline {5}Conclusion}{60}
+\contentsline {subsection}{\numberline {4.2.2}Decision Tree Analysis}{45}
+\contentsline {subsection}{\numberline {4.2.3}Sampled Networks}{50}
+\contentsline {section}{\numberline {4.3}Commercial Viability \& Model Analysis}{55}
+\contentsline {subsection}{\numberline {4.3.1}Commercial Viability Analysis}{55}
+\contentsline {subsection}{\numberline {4.3.2}Model Analysis}{59}
+\contentsline {subsection}{\numberline {4.3.3}Further Improvements}{61}
+\contentsline {chapter}{\numberline {5}Conclusion}{62}

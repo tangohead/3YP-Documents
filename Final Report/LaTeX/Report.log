@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2012.11.13)  24 APR 2013 18:42
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2012.11.13)  24 APR 2013 23:34
 entering extended mode
 **Report.tex
 ("G:\My Documents\3rd Year Project\3YP-Documents\Final Report\LaTeX\Report.tex"
@@ -497,100 +497,95 @@ Missing character: There is no ô in font cmr10!
 
 ] [37] [38]
 Chapter 4.
-File: simbase.png Graphic file (type png)
-<use simbase.png>
-Package pdftex.def Info: simbase.png used on input line 746.
-(pdftex.def)             Requested size: 411.12872pt x 411.12872pt.
-Missing character: There is no ‚ in font cmr10!
-Missing character: There is no Ä in font cmr10!
-Missing character: There is no ì in font cmr10!
- [39
-
-] [40] <smok-giveup.png, id=180, 1059.20718pt x 560.0925pt>
-File: smok-giveup.png Graphic file (type png)
- <use smok-giveup.png>
-Package pdftex.def Info: smok-giveup.png used on input line 770.
-(pdftex.def)             Requested size: 469.75502pt x 248.39856pt.
-
-<smok-pct.png, id=181, 1061.46562pt x 560.0925pt>
-File: smok-pct.png Graphic file (type png)
- <use smok-pct.png>
-Package pdftex.def Info: smok-pct.png used on input line 778.
-(pdftex.def)             Requested size: 469.75502pt x 247.86868pt.
- <give-up.png, id=182, 1059.96pt x 557.08125pt>
-File: give-up.png Graphic file (type png)
-
-<use give-up.png>
-Package pdftex.def Info: give-up.png used on input line 788.
-(pdftex.def)             Requested size: 469.75502pt x 246.88458pt.
- [41 <G:/My Documents/3rd Year Project/3YP-Documents/Final Report/LaTeX/smok-giveup.png>] [42 <G:/My Documents/3rd Year 
-Project/3YP-Documents/Final Report/LaTeX/smok-pct.png> <G:/My Documents/3rd Year Project/3YP-Documents/Final Report/LaTe
-X/give-up.png>] <mean-cig.png, id=190, 1060.71281pt x 558.58687pt>
-File: mean-cig.png Graphic file (type png)
- <use mean-cig.png>
-Package pdftex.def Info: mean-cig.png used on input line 798.
-(pdftex.def)             Requested size: 469.75502pt x 247.38136pt.
- [43 <G:/My Documents/3rd Year Project/3YP-Documents/Final Report/LaTeX/mean-cig.png>] [44]
-<dectree-right-labelled.png, id=197, 1091.57813pt x 409.53pt>
-File: dectree-right-labelled.png Graphic file (type png)
- <use dectree-right-labelled.png>
-Package pdftex.def Info: dectree-right-labelled.png used on input line 813.
-(pdftex.def)             Requested size: 614.295pt x 230.46628pt.
- [45 <G:/My Documents/3rd Year Project/3YP-Documents/Final Report/LaTeX/dectree-right-labelled.png>]
-<dectree-left-label.png, id=201, 862.72313pt x 326.72063pt>
-File: dectree-left-label.png Graphic file (type png)
- <use dectree-left-label.png>
-Package pdftex.def Info: dectree-left-label.png used on input line 823.
-(pdftex.def)             Requested size: 614.295pt x 232.64629pt.
- [46 <G:/My Documents/3rd Year Project/3YP-Documents/Final Report/LaTeX/dectree-left-label.png>]
-Missing character: There is no ‚ in font cmr10!
-Missing character: There is no Ä in font cmr10!
-Missing character: There is no ì in font cmr10!
- [47
-
-
-
+[39
 
 ]
-Missing character: There is no ‚ in font cmr10!
-Missing character: There is no Ä in font cmr10!
-Missing character: There is no ì in font cmr10!
-Missing character: There is no ‚ in font cmr10!
-Missing character: There is no Ä in font cmr10!
-Missing character: There is no ì in font cmr10!
- <sample-init.png, id=209, 1027.84pt x 1027.84pt>
-File: sample-init.png Graphic file (type png)
-
-<use sample-init.png>
-Package pdftex.def Info: sample-init.png used on input line 848.
-(pdftex.def)             Requested size: 411.12872pt x 411.12872pt.
- <sample-fin.png, id=210, 1027.84pt x 1027.84pt>
-File: sample-fin.png Graphic file (type png)
- <use sample-fin.png>
-Package pdftex.def Info: sample-fin.png used on input line 855.
+File: simbase.png Graphic file (type png)
+ <use simbase.png>
+Package pdftex.def Info: simbase.png used on input line 745.
 (pdftex.def)             Requested size: 513.91875pt x 513.91875pt.
 
-Overfull \hbox (44.16373pt too wide) in paragraph at lines 855--856
+Overfull \hbox (44.16373pt too wide) in paragraph at lines 745--746
  [] 
  []
 
-<email-smokers.png, id=211, 1027.84pt x 1027.84pt>
+[40] [41] [42] <smok-giveup.png, id=187, 1059.20718pt x 560.0925pt>
+File: smok-giveup.png Graphic file (type png)
+ <use smok-giveup.png>
+Package pdftex.def Info: smok-giveup.png used on input line 802.
+(pdftex.def)             Requested size: 469.75502pt x 248.39856pt.
+
+<smok-pct.png, id=188, 1061.46562pt x 560.0925pt>
+File: smok-pct.png Graphic file (type png)
+ <use smok-pct.png>
+Package pdftex.def Info: smok-pct.png used on input line 810.
+(pdftex.def)             Requested size: 469.75502pt x 247.86868pt.
+ <give-up.png, id=189, 1059.96pt x 557.08125pt>
+File: give-up.png Graphic file (type png)
+
+<use give-up.png>
+Package pdftex.def Info: give-up.png used on input line 820.
+(pdftex.def)             Requested size: 469.75502pt x 246.88458pt.
+ [43
+
+
+] [44 <G:/My Documents/3rd Year Project/3YP-Documents/Final Report/LaTeX/smok-giveup.png> <G:/My Documents/3rd Year Proj
+ect/3YP-Documents/Final Report/LaTeX/smok-pct.png>]
+<mean-cig.png, id=196, 1060.71281pt x 558.58687pt>
+File: mean-cig.png Graphic file (type png)
+ <use mean-cig.png>
+Package pdftex.def Info: mean-cig.png used on input line 830.
+(pdftex.def)             Requested size: 469.75502pt x 247.38136pt.
+ [45 <G:/My Documents/3rd Year Project/3YP-Documents/Final Report/LaTeX/give-up.png>] [46 <G:/My Documents/3rd Year Proj
+ect/3YP-Documents/Final Report/LaTeX/mean-cig.png>] <dectree-right-labelled.png, id=203, 1091.57813pt x 409.53pt>
+File: dectree-right-labelled.png Graphic file (type png)
+ <use dectree-right-labelled.png>
+Package pdftex.def Info: dectree-right-labelled.png used on input line 843.
+(pdftex.def)             Requested size: 614.295pt x 230.46628pt.
+ [47 <G:/My Documents/3rd Year Project/3YP-Documents/Final Report/LaTeX/dectree-right-labelled.png>]
+<dectree-left-label.png, id=208, 862.72313pt x 326.72063pt>
+File: dectree-left-label.png Graphic file (type png)
+ <use dectree-left-label.png>
+Package pdftex.def Info: dectree-left-label.png used on input line 853.
+(pdftex.def)             Requested size: 614.295pt x 232.64629pt.
+ [48 <G:/My Documents/3rd Year Project/3YP-Documents/Final Report/LaTeX/dectree-left-label.png>] [49
+
+
+
+
+] <sample-init.png, id=215, 1027.84pt x 1027.84pt>
+File: sample-init.png Graphic file (type png)
+
+<use sample-init.png>
+Package pdftex.def Info: sample-init.png used on input line 877.
+(pdftex.def)             Requested size: 411.12872pt x 411.12872pt.
+ <sample-fin.png, id=216, 1027.84pt x 1027.84pt>
+File: sample-fin.png Graphic file (type png)
+ <use sample-fin.png>
+Package pdftex.def Info: sample-fin.png used on input line 885.
+(pdftex.def)             Requested size: 513.91875pt x 513.91875pt.
+
+Overfull \hbox (44.16373pt too wide) in paragraph at lines 885--886
+ [] 
+ []
+
+<email-smokers.png, id=217, 1027.84pt x 1027.84pt>
 File: email-smokers.png Graphic file (type png)
  <use email-smokers.png>
-Package pdftex.def Info: email-smokers.png used on input line 866.
+Package pdftex.def Info: email-smokers.png used on input line 897.
 (pdftex.def)             Requested size: 411.12872pt x 411.12872pt.
 
-<email-nonsmok.png, id=212, 1027.84pt x 1027.84pt>
+<email-nonsmok.png, id=218, 1027.84pt x 1027.84pt>
 File: email-nonsmok.png Graphic file (type png)
  <use email-nonsmok.png>
-Package pdftex.def Info: email-nonsmok.png used on input line 873.
+Package pdftex.def Info: email-nonsmok.png used on input line 905.
 (pdftex.def)             Requested size: 411.12872pt x 411.12872pt.
 Missing character: There is no ‚ in font cmr10!
 Missing character: There is no Ä in font cmr10!
 Missing character: There is no ì in font cmr10!
- [48] [49 <G:/My Documents/3rd Year Project/3YP-Documents/Final Report/LaTeX/sample-init.png>] [50 <G:/My Documents/3rd 
-Year Project/3YP-Documents/Final Report/LaTeX/sample-fin.png>] [51 <G:/My Documents/3rd Year Project/3YP-Documents/Final
- Report/LaTeX/email-smokers.png>] [52 <G:/My Documents/3rd Year Project/3YP-Documents/Final Report/LaTeX/email-nonsmok.p
+ [50] [51 <G:/My Documents/3rd Year Project/3YP-Documents/Final Report/LaTeX/sample-init.png>] [52 <G:/My Documents/3rd 
+Year Project/3YP-Documents/Final Report/LaTeX/sample-fin.png>] [53 <G:/My Documents/3rd Year Project/3YP-Documents/Final
+ Report/LaTeX/email-smokers.png>] [54 <G:/My Documents/3rd Year Project/3YP-Documents/Final Report/LaTeX/email-nonsmok.p
 ng>]
 Missing character: There is no ‚ in font cmr10!
 Missing character: There is no Ä in font cmr10!
@@ -598,42 +593,40 @@ Missing character: There is no ì in font cmr10!
 Missing character: There is no ‚ in font cmr10!
 Missing character: There is no Ä in font cmr10!
 Missing character: There is no ì in font cmr10!
- [53]
-<scale-free-gen.png, id=236, 1061.46562pt x 558.58687pt>
+ [55]
+<scale-free-gen.png, id=242, 1061.46562pt x 558.58687pt>
 File: scale-free-gen.png Graphic file (type png)
  <use scale-free-gen.png>
-Package pdftex.def Info: scale-free-gen.png used on input line 903.
+Package pdftex.def Info: scale-free-gen.png used on input line 935.
 (pdftex.def)             Requested size: 469.75502pt x 247.20238pt.
 
-<small-world-gen.png, id=237, 1061.46562pt x 557.83406pt>
+<small-world-gen.png, id=243, 1061.46562pt x 557.83406pt>
 File: small-world-gen.png Graphic file (type png)
  <use small-world-gen.png>
-Package pdftex.def Info: small-world-gen.png used on input line 910.
+Package pdftex.def Info: small-world-gen.png used on input line 943.
 (pdftex.def)             Requested size: 469.75502pt x 246.86922pt.
-
-<scale-free-runs.png, id=238, 1062.21844pt x 558.58687pt>
+ [56 <G:/My Documents/3rd Year Project/3YP-Documents/Final Report/LaTeX/scale-free-gen.png>] <scale-free-runs.png, id=24
+7, 1062.21844pt x 558.58687pt>
 File: scale-free-runs.png Graphic file (type png)
- <use scale-free-runs.png>
-Package pdftex.def Info: scale-free-runs.png used on input line 921.
-(pdftex.def)             Requested size: 469.75502pt x 247.0319pt.
 
-<small-world-runs.png, id=239, 1061.46562pt x 558.58687pt>
+<use scale-free-runs.png>
+Package pdftex.def Info: scale-free-runs.png used on input line 953.
+(pdftex.def)             Requested size: 469.75502pt x 247.0319pt.
+ <small-world-runs.png, id=248, 1061.46562pt x 558.58687pt>
 File: small-world-runs.png Graphic file (type png)
  <use small-world-runs.png>
-Package pdftex.def Info: small-world-runs.png used on input line 928.
+Package pdftex.def Info: small-world-runs.png used on input line 961.
 (pdftex.def)             Requested size: 469.75502pt x 247.20238pt.
- [54 <G:/My Documents/3rd Year Project/3YP-Documents/Final Report/LaTeX/scale-free-gen.png>] [55 <G:/My Documents/3rd Ye
-ar Project/3YP-Documents/Final Report/LaTeX/small-world-gen.png> <G:/My Documents/3rd Year Project/3YP-Documents/Final R
-eport/LaTeX/scale-free-runs.png>]
 Missing character: There is no ‚ in font cmr10!
 Missing character: There is no Ä in font cmr10!
 Missing character: There is no ì in font cmr10!
-
-[56 <G:/My Documents/3rd Year Project/3YP-Documents/Final Report/LaTeX/small-world-runs.png>]
+ [57 <G:/My Documents/3rd Year Project/3YP-Documents/Final Report/LaTeX/small-world-gen.png>] [58 <G:/My Documents/3rd Y
+ear Project/3YP-Documents/Final Report/LaTeX/scale-free-runs.png> <G:/My Documents/3rd Year Project/3YP-Documents/Final 
+Report/LaTeX/small-world-runs.png>] [59]
 Missing character: There is no ‚ in font cmr10!
 Missing character: There is no Ä in font cmr10!
 Missing character: There is no ì in font cmr10!
- [57] [58] [59]
+ [60] [61]
 Chapter 5.
 Missing character: There is no ‚ in font cmr10!
 Missing character: There is no Ä in font cmr10!
@@ -644,43 +637,40 @@ Missing character: There is no ô in font cmr10!
 Missing character: There is no ‚ in font cmr10!
 Missing character: There is no Ä in font cmr10!
 Missing character: There is no ì in font cmr10!
-("G:\My Documents\3rd Year Project\3YP-Documents\Final Report\LaTeX\Report.bbl" [60
+("G:\My Documents\3rd Year Project\3YP-Documents\Final Report\LaTeX\Report.bbl" [62
 
-] [61
+] [63
 
 ]
 Missing character: There is no ‚ in font cmr10!
 Missing character: There is no Ä in font cmr10!
 Missing character: There is no ê in font cmr10!
- [62]) [63]
-("G:\My Documents\3rd Year Project\3YP-Documents\Final Report\LaTeX\Report.aux")
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
- ) 
+ [64]) [65]
+("G:\My Documents\3rd Year Project\3YP-Documents\Final Report\LaTeX\Report.aux") ) 
 Here is how much of TeX's memory you used:
- 4358 strings out of 494045
- 62765 string characters out of 3145971
- 143569 words of memory out of 3000000
- 7580 multiletter control sequences out of 15000+200000
+ 4359 strings out of 494045
+ 62776 string characters out of 3145971
+ 144558 words of memory out of 3000000
+ 7581 multiletter control sequences out of 15000+200000
  11742 words of font info for 42 fonts, out of 3000000 for 9000
  715 hyphenation exceptions out of 8191
  33i,14n,32p,2138b,997s stack positions out of 5000i,500n,10000p,200000b,50000s
-<D:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx10.pfb><D:/Program Files (x86)/MiKTeX 2.9/fonts/
-type1/public/amsfonts/cm/cmbx12.pfb><D:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><D:/Pro
-gram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cmextra/cmex7.pfb><D:/Program Files (x86)/MiKTeX 2.9/fonts/type1
-/public/amsfonts/cm/cmmi10.pfb><D:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi5.pfb><D:/Program F
-iles (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi7.pfb><D:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/ams
-fonts/cm/cmr10.pfb><D:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><D:/Program Files (x86)/M
-iKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb><D:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr
-7.pfb><D:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><D:/Program Files (x86)/MiKTeX 2.9/fo
-nts/type1/public/amsfonts/cm/cmsy5.pfb><D:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy7.pfb><D:/P
-rogram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti10.pfb><D:/Program Files (x86)/MiKTeX 2.9/fonts/type1/p
-ublic/amsfonts/cm/cmti7.pfb><D:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt10.pfb><D:/Program Fil
-es (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmu10.pfb>
-Output written on Report.pdf (65 pages, 4173574 bytes).
+<D:/Program Files (x86)/MiKTeX 2.9/fon
+ts/type1/public/amsfonts/cm/cmbx10.pfb><D:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><D:/
+Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><D:/Program Files (x86)/MiKTeX 2.9/fonts/type1/
+public/amsfonts/cmextra/cmex7.pfb><D:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><D:/Progr
+am Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi5.pfb><D:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public
+/amsfonts/cm/cmmi7.pfb><D:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><D:/Program Files (x8
+6)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><D:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm
+/cmr17.pfb><D:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb><D:/Program Files (x86)/MiKTeX 2.9
+/fonts/type1/public/amsfonts/cm/cmsy10.pfb><D:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy5.pfb><
+D:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy7.pfb><D:/Program Files (x86)/MiKTeX 2.9/fonts/type
+1/public/amsfonts/cm/cmti10.pfb><D:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti7.pfb><D:/Program 
+Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt10.pfb><D:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/a
+msfonts/cm/cmu10.pfb>
+Output written on Report.pdf (67 pages, 4179416 bytes).
 PDF statistics:
- 330 PDF objects out of 1000 (max. 8388607)
+ 337 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  171 words of extra memory for PDF output out of 10000 (max. 10000000)
 
