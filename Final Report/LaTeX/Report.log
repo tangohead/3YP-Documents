@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2012.11.13)  24 APR 2013 23:34
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2012.11.13)  25 APR 2013 00:38
 entering extended mode
 **Report.tex
 ("G:\My Documents\3rd Year Project\3YP-Documents\Final Report\LaTeX\Report.tex"
@@ -563,11 +563,7 @@ Package pdftex.def Info: sample-init.png used on input line 877.
 File: sample-fin.png Graphic file (type png)
  <use sample-fin.png>
 Package pdftex.def Info: sample-fin.png used on input line 885.
-(pdftex.def)             Requested size: 513.91875pt x 513.91875pt.
-
-Overfull \hbox (44.16373pt too wide) in paragraph at lines 885--886
- [] 
- []
+(pdftex.def)             Requested size: 411.12872pt x 411.12872pt.
 
 <email-smokers.png, id=217, 1027.84pt x 1027.84pt>
 File: email-smokers.png Graphic file (type png)
@@ -617,16 +613,9 @@ File: small-world-runs.png Graphic file (type png)
  <use small-world-runs.png>
 Package pdftex.def Info: small-world-runs.png used on input line 961.
 (pdftex.def)             Requested size: 469.75502pt x 247.20238pt.
-Missing character: There is no â in font cmr10!
-Missing character: There is no € in font cmr10!
-Missing character: There is no “ in font cmr10!
  [57 <G:/My Documents/3rd Year Project/3YP-Documents/Final Report/LaTeX/small-world-gen.png>] [58 <G:/My Documents/3rd Y
 ear Project/3YP-Documents/Final Report/LaTeX/scale-free-runs.png> <G:/My Documents/3rd Year Project/3YP-Documents/Final 
-Report/LaTeX/small-world-runs.png>] [59]
-Missing character: There is no â in font cmr10!
-Missing character: There is no € in font cmr10!
-Missing character: There is no “ in font cmr10!
- [60] [61]
+Report/LaTeX/small-world-runs.png>] [59] [60] [61]
 Chapter 5.
 Missing character: There is no â in font cmr10!
 Missing character: There is no € in font cmr10!
@@ -668,7 +657,7 @@ D:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy7.pfb><D:/P
 1/public/amsfonts/cm/cmti10.pfb><D:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti7.pfb><D:/Program 
 Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt10.pfb><D:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/a
 msfonts/cm/cmu10.pfb>
-Output written on Report.pdf (67 pages, 4179416 bytes).
+Output written on Report.pdf (67 pages, 4179668 bytes).
 PDF statistics:
  337 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
